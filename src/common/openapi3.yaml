@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: service-name
+  description: basic template for map colonies service
+  version: 1.0.0
+paths:
+  /resourceName:
+    get:
+      tags:
+        - resourceName
+      summary: gets the resource
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/resource"
+components:
+  schemas:
+    resource:
+      required:
+        - id
+        - name
+        - description
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+        name:
+          type: string
+        description:
+          type: string

@@ -1,0 +1,13 @@
+{
+  "swagger": {
+    "swaggerPath": "./api/swagger.yaml",
+    "jsonPath": "/docs/api.json",
+    "uiPath": "/docs/api"
+  },
+  "logger": {
+    "level": "info"
+  },
+  "server": {
+    "port": "8080"
+  }
+}
