@@ -3,6 +3,7 @@ import { get } from 'config';
 import { container } from 'tsyringe';
 import { SwaggerController } from '../controllers/swagger';
 
+// FIX - THIS SHOULD BE A FUNC, NOT A FUCKING code that imported out of order
 const swaggerRouter = Router();
 const controller = container.resolve(SwaggerController);
 const swaggerConfig: {

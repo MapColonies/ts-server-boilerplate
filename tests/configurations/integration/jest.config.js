@@ -1,16 +1,20 @@
 module.exports = {
     transform: {
-        "^.+\\.(t|j)s$": "ts-jest"
+        "^.+\\.ts$": "ts-jest"
     },
     coverageReporters: [
         "text",
         "html"
     ],
-    setupFiles: ["../jest.setup.js"],
+    rootDir: "../../../.",
+    testMatch: ["<rootDir>/tests/integration/**/*.spec.ts"],
+    setupFiles: ["<rootDir>/tests/configurations/jest.setup.js"],
     collectCoverage: true,
     collectCoverageFrom: [
         "<rootDir>/src/**/*.{ts}",
         "!**/node_modules/**",
         "!**/vendor/**"
-    ]
+    ],
+    preset: 'ts-jest',
+    testEnvironment: 'node',
 }

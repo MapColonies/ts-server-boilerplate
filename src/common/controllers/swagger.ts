@@ -5,6 +5,8 @@ import { MCLogger } from '@map-colonies/mc-logger';
 import { Request, Response, RequestHandler, NextFunction } from 'express';
 import { safeLoad } from 'js-yaml';
 import { injectable, delay, inject } from 'tsyringe';
+import { Services } from '../constants';
+import { ILogger } from '../interfaces';
 @injectable()
 export class SwaggerController {
   public uiMiddleware: RequestHandler[];
@@ -18,12 +20,12 @@ export class SwaggerController {
   };
 
   public constructor(
-    @inject(delay(() => MCLogger)) private readonly logger: MCLogger
+    @inject(Services.LOGGER) private readonly logger: ILogger
   ) {
     this.swaggerConfig = get('swagger');
 
     console.log(process.cwd())
-    this.swaggerDoc = safeLoad(readFileSync('common/openapi3.yaml', 'utf8')) as swaggerUi.JsonObject;
+    this.swaggerDoc = safeLoad(readFileSync('openapi3.yaml', 'utf8')) as swaggerUi.JsonObject;
     this.serveUi = swaggerUi.setup(this.swaggerDoc);
     this.uiMiddleware = swaggerUi.serve;
   }

@@ -14,7 +14,7 @@
     "build": "tsc --project tsconfig.json  && npm run assets:copy",
     "build:dev": "npm run clean && npm run assets:copy && tsc -w --project tsconfig.build.json",
     "start": "npm run build && cd dist && node ./index.js",
-    "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./src/common/openapi3.yaml ./dist/common/ && copyfiles ./package.json dist",
+    "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist"
   },
   "directories": {
@@ -52,7 +52,7 @@
     "@map-colonies/eslint-config": "^1.1.0",
     "@types/config": "0.0.36",
     "@types/express": "^4.17.8",
-    "@types/jest": "^26.0.12",
+    "@types/jest": "^26.0.19",
     "@types/js-yaml": "^3.12.5",
     "@types/supertest": "^2.0.10",
     "@types/swagger-ui-express": "^4.1.2",
@@ -62,7 +62,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.8.1",
     "husky": "^4.2.5",
-    "jest": "^26.4.2",
+    "jest": "^26.6.3",
     "jest-create-mock-instance": "^1.1.0",
     "jest-html-reporters": "^2.0.3",
     "nodemon": "^2.0.6",

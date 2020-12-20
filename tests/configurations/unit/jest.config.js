@@ -1,10 +1,15 @@
 module.exports = {
   transform: {
-    "^.+\\.(t|j)s$": "ts-jest"
+    "^.+\\.ts$": "ts-jest"
   },
+  testMatch: ["<rootDir>/tests/unit/**/*.spec.ts"],
   coverageReporters: [
     "text",
     "html"
   ],
-  setupFiles: ["../jest.setup.js"]
+  rootDir: "../../../.",
+  setupFiles: ["<rootDir>/tests/configurations/jest.setup.js"],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+
 }

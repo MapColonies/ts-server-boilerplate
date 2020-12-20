@@ -1,8 +1,9 @@
 {
+    "ignorePatterns": "**/*.js",
     "extends": [
       "@map-colonies/eslint-config/ts-base"
     ],
     "parserOptions": {
-      "project": "./tsconfig.build.json"
+      "project": "./tsconfig.lint.json"
     }
 }

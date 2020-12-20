@@ -1,12 +1,14 @@
 import * as supertest from 'supertest';
 import { Application } from 'express';
 
-import { getApp } from '../../../../src/app';
+import { container } from 'tsyringe';
+import { ServerBuilder } from '../../../../src/serverBuilder';
 
 let app : Application | null = null;
 
 export async function init(): Promise<void> {
-    app = await getApp();
+    const builder = container.resolve<ServerBuilder>(ServerBuilder)
+    app = await builder.build()
 }
 
 export async function getResource(): Promise<supertest.Response> {
