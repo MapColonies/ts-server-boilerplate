@@ -12,6 +12,7 @@
             "sourceMaps": true,
             "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
+            "cwd": "${workspaceFolder}/dist",
             "skipFiles": [
                 "<node_internals>/**"
             ],
