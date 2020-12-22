@@ -4,8 +4,8 @@ import { ResourceNameManager } from '../../../../src/resourceName/models/resourc
 let resourceNameManager: ResourceNameManager;
 
 describe('ResourceNameManager', () => {
-  beforeAll(function() {
-    resourceNameManager = container.resolve(ResourceNameManager);
+  beforeEach(function() {
+    resourceNameManager = new ResourceNameManager({log: jest.fn()});
   });
   describe('#getResource', () => {
     it('return the resource of id 1', function() {

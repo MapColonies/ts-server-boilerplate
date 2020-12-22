@@ -1,4 +1,3 @@
-import { MCLogger } from '@map-colonies/mc-logger';
 import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import { inject, injectable } from 'tsyringe';
 import { StatusCodes } from 'http-status-codes';

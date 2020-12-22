@@ -10,6 +10,7 @@ module.exports = {
     testMatch: ["<rootDir>/tests/integration/**/*.spec.ts"],
     setupFiles: ["<rootDir>/tests/configurations/jest.setup.js"],
     collectCoverage: true,
+    moduleDirectories: ['node_modules', 'src'],
     collectCoverageFrom: [
         "<rootDir>/src/**/*.{ts}",
         "!**/node_modules/**",

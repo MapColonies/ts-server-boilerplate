@@ -1,20 +1,25 @@
 import { Router } from 'express';
-import { get } from 'config';
-import { container } from 'tsyringe';
+import { FactoryFunction } from 'tsyringe';
 import { SwaggerController } from '../controllers/swagger';
+import { Services } from '../constants';
+import { IConfig, SwaggerConfig } from '../interfaces';
 
-// FIX - THIS SHOULD BE A FUNC, NOT A FUCKING code that imported out of order
-const swaggerRouter = Router();
-const controller = container.resolve(SwaggerController);
-const swaggerConfig: {
-  jsonPath: string;
-  uiPath: string;
-} = get('swagger');
-const swaggerJsonPath = swaggerConfig.jsonPath;
-if (swaggerJsonPath && swaggerJsonPath !== '') {
-  swaggerRouter.get(swaggerJsonPath, controller.serveJson.bind(controller));
-}
-const swaggerPath = swaggerConfig.uiPath;
-swaggerRouter.use(swaggerPath, controller.uiMiddleware, controller.serveUi);
+const swaggerRouterFactory: FactoryFunction<Router> = (dependencyContainer) => {
+  const controller = dependencyContainer.resolve(SwaggerController);
+  const config = dependencyContainer.resolve<IConfig>(Services.CONFIG);
+  const swaggerConfig = config.get<SwaggerConfig>('swaggerConfig');
+  
+  const swaggerRouter = Router();
 
-export { swaggerRouter };
+  const swaggerJsonPath = swaggerConfig.basePath + swaggerConfig.jsonPath;
+  if (swaggerJsonPath && swaggerJsonPath !== '') {
+    swaggerRouter.get(swaggerJsonPath, controller.serveJson.bind(controller));
+  }
+
+  const openapiUiPath = swaggerConfig.basePath + swaggerConfig.uiPath;
+  swaggerRouter.use(openapiUiPath, controller.uiMiddleware, controller.serveUi);
+
+  return swaggerRouter;
+};
+
+export { swaggerRouterFactory };

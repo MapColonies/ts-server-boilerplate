@@ -4,8 +4,8 @@
   "description": "This is template for map colonies typescript service",
   "main": "./src/index.ts",
   "scripts": {
-    "test:unit": "jest --config=\"./tests/configurations/unit/jest.config.js\" --testPathPattern=\"./src/tests/unit/.*.spec.ts\" --reporters='default' --reporters='jest-html-reporters' --watchAll=false",
-    "test:integration": "jest --config=\"./tests/configurations/integration/jest.config.js\" --testPathPattern=\"./src/tests/integration/.*.spec.ts\"",
+    "test:unit": "jest --config=./tests/configurations/unit/jest.config.js",
+    "test:integration": "jest --config=./tests/configurations/integration/jest.config.js",
     "lint": "eslint src/**",
     "lint:fix": "eslint --fix src/**",
     "release": "standard-version",

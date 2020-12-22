@@ -1,20 +1,20 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import { initAsync as validatorInit } from 'openapi-validator-middleware';
-import { MCLogger } from '@map-colonies/mc-logger';
-import { inject, injectable } from 'tsyringe';
+import { container, inject, injectable } from 'tsyringe';
 import { RequestLogger } from './common/middlewares/RequestLogger';
 import { ErrorHandler } from './common/middlewares/ErrorHandler';
-import { router as resourceNameRouter } from './resourceName/routers/resourceNameRouter';
-import { swaggerRouter } from './common/routes/swagger';
 import { Services } from './common/constants';
-import { ILogger } from './common/interfaces';
+import { IConfig, ILogger } from './common/interfaces';
+import { routes } from './routes';
 
 @injectable()
 export class ServerBuilder {
   private readonly serverInstance = express();
 
   public constructor(
-    @inject(Services.LOGGER)private readonly logger: ILogger,
+    @inject(Services.LOGGER) private readonly logger: ILogger,
+    @inject(Services.CONFIG) private readonly config: IConfig,
     private readonly requestLogger: RequestLogger,
     private readonly errorHandler: ErrorHandler
   ) {
@@ -23,7 +23,7 @@ export class ServerBuilder {
 
   public async build(): Promise<express.Application> {
     //initiate swagger validator
-    await validatorInit('./openapi3.yaml');
+    await validatorInit(this.config.get('swaggerConfig.filePath'));
 
     this.registerMiddleware();
     this.buildRoutes();
@@ -32,13 +32,15 @@ export class ServerBuilder {
   }
 
   private buildRoutes(): void {
-    this.serverInstance.use('/resourceName', resourceNameRouter);
-    this.serverInstance.use(swaggerRouter);
+    routes.forEach((route) => {
+      const middlewares = route.middlewares ?? [];
+      this.serverInstance.use(route.path, ...middlewares, route.routerFactory(container));
+    });
   }
 
   private registerMiddleware(): void {
+    this.serverInstance.use(bodyParser.urlencoded({extended: true}));
     this.serverInstance.use(this.requestLogger.getLoggerMiddleware());
     this.serverInstance.use(this.errorHandler.getErrorHandlerMiddleware());
   }
-
 }

@@ -1,8 +1,9 @@
 {
-  "swagger": {
-    "swaggerPath": "./api/swagger.yaml",
-    "jsonPath": "/docs/api.json",
-    "uiPath": "/docs/api"
+  "swaggerConfig": {
+    "filePath": "./openapi3.yaml",
+    "basePath": "/docs",
+    "jsonPath": "/api.json",
+    "uiPath": "/api"
   },
   "logger": {
     "level": "info"

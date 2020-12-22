@@ -1,12 +1,11 @@
 import { readFileSync } from 'fs';
 import swaggerUi from 'swagger-ui-express';
-import { get } from 'config';
-import { MCLogger } from '@map-colonies/mc-logger';
-import { Request, Response, RequestHandler, NextFunction } from 'express';
+import { Request, Response, RequestHandler } from 'express';
 import { safeLoad } from 'js-yaml';
-import { injectable, delay, inject } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
+import { IConfig } from 'config';
 import { Services } from '../constants';
-import { ILogger } from '../interfaces';
+import { ILogger, SwaggerConfig } from '../interfaces';
 @injectable()
 export class SwaggerController {
   public uiMiddleware: RequestHandler[];
@@ -14,18 +13,13 @@ export class SwaggerController {
 
   private readonly swaggerDoc: swaggerUi.JsonObject;
 
-  private readonly swaggerConfig: {
-    jsonPath: string;
-    uiPath: string;
-  };
-
   public constructor(
-    @inject(Services.LOGGER) private readonly logger: ILogger
+    @inject(Services.LOGGER) private readonly logger: ILogger,
+    @inject(Services.CONFIG) private readonly config: IConfig
   ) {
-    this.swaggerConfig = get('swagger');
+    const swaggerConfig = config.get<SwaggerConfig>('swaggerConfig');
 
-    console.log(process.cwd())
-    this.swaggerDoc = safeLoad(readFileSync('openapi3.yaml', 'utf8')) as swaggerUi.JsonObject;
+    this.swaggerDoc = safeLoad(readFileSync(swaggerConfig.filePath, 'utf8')) as swaggerUi.JsonObject;
     this.serveUi = swaggerUi.setup(this.swaggerDoc);
     this.uiMiddleware = swaggerUi.serve;
   }

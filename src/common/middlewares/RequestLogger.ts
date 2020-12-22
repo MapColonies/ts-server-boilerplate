@@ -1,4 +1,3 @@
-import { MCLogger } from '@map-colonies/mc-logger';
 import { Request, Response, NextFunction, Handler } from 'express';
 import { inject, injectable } from 'tsyringe';
 import { ILogger } from '../interfaces';
