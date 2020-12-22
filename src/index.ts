@@ -9,7 +9,7 @@ import { DEFAULT_SERVER_PORT } from './common/constants';
 interface IServerConfig {
   port: string
 }
-console.log('dafuk')
+
 const serverConfig = get<IServerConfig>('server');
 const port: number = parseInt(serverConfig.port) ||  DEFAULT_SERVER_PORT;
 void getApp().then(async (app) => {
