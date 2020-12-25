@@ -3,9 +3,15 @@ info:
   title: service-name
   description: basic template for map colonies service
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: http://localhost:8080
 paths:
   /resourceName:
     get:
+      operationId: getResourceName
       tags:
         - resourceName
       summary: gets the resource
