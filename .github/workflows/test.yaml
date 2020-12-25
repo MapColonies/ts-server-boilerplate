@@ -4,11 +4,11 @@ on: [pull_request]
 
 jobs:
   tests:
-    name: Run SERVICE_NAME Tests
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out TS Project Git repository
+      - name: Check out Git repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
