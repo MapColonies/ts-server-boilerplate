@@ -65,6 +65,7 @@
     "jest-create-mock-instance": "^1.1.0",
     "jest-html-reporters": "^2.0.3",
     "nodemon": "^2.0.6",
+    "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "standard-version": "^9.0.0",
     "supertest": "^6.0.1",
