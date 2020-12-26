@@ -6,7 +6,8 @@ import { RequestLogger } from './common/middlewares/RequestLogger';
 import { ErrorHandler } from './common/middlewares/ErrorHandler';
 import { Services } from './common/constants';
 import { IConfig, ILogger } from './common/interfaces';
-import { routes } from './routes';
+import { resourceNameRouterFactory } from './resourceName/routes/resourceNameRouter';
+import { swaggerRouterFactory } from './common/routes/swagger';
 
 @injectable()
 export class ServerBuilder {
@@ -33,10 +34,9 @@ export class ServerBuilder {
 
   private buildRoutes(): void {
     this.logger.log('debug', 'registering service routes');
-    routes.forEach((route) => {
-      const middlewares = route.middlewares ?? [];
-      this.serverInstance.use(route.path, ...middlewares, route.routerFactory(container));
-    });
+
+    this.serverInstance.use('/resourceName', resourceNameRouterFactory(container));
+    this.serverInstance.use('/', swaggerRouterFactory(container));
   }
 
   private registerMiddleware(): void {

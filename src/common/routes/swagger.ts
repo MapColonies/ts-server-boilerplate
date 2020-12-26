@@ -1,4 +1,3 @@
-
 import { Router } from 'express';
 import { FactoryFunction } from 'tsyringe';
 import { SwaggerController } from '../controllers/swagger';

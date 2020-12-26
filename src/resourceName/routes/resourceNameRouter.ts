@@ -7,7 +7,8 @@ const resourceNameRouterFactory: FactoryFunction<Router> = (dependencyContainer)
   const router = Router();
   const controller = dependencyContainer.resolve(ResourceNameController);
 
-  router.get('/', validate, controller.get.bind(controller));
+  router.get('/', validate, controller.getResource);
+  router.post('/', validate, controller.createResource);
 
   return router;
 };

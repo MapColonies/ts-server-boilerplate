@@ -22,8 +22,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/resource'
+    post:
+      operationId: createResource
+      tags:
+        - resourceName
+      summary: creates a new record of type resource
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resource'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
   schemas:
+    error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
     resource:
       required:
         - id

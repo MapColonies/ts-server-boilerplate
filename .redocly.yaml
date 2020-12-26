@@ -27,7 +27,6 @@ lint:
     no-unused-components:
       severity: error
 
-
   decorators:
     # Decorators modify the the definition after validation is complete, only in the bundling process.
     # This section can be omitted if you don't use decorators.
