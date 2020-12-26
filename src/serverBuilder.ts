@@ -32,6 +32,7 @@ export class ServerBuilder {
   }
 
   private buildRoutes(): void {
+    this.logger.log('debug', 'registering service routes');
     routes.forEach((route) => {
       const middlewares = route.middlewares ?? [];
       this.serverInstance.use(route.path, ...middlewares, route.routerFactory(container));
@@ -39,7 +40,8 @@ export class ServerBuilder {
   }
 
   private registerMiddleware(): void {
-    this.serverInstance.use(bodyParser.urlencoded({ extended: true }));
+    this.logger.log('debug', 'Registering middlewares');
+    this.serverInstance.use(bodyParser.json());
     this.serverInstance.use(this.requestLogger.getLoggerMiddleware());
     this.serverInstance.use(this.errorHandler.getErrorHandlerMiddleware());
   }
