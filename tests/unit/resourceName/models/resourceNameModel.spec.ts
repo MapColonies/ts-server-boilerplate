@@ -1,4 +1,3 @@
-import { container } from 'tsyringe';
 import { ResourceNameManager } from '../../../../src/resourceName/models/resourceNameManager';
 
 let resourceNameManager: ResourceNameManager;

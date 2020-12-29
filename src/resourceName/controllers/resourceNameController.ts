@@ -1,4 +1,4 @@
-import { Request, Response, RequestHandler } from 'express';
+import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
 import { Services } from '../../common/constants';
