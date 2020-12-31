@@ -2,7 +2,6 @@ import { readFileSync } from 'fs';
 import { container } from 'tsyringe';
 import config from 'config';
 import { MCLogger, IServiceConfig } from '@map-colonies/mc-logger';
-import { ResourceNameManager } from '../../src/resourceName/models/resourceNameManager';
 import { Services } from '../../src/common/constants';
 
 function registerTestValues(): void {
