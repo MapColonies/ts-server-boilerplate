@@ -6,9 +6,9 @@ import { ServerBuilder } from '../../../../src/serverBuilder';
 
 let app: Application | null = null;
 
-export async function init(): Promise<void> {
+export function init(): void {
   const builder = container.resolve<ServerBuilder>(ServerBuilder);
-  app = await builder.build();
+  app = builder.build();
 }
 
 export async function getResource(): Promise<supertest.Response> {

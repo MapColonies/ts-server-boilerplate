@@ -3,9 +3,9 @@ import { Application } from 'express';
 import { registerExternalValues } from './containerConfig';
 import { ServerBuilder } from './serverBuilder';
 
-async function getApp(): Promise<Application> {
+function getApp(): Application {
   registerExternalValues();
-  const app = await container.resolve(ServerBuilder).build();
+  const app = container.resolve(ServerBuilder).build();
   return app;
 }
 

@@ -50,11 +50,11 @@ components:
         message:
           type: string
     resource:
+      type: object
       required:
         - id
         - name
         - description
-      type: object
       properties:
         id:
           type: number
