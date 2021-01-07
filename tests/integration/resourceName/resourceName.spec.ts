@@ -6,9 +6,9 @@ import { registerTestValues } from '../testContainerConfig';
 import * as requestSender from './helpers/requestSender';
 
 describe('resourceName', function () {
-  beforeAll(async function () {
+  beforeAll(function () {
     registerTestValues();
-    await requestSender.init();
+    requestSender.init();
   });
   afterEach(function () {
     container.clearInstances();
