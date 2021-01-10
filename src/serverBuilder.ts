@@ -9,7 +9,6 @@ import { IConfig, ILogger } from './common/interfaces';
 import { resourceNameRouterFactory } from './resourceName/routes/resourceNameRouter';
 import { openapiRouterFactory } from './common/routes/openapi';
 
-
 @injectable()
 export class ServerBuilder {
   private readonly serverInstance = express();

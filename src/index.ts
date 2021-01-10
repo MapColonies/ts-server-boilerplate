@@ -14,4 +14,6 @@ const serverConfig = get<IServerConfig>('server');
 const port: number = parseInt(serverConfig.port) || DEFAULT_SERVER_PORT;
 const app = getApp();
 const probe = container.resolve<Probe>(Probe);
-void probe.start(app, port);
+void probe.start(app, port).then(() => {
+  probe.readyFlag = true;
+});
