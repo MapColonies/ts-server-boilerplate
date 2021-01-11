@@ -28,7 +28,7 @@ jobs:
           prettier: true
           eslint_extensions: ts
       - name: OpenAPI Lint Checks
-        uses: nwestfall/openapi-action@v1.0.1
+        uses: nwestfall/openapi-action@v1.0.2
         with:
          github_token: ${{ secrets.GITHUB_TOKEN }}
-         file: openapi3.yaml
+         file: ./openapi3.yaml
