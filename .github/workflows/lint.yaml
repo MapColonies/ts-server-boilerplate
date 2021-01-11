@@ -27,16 +27,8 @@ jobs:
           eslint: true
           prettier: true
           eslint_extensions: ts
-      - name: lint openapi spec file
-        run: npm run lint:openapi
-  # this is a place holder for an openapi lint, action is not mature enough to accept custom config.
-  # openapi:
-  #   name: Lint openapi3.yaml
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: OpenAPI Lint Checks
-  #       uses: nwestfall/openapi-action@v1.0.1
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         file: openapi3.yaml
+      - name: OpenAPI Lint Checks
+        uses: nwestfall/openapi-action@v1.0.2
+        with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         file: ./openapi3.yaml
