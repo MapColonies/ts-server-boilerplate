@@ -6,9 +6,10 @@
   "scripts": {
     "test:unit": "jest --config=./tests/configurations/unit/jest.config.js",
     "test:integration": "jest --config=./tests/configurations/integration/jest.config.js",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write .",
-    "prelint:fix": "npm run prettier:fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "prelint:fix": "npm run format:fix",
+    "prelint": "npm run format",
     "lint:openapi": "openapi lint ./openapi3.yaml",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -38,7 +39,6 @@
   "dependencies": {
     "@map-colonies/error-express-handler": "^1.1.0",
     "@map-colonies/mc-logger": "^1.2.1",
-    "@map-colonies/mc-model-types": "^1.0.1",
     "@map-colonies/mc-probe": "^1.0.0",
     "config": "^3.3.3",
     "express": "^4.17.1",
