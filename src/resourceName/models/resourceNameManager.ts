@@ -2,7 +2,6 @@ import { inject, injectable } from 'tsyringe';
 import { Services } from '../../common/constants';
 import { ILogger } from '../../common/interfaces';
 
-
 const resourceInstance: IResourceNameModel = {
   id: 1,
   name: 'ronin',

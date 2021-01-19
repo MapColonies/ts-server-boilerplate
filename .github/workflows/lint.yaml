@@ -27,6 +27,7 @@ jobs:
           eslint: true
           prettier: true
           eslint_extensions: ts
+
       - name: OpenAPI Lint Checks
         uses: nwestfall/openapi-action@v1.0.2
         with:
