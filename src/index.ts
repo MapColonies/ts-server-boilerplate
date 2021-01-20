@@ -1,4 +1,13 @@
+/* eslint-disable import/first */
 // this import must be called before the first import of tsyring
+// eslint-disable-next-line import/newline-after-import
+import { Tracing } from '@map-colonies/telemetry';
+const tracing = new Tracing('ts-server-boilerplate', undefined, {
+  serviceName: 'ts-server-boilerplate',
+  url: 'http://localhost:55681/v1/trace',
+});
+
+tracing.start()
 import 'reflect-metadata';
 import { Probe } from '@map-colonies/mc-probe';
 import { container } from 'tsyringe';
