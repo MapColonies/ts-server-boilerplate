@@ -7,7 +7,7 @@ const tracing = new Tracing('ts-server-boilerplate', undefined, {
   url: 'http://localhost:55681/v1/trace',
 });
 
-tracing.start()
+tracing.start();
 import 'reflect-metadata';
 import { Probe } from '@map-colonies/mc-probe';
 import { container } from 'tsyringe';
