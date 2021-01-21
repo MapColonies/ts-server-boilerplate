@@ -4,3 +4,5 @@ export enum Services {
   LOGGER = 'ILogger',
   CONFIG = 'IConfig',
 }
+
+export const SERVICE_NAME = 'ts-server-boilerplate';

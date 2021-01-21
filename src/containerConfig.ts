@@ -4,7 +4,7 @@ import config from 'config';
 import { Probe } from '@map-colonies/mc-probe';
 import { MCLogger, ILoggerConfig, IServiceConfig } from '@map-colonies/mc-logger';
 import api from '@opentelemetry/api';
-import { Services } from './common/constants';
+import { Services, SERVICE_NAME } from './common/constants';
 
 function registerExternalValues(): void {
   const loggerConfig = config.get<ILoggerConfig>('logger');
@@ -13,7 +13,7 @@ function registerExternalValues(): void {
   const logger = new MCLogger(loggerConfig, service);
   container.register(Services.CONFIG, { useValue: config });
   container.register(Services.LOGGER, { useValue: logger });
-  container.register('Tracer', { useValue: api.trace.getTracer('ts-server-boilerplate') });
+  container.register('Tracer', { useValue: api.trace.getTracer(SERVICE_NAME) });
   container.register<Probe>(Probe, { useFactory: (container) => new Probe(container.resolve(Services.LOGGER), {}) });
 }
 
