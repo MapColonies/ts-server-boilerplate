@@ -11,7 +11,7 @@ import { openapiRouterFactory } from './common/routes/openapi';
 
 @injectable()
 export class ServerBuilder {
-  private readonly serverInstance = express();
+  private readonly serverInstance: express.Application;
 
   public constructor(
     @inject(Services.CONFIG) private readonly config: IConfig,
