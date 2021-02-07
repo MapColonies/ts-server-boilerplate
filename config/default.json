@@ -2,7 +2,7 @@
   "openapiConfig": {
     "filePath": "./openapi3.yaml",
     "basePath": "/docs",
-    "jsonPath": "/api.json",
+    "rawPath": "/api",
     "uiPath": "/api"
   },
   "logger": {
