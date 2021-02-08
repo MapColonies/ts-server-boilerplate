@@ -10,7 +10,7 @@ import { IConfig, ILogger } from './common/interfaces';
 import { resourceNameRouterFactory } from './resourceName/routes/resourceNameRouter';
 @injectable()
 export class ServerBuilder {
-  private readonly serverInstance = express();
+  private readonly serverInstance: express.Application;
 
   public constructor(
     @inject(Services.CONFIG) private readonly config: IConfig,
