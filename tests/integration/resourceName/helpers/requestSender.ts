@@ -14,3 +14,7 @@ export function init(): void {
 export async function getResource(): Promise<supertest.Response> {
   return supertest.agent(app).get('/resourceName').set('Content-Type', 'application/json');
 }
+
+export async function createResource(): Promise<supertest.Response> {
+  return supertest.agent(app).post('/resourceName').set('Content-Type', 'application/json');
+}

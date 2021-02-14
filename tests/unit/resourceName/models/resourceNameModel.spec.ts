@@ -17,4 +17,16 @@ describe('ResourceNameManager', () => {
       expect(resource.description).toEqual('can you do a logistics run?');
     });
   });
+  describe('#createResource', () => {
+    it('return the resource of id 1', function () {
+      // action
+      const resource = resourceNameManager.createResource({ description: 'meow', name: 'cat' });
+
+      // expectation
+      expect(resource.id).toBeLessThanOrEqual(100);
+      expect(resource.id).toBeGreaterThanOrEqual(0);
+      expect(resource).toHaveProperty('name', 'cat');
+      expect(resource).toHaveProperty('description', 'meow');
+    });
+  });
 });

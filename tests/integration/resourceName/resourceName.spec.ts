@@ -25,6 +25,11 @@ describe('resourceName', function () {
       expect(resource.name).toEqual('ronin');
       expect(resource.description).toEqual('can you do a logistics run?');
     });
+    it('should return 200 status code and create the resource', async function () {
+      const response = await requestSender.createResource();
+
+      expect(response.status).toBe(httpStatusCodes.CREATED);
+    });
   });
   describe('Bad Path', function () {
     // All requests with status code of 400
