@@ -1,5 +1,11 @@
 # Map Colonies typescript service template
 
+----------------------------------
+![badge-alerts-lgtm](https://img.shields.io/lgtm/alerts/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+![grade-badge-lgtm](https://img.shields.io/lgtm/grade/javascript/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+![snyk](https://img.shields.io/snyk/vulnerabilities/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+----------------------------------
+
 This is a basic template for building new map colonies services in typescript.
 
 ### template features:
