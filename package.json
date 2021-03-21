@@ -44,7 +44,7 @@
     "@map-colonies/openapi-express-viewer": "^2.0.1",
     "config": "^3.3.3",
     "express": "^4.17.1",
-    "express-openapi-validator": "^4.11.0",
+    "express-openapi-validator": "^4.11.1",
     "http-status-codes": "^2.1.4",
     "js-yaml": "^3.14.1",
     "reflect-metadata": "^0.1.13",
