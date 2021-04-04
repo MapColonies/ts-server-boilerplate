@@ -7,9 +7,12 @@ import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
 import { ExpressInstrumentation } from '@opentelemetry/instrumentation-express';
 import { container } from 'tsyringe';
 import { get } from 'config';
-import { DEFAULT_SERVER_PORT } from './common/constants';
+import { DEFAULT_SERVER_PORT, IGNORED_INCOMING_TRACE_ROUTES, IGNORED_OUTGOING_TRACE_ROUTES } from './common/constants';
 
-const tracing = new Tracing('app_tracer', [new HttpInstrumentation({ ignoreOutgoingUrls: [/^.*\/v1\/metrics.*$/] }), new ExpressInstrumentation()]);
+const tracing = new Tracing('app_tracer', [
+  new HttpInstrumentation({ ignoreOutgoingUrls: IGNORED_OUTGOING_TRACE_ROUTES, ignoreIncomingPaths: IGNORED_INCOMING_TRACE_ROUTES }),
+  new ExpressInstrumentation(),
+]);
 
 import { getApp } from './app';
 
