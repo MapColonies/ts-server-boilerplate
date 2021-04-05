@@ -14,6 +14,9 @@ FROM node:12.20.1-alpine3.9 as production
 RUN apk add dumb-init
 
 ENV NODE_ENV=production
+RUN chgrp -R 0 /usr && \
+    chmod -R g=u /usr
+RUN useradd -ms /bin/bash user && usermod -a -G root user
 ENV SERVER_PORT=8080
 
 
