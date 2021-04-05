@@ -19,6 +19,7 @@ This is a basic template for building new map colonies services in typescript.
 - logger using @map-colonies/mc-logger
 - swagger ui & swagger json serve
 - config load
+- tracing and metrics
 - github templates
   - bug report
   - feature request
