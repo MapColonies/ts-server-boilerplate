@@ -6,6 +6,9 @@ jobs:
   tests:
     name: Run Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [12.x, 14.x]
 
     steps:
       - name: Check out Git repository
@@ -14,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: ${{ matrix.node }}
 
       - name: Install Node.js dependencies
         run: npm ci
