@@ -11,6 +11,14 @@
       "payload": {
         "limit": "REQUEST_PAYLOAD_LIMIT"
       }
+    },
+    "response": {
+      "compression": {
+        "enabled": {
+          "__name": "RESPONSE_COMPRESSION_ENABLED",
+          "__format": "boolean"
+        }
+      }
     }
   }
 }
