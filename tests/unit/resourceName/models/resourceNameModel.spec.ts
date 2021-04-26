@@ -1,10 +1,11 @@
+import jsLogger from '@map-colonies/js-logger';
 import { ResourceNameManager } from '../../../../src/resourceName/models/resourceNameManager';
 
 let resourceNameManager: ResourceNameManager;
 
 describe('ResourceNameManager', () => {
   beforeEach(function () {
-    resourceNameManager = new ResourceNameManager({ log: jest.fn() });
+    resourceNameManager = new ResourceNameManager(jsLogger({ enabled: false }));
   });
   describe('#getResource', () => {
     it('return the resource of id 1', function () {
