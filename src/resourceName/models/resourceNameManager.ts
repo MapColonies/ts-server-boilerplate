@@ -1,6 +1,6 @@
+import { Logger } from '@map-colonies/js-logger';
 import { inject, injectable } from 'tsyringe';
 import { Services } from '../../common/constants';
-import { ILogger } from '../../common/interfaces';
 
 const resourceInstance: IResourceNameModel = {
   id: 1,
@@ -20,9 +20,9 @@ export interface IResourceNameModel {
 
 @injectable()
 export class ResourceNameManager {
-  public constructor(@inject(Services.LOGGER) private readonly logger: ILogger) {}
+  public constructor(@inject(Services.LOGGER) private readonly logger: Logger) {}
   public getResource(): IResourceNameModel {
-    this.logger.log('info', 'loggging');
+    this.logger.info('loggging');
     return resourceInstance;
   }
   public createResource(resource: IResourceNameModel): IResourceNameModel {
