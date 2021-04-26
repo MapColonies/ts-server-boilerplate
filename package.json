@@ -46,7 +46,7 @@
     "@godaddy/terminus": "4.7.1",
     "@opentelemetry/api": "0.18.1",
     "@opentelemetry/api-metrics": "0.18.2",
-    "@opentelemetry/instrumentation-express": "0.14.0",
+    "@opentelemetry/instrumentation-express": "0.15.0",
     "@opentelemetry/instrumentation-http": "0.18.2",
     "compression": "^1.7.4",
     "config": "^3.3.6",
