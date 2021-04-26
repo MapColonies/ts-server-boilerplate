@@ -10,6 +10,7 @@ import httpLogger from '@map-colonies/express-access-log-middleware';
 import { Services } from './common/constants';
 import { IConfig } from './common/interfaces';
 import { resourceNameRouterFactory } from './resourceName/routes/resourceNameRouter';
+
 @injectable()
 export class ServerBuilder {
   private readonly serverInstance: express.Application;
@@ -52,6 +53,6 @@ export class ServerBuilder {
   }
 
   private registerPostRoutesMiddleware(): void {
-    this.serverInstance.use(getErrorHandlerMiddleware((message) => this.logger.error(message)));
+    this.serverInstance.use(getErrorHandlerMiddleware());
   }
 }
