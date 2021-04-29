@@ -1,54 +1,119 @@
 # Map Colonies typescript service template
 
 ----------------------------------
+
 ![badge-alerts-lgtm](https://img.shields.io/lgtm/alerts/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+
 ![grade-badge-lgtm](https://img.shields.io/lgtm/grade/javascript/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+
 ![snyk](https://img.shields.io/snyk/vulnerabilities/github/MapColonies/ts-server-boilerplate?style=for-the-badge)
+
 ----------------------------------
 
-This is a basic template for building new map colonies services in typescript.
+This is a basic repo template for building new MapColonies web services in Typescript.
 
-### template features:
-- eslint configuration with @map-colonies/eslint-config
-- prettier
+### Template Features:
+
+- eslint configuration by [@map-colonies/eslint-config](https://github.com/MapColonies/eslint-config)
+
+- prettier configuration by [@map-colonies/prettier-config](https://github.com/MapColonies/prettier-config)
+
 - jest
-- nvm configuration
-- Dockerfile
-- commitlint setup
+
+- .nvmrc
+
+- Multi stage producton-ready Dockerfile
+
+- commitlint
+
 - git hooks
-- logger using @map-colonies/mc-logger
-- swagger ui & swagger json serve
-- config load
-- tracing and metrics
+
+- logging by [@map-colonies/js-logger](https://github.com/MapColonies/js-logger)
+
+- OpenAPI request validation
+
+- config load with [node-config](https://www.npmjs.com/package/node-config)
+
+- Tracing and metrics by [@map-colonies/telemetry](https://github.com/MapColonies/telemetry)
+
 - github templates
-  - bug report
-  - feature request
-  - pull request
+
+- bug report
+
+- feature request
+
+- pull request
+
 - github actions
-  - lint
-  - test
 
-### usage:
+- on pull_request
 
-1. copy the template files to new service repository.
-1. run `npm install `.
-1. run `npm rebuild husky` to configure commit messages linting.
-1. add the required logic for the new service:
-   - to add new routes: create an express router and connect it to express server in ServerBuilder registerControllers function. when adding handler to the router make sure to add "validate" middleware from 'openapi-express-validator' for request validation.
-   - modify the global error handler in the middleware folder to return better error responses and catch the errors before the global handler (currently it returns empty 500 response )
+- LGTM
 
-### usage notes:
+- test
 
-1. when importing external dependencies from DI (such as McLogger) in class constructor the following decorator must be used to retrieve instance:
+- lint
 
-```typescript
-@inject(delay(() => <injection token>)) <variable definition>
+- snyk
+
+## Installation
+
+Install deps with npm
+
+```bash
+npm install
 ```
 
-usage example:
+## Run Locally
 
-```typescript
-public constructor(
-    @inject(delay(() => MCLogger)) private readonly logger: MCLogger) {
-  }
+Clone the project
+
+```bash
+
+git clone https://link-to-project
+
+```
+
+Go to the project directory
+
+```bash
+
+cd my-project
+
+```
+
+Install dependencies
+
+```bash
+
+npm install
+
+```
+
+Start the server
+
+```bash
+
+npm run start
+
+```
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+
+npm run test
+
+```
+
+To only run unit tests:
+```bash
+npm run test:unit
+```
+
+To only run integration tests:
+```bash
+npm run test:integration
 ```
