@@ -56,6 +56,9 @@ This is a basic repo template for building new MapColonies web services in Types
 
 - snyk
 
+## API
+Checkout the OpenAPI spec [here](/openapi3.yaml)
+
 ## Installation
 
 Install deps with npm
