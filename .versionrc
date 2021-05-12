@@ -1,0 +1,8 @@
+{
+  "bumpFiles": [
+    {
+      "filename": "openapi3.yaml",
+      "updater": "standard-version-updater.js"
+    }
+  ]
+}
