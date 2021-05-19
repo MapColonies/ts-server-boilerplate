@@ -6,7 +6,7 @@ import { registerTestValues } from '../testContainerConfig';
 import * as requestSender from './helpers/requestSender';
 
 describe('resourceName', function () {
-  beforeAll(function () {
+  beforeEach(function () {
     registerTestValues();
     requestSender.init();
   });
