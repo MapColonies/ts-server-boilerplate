@@ -70,3 +70,14 @@ jobs:
         with:
           name: Test Reporters
           path: reports/**
+
+  build_image:
+    name: Build Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: build Docker image
+        run: docker build -t test-build:latest .
