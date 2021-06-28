@@ -3,7 +3,11 @@
     "filePath": "OPENAPI_FILE_PATH"
   },
   "logger": {
-    "level": "LOG_LEVEL"
+    "level": "LOG_LEVEL",
+    "prettyPrint": {
+      "__name": "LOG_PRETTY_PRINT_ENABLED",
+      "__format": "boolean"
+    }
   },
   "server": {
     "port": "SERVER_PORT",

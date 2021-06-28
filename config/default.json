@@ -6,7 +6,8 @@
     "uiPath": "/api"
   },
   "logger": {
-    "level": "info"
+    "level": "info",
+    "prettyPrint": false
   },
   "server": {
     "port": "8080",
