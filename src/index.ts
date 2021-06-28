@@ -11,7 +11,7 @@ import { container } from 'tsyringe';
 import { get } from 'config';
 import { DEFAULT_SERVER_PORT, IGNORED_INCOMING_TRACE_ROUTES, IGNORED_OUTGOING_TRACE_ROUTES, Services } from './common/constants';
 
-const tracing = new Tracing('app_tracer', [
+const tracing = new Tracing([
   new HttpInstrumentation({ ignoreOutgoingUrls: IGNORED_OUTGOING_TRACE_ROUTES, ignoreIncomingPaths: IGNORED_INCOMING_TRACE_ROUTES }),
   new ExpressInstrumentation(),
 ]);
