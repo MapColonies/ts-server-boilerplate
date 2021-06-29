@@ -25,8 +25,8 @@
         "LOG_PRETTY_PRINT_ENABLED": "true",
         "TELEMETRY_TRACING_ENABLED": "false",
         "TELEMETRY_METRICS_ENABLED": "false",
-        "TELEMETRY_TRACING_URL": "",
-        "TELEMETRY_METRICS_URL": ""
+        "TELEMETRY_TRACING_URL": "http://localhost:55681/v1/trace",
+        "TELEMETRY_METRICS_URL": "http://localhost:55681/v1/metrics"
         // "OPENAPI_FILE_PATH": "./openapi3.yaml"
       }
     }
