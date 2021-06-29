@@ -26,9 +26,8 @@
         "TELEMETRY_TRACING_ENABLED": "false",
         "TELEMETRY_METRICS_ENABLED": "false",
         "TELEMETRY_TRACING_URL": "",
-        "TELEMETRY_METRICS_URL": "",
+        "TELEMETRY_METRICS_URL": ""
         // "OPENAPI_FILE_PATH": "./openapi3.yaml"
-
       }
     }
   ]
