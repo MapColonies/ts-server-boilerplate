@@ -13,7 +13,7 @@ cloudProvider:
 
 image:
   repository: ts-server-boilerplate
-  tag: 'v1.0.0'
+  tag: 'latest'
 
 replicaCount: 1
 
