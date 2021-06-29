@@ -6,6 +6,9 @@ global:
 
 enabled: true
 environment: development
+replicaCount: 1
+initialDelaySeconds: 60
+nodePort: 30030 #for minikube deployment only
 
 cloudProvider:
   dockerRegistryUrl: my-registry-url.io
@@ -14,8 +17,6 @@ cloudProvider:
 image:
   repository: ts-server-boilerplate
   tag: 'latest'
-
-replicaCount: 1
 
 env:
   port: 8080
@@ -32,8 +33,6 @@ env:
     enabled: false
     url: http://localhost:55681/v1/metrics
 
-initialDelaySeconds: 60
-
 resources:
   enabled: false
   value:
@@ -47,3 +46,11 @@ resources:
 route:
   enabled: true
   path: /
+
+ingress:
+  enabled: false
+  path: /
+  host: 'localhost'
+  cors:
+    enabled: true
+    origin: '*'

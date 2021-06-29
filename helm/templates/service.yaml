@@ -21,6 +21,9 @@ spec:
       targetPort: {{ .Values.env.targetPort }}
       protocol: {{ .Values.env.protocol }}
       name: http
+      {{- if eq $cloudProviderFlavor "minikube" }}
+      nodePort: {{ .Values.nodePort }}
+      {{- end }}
   selector:
     app: {{ $chartName }}
     release: {{ $releaseName }}
