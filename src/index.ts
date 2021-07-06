@@ -25,7 +25,7 @@ interface IServerConfig {
 const serverConfig = get<IServerConfig>('server');
 const port: number = parseInt(serverConfig.port) || DEFAULT_SERVER_PORT;
 
-const app = getApp(tracing);
+const app = getApp();
 
 const logger = container.resolve<Logger>(Services.LOGGER);
 const stubHealthcheck = async (): Promise<void> => Promise.resolve();

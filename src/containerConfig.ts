@@ -3,19 +3,21 @@ import config from 'config';
 import { logMethod } from '@map-colonies/telemetry';
 import { trace } from '@opentelemetry/api';
 import jsLogger, { LoggerOptions } from '@map-colonies/js-logger';
-import { Tracing, Metrics } from '@map-colonies/telemetry';
-import { Services, SERVICE_NAME } from './common/constants';
+import { Metrics } from '@map-colonies/telemetry';
+import { trace } from '@opentelemetry/api';
+import { Services } from './common/constants';
+import { tracing } from './common/tracing';
 
-function registerExternalValues(tracing: Tracing): void {
-  const loggerConfig = config.get<LoggerOptions>('logger');
+function registerExternalValues(): void {
+  const loggerConfig = config.get<LoggerOptions>('telemetry.logger');
   // @ts-expect-error the signature is wrong
   const logger = jsLogger({ ...loggerConfig, prettyPrint: loggerConfig.prettyPrint, hooks: { logMethod } });
   container.register(Services.CONFIG, { useValue: config });
   container.register(Services.LOGGER, { useValue: logger });
 
   tracing.start();
-  const appTracer = trace.getTracer(SERVICE_NAME);
-  container.register(Services.TRACER, { useValue: appTracer });
+  const tracer = trace.getTracer('app');
+  container.register(Services.TRACER, { useValue: tracer });
 
   const metrics = new Metrics('app_meter');
   const meter = metrics.start();

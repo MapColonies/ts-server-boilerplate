@@ -5,9 +5,11 @@
     "rawPath": "/api",
     "uiPath": "/api"
   },
-  "logger": {
-    "level": "info",
-    "prettyPrint": false
+  "telemetry": {
+    "logger": {
+      "level": "info",
+      "prettyPrint": false
+    }
   },
   "server": {
     "port": "8080",

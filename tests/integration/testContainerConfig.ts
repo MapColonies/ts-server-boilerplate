@@ -3,6 +3,7 @@ import config from 'config';
 import { trace } from '@opentelemetry/api';
 import { Metrics } from '@map-colonies/telemetry';
 import jsLogger from '@map-colonies/js-logger';
+import { trace } from '@opentelemetry/api';
 import { Services } from '../../src/common/constants';
 
 function registerTestValues(): void {
