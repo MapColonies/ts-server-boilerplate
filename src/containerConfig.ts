@@ -4,7 +4,6 @@ import { logMethod } from '@map-colonies/telemetry';
 import { trace } from '@opentelemetry/api';
 import jsLogger, { LoggerOptions } from '@map-colonies/js-logger';
 import { Metrics } from '@map-colonies/telemetry';
-import { trace } from '@opentelemetry/api';
 import { Services } from './common/constants';
 import { tracing } from './common/tracing';
 
