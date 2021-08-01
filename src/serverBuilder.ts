@@ -1,21 +1,25 @@
-import express from 'express';
+import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import { OpenapiViewerRouter, OpenapiRouterConfig } from '@map-colonies/openapi-express-viewer';
 import { getErrorHandlerMiddleware } from '@map-colonies/error-express-handler';
 import { middleware as OpenApiMiddleware } from 'express-openapi-validator';
-import { container, inject, injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 import { Logger } from '@map-colonies/js-logger';
 import httpLogger from '@map-colonies/express-access-log-middleware';
 import { Services } from './common/constants';
 import { IConfig } from './common/interfaces';
-import { resourceNameRouterFactory } from './resourceName/routes/resourceNameRouter';
+import { resourceNameRouterSymbol } from './resourceName/routes/resourceNameRouter';
 
 @injectable()
 export class ServerBuilder {
   private readonly serverInstance: express.Application;
 
-  public constructor(@inject(Services.CONFIG) private readonly config: IConfig, @inject(Services.LOGGER) private readonly logger: Logger) {
+  public constructor(
+    @inject(Services.CONFIG) private readonly config: IConfig,
+    @inject(Services.LOGGER) private readonly logger: Logger,
+    @inject(resourceNameRouterSymbol) private readonly resourceNameRouter: Router
+  ) {
     this.serverInstance = express();
   }
 
@@ -34,7 +38,7 @@ export class ServerBuilder {
   }
 
   private buildRoutes(): void {
-    this.serverInstance.use('/resourceName', resourceNameRouterFactory(container));
+    this.serverInstance.use('/resourceName', this.resourceNameRouter);
     this.buildDocsRoutes();
   }
 

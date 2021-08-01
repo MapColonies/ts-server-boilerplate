@@ -1,17 +1,25 @@
+import jsLogger from '@map-colonies/js-logger';
+import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
-import { container } from 'tsyringe';
+import { getApp } from '../../../src/app';
+import { Services } from '../../../src/common/constants';
 import { IResourceNameModel } from '../../../src/resourceName/models/resourceNameManager';
-
-import { registerTestValues } from '../testContainerConfig';
-import * as requestSender from './helpers/requestSender';
+import { ResourceNameRequestSender } from './helpers/requestSender';
 
 describe('resourceName', function () {
+  let requestSender: ResourceNameRequestSender;
   beforeEach(function () {
-    registerTestValues();
-    requestSender.init();
+    const app = getApp({
+      override: [
+        { token: Services.LOGGER, provider: { useValue: jsLogger({ enabled: false }) } },
+        { token: Services.TRACER, provider: { useValue: trace.getTracer('testTracer') } },
+      ],
+      useChild: true,
+    });
+    requestSender = new ResourceNameRequestSender(app);
   });
   afterEach(function () {
-    container.clearInstances();
+    // container.clearInstances();
   });
 
   describe('Happy Path', function () {
