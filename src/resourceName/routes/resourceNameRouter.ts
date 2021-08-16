@@ -12,6 +12,6 @@ const resourceNameRouterFactory: FactoryFunction<Router> = (dependencyContainer)
   return router;
 };
 
-export const resourceNameRouterSymbol = Symbol('resourceNameRouterFactory');
+export const RESOURCE_NAME_ROUTER_SYMBOL = Symbol('resourceNameRouterFactory');
 
 export { resourceNameRouterFactory };

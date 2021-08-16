@@ -8,6 +8,19 @@ info:
     url: https://opensource.org/licenses/MIT
 
 paths:
+  /anotherResource:
+    get:
+      operationId: getResourceName
+      tags:
+        - anotherResource
+      summary: gets the resource
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/anotherResource'
   /resourceName:
     get:
       operationId: getResourceName
@@ -62,3 +75,14 @@ components:
           type: string
         description:
           type: string
+    anotherResource:
+      type: object
+      required:
+        - kind
+        - isAlive
+        - description
+      properties:
+        kind:
+          type: string
+        isAlive:
+          type: boolean

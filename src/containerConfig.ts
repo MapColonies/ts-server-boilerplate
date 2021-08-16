@@ -6,8 +6,9 @@ import jsLogger, { LoggerOptions } from '@map-colonies/js-logger';
 import { Metrics } from '@map-colonies/telemetry';
 import { Services } from './common/constants';
 import { tracing } from './common/tracing';
-import { resourceNameRouterFactory, resourceNameRouterSymbol } from './resourceName/routes/resourceNameRouter';
+import { resourceNameRouterFactory, RESOURCE_NAME_ROUTER_SYMBOL } from './resourceName/routes/resourceNameRouter';
 import { InjectionObject, registerDependencies } from './common/dependencyRegistration';
+import { anotherResourceRouterFactory, ANOTHER_RESOURECE_ROUTER_SYMBOL } from './anotherResource/routes/anotherResourceRouter';
 
 export interface RegisterOptions {
   override?: InjectionObject<unknown>[];
@@ -30,7 +31,8 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
     { token: Services.LOGGER, provider: { useValue: logger } },
     { token: Services.TRACER, provider: { useValue: tracer } },
     { token: Services.METER, provider: { useValue: meter } },
-    { token: resourceNameRouterSymbol, provider: { useFactory: resourceNameRouterFactory } },
+    { token: RESOURCE_NAME_ROUTER_SYMBOL, provider: { useFactory: resourceNameRouterFactory } },
+    { token: ANOTHER_RESOURECE_ROUTER_SYMBOL, provider: { useFactory: anotherResourceRouterFactory } },
     {
       token: 'onSignal',
       provider: {

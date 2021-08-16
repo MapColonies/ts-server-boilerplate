@@ -9,7 +9,8 @@ import { Logger } from '@map-colonies/js-logger';
 import httpLogger from '@map-colonies/express-access-log-middleware';
 import { Services } from './common/constants';
 import { IConfig } from './common/interfaces';
-import { resourceNameRouterSymbol } from './resourceName/routes/resourceNameRouter';
+import { RESOURCE_NAME_ROUTER_SYMBOL } from './resourceName/routes/resourceNameRouter';
+import { ANOTHER_RESOURECE_ROUTER_SYMBOL } from './anotherResource/routes/anotherResourceRouter';
 
 @injectable()
 export class ServerBuilder {
@@ -18,7 +19,8 @@ export class ServerBuilder {
   public constructor(
     @inject(Services.CONFIG) private readonly config: IConfig,
     @inject(Services.LOGGER) private readonly logger: Logger,
-    @inject(resourceNameRouterSymbol) private readonly resourceNameRouter: Router
+    @inject(RESOURCE_NAME_ROUTER_SYMBOL) private readonly resourceNameRouter: Router,
+    @inject(ANOTHER_RESOURECE_ROUTER_SYMBOL) private readonly anotherResourceRouter: Router
   ) {
     this.serverInstance = express();
   }
@@ -39,6 +41,7 @@ export class ServerBuilder {
 
   private buildRoutes(): void {
     this.serverInstance.use('/resourceName', this.resourceNameRouter);
+    this.serverInstance.use('/anotherResource', this.anotherResourceRouter);
     this.buildDocsRoutes();
   }
 
