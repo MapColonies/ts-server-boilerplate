@@ -10,7 +10,7 @@ info:
 paths:
   /anotherResource:
     get:
-      operationId: getResourceName
+      operationId: getAnotherResource
       tags:
         - anotherResource
       summary: gets the resource
