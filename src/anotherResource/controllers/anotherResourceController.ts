@@ -8,7 +8,6 @@ import { Services } from '../../common/constants';
 
 import { IAnotherResourceModel, AnotherResourceManager } from '../models/anotherResourceManager';
 
-type CreateResourceHandler = RequestHandler<undefined, IAnotherResourceModel, IAnotherResourceModel>;
 type GetResourceHandler = RequestHandler<undefined, IAnotherResourceModel>;
 
 @injectable()
