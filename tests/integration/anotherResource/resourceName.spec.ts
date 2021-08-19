@@ -3,11 +3,11 @@ import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
 import { getApp } from '../../../src/app';
 import { Services } from '../../../src/common/constants';
-import { IResourceNameModel } from '../../../src/resourceName/models/resourceNameManager';
-import { ResourceNameRequestSender } from './helpers/requestSender';
+import { IAnotherResourceModel } from '../../../src/anotherResource/models/anotherResourceManager';
+import { AnotherResourceRequestSender } from './helpers/requestSender';
 
 describe('resourceName', function () {
-  let requestSender: ResourceNameRequestSender;
+  let requestSender: AnotherResourceRequestSender;
   beforeEach(function () {
     const app = getApp({
       override: [
@@ -16,7 +16,7 @@ describe('resourceName', function () {
       ],
       useChild: true,
     });
-    requestSender = new ResourceNameRequestSender(app);
+    requestSender = new AnotherResourceRequestSender(app);
   });
 
   describe('Happy Path', function () {
@@ -25,15 +25,9 @@ describe('resourceName', function () {
 
       expect(response.status).toBe(httpStatusCodes.OK);
 
-      const resource = response.body as IResourceNameModel;
-      expect(resource.id).toEqual(1);
-      expect(resource.name).toEqual('ronin');
-      expect(resource.description).toEqual('can you do a logistics run?');
-    });
-    it('should return 200 status code and create the resource', async function () {
-      const response = await requestSender.createResource();
-
-      expect(response.status).toBe(httpStatusCodes.CREATED);
+      const resource = response.body as IAnotherResourceModel;
+      expect(resource.kind).toEqual('avi');
+      expect(resource.isAlive).toEqual(false);
     });
   });
   describe('Bad Path', function () {

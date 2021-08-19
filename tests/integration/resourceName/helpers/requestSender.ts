@@ -1,20 +1,13 @@
 import * as supertest from 'supertest';
-import { Application } from 'express';
 
-import { container } from 'tsyringe';
-import { ServerBuilder } from '../../../../src/serverBuilder';
+export class ResourceNameRequestSender {
+  public constructor(private readonly app: Express.Application) {}
 
-let app: Application | null = null;
+  public async getResource(): Promise<supertest.Response> {
+    return supertest.agent(this.app).get('/resourceName').set('Content-Type', 'application/json');
+  }
 
-export function init(): void {
-  const builder = container.resolve<ServerBuilder>(ServerBuilder);
-  app = builder.build();
-}
-
-export async function getResource(): Promise<supertest.Response> {
-  return supertest.agent(app).get('/resourceName').set('Content-Type', 'application/json');
-}
-
-export async function createResource(): Promise<supertest.Response> {
-  return supertest.agent(app).post('/resourceName').set('Content-Type', 'application/json');
+  public async createResource(): Promise<supertest.Response> {
+    return supertest.agent(this.app).post('/resourceName').set('Content-Type', 'application/json');
+  }
 }
