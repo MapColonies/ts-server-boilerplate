@@ -2,7 +2,7 @@ import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
 import { getApp } from '../../../src/app';
-import { Services } from '../../../src/common/constants';
+import { SERVICES } from '../../../src/common/constants';
 import { IResourceNameModel } from '../../../src/resourceName/models/resourceNameManager';
 import { ResourceNameRequestSender } from './helpers/requestSender';
 
@@ -11,8 +11,8 @@ describe('resourceName', function () {
   beforeEach(function () {
     const app = getApp({
       override: [
-        { token: Services.LOGGER, provider: { useValue: jsLogger({ enabled: false }) } },
-        { token: Services.TRACER, provider: { useValue: trace.getTracer('testTracer') } },
+        { token: SERVICES.LOGGER, provider: { useValue: jsLogger({ enabled: false }) } },
+        { token: SERVICES.TRACER, provider: { useValue: trace.getTracer('testTracer') } },
       ],
       useChild: true,
     });

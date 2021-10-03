@@ -4,7 +4,7 @@ import { trace } from '@opentelemetry/api';
 import { DependencyContainer } from 'tsyringe/dist/typings/types';
 import jsLogger, { LoggerOptions } from '@map-colonies/js-logger';
 import { Metrics } from '@map-colonies/telemetry';
-import { Services } from './common/constants';
+import { SERVICES, SERVICE_NAME } from './common/constants';
 import { tracing } from './common/tracing';
 import { resourceNameRouterFactory, RESOURCE_NAME_ROUTER_SYMBOL } from './resourceName/routes/resourceNameRouter';
 import { InjectionObject, registerDependencies } from './common/dependencyRegistration';
@@ -20,17 +20,17 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
   // @ts-expect-error the signature is wrong
   const logger = jsLogger({ ...loggerConfig, prettyPrint: loggerConfig.prettyPrint, hooks: { logMethod } });
 
-  const metrics = new Metrics('app');
+  const metrics = new Metrics(SERVICE_NAME);
   const meter = metrics.start();
 
   tracing.start();
-  const tracer = trace.getTracer('app');
+  const tracer = trace.getTracer(SERVICE_NAME);
 
   const dependencies: InjectionObject<unknown>[] = [
-    { token: Services.CONFIG, provider: { useValue: config } },
-    { token: Services.LOGGER, provider: { useValue: logger } },
-    { token: Services.TRACER, provider: { useValue: tracer } },
-    { token: Services.METER, provider: { useValue: meter } },
+    { token: SERVICES.CONFIG, provider: { useValue: config } },
+    { token: SERVICES.LOGGER, provider: { useValue: logger } },
+    { token: SERVICES.TRACER, provider: { useValue: tracer } },
+    { token: SERVICES.METER, provider: { useValue: meter } },
     { token: RESOURCE_NAME_ROUTER_SYMBOL, provider: { useFactory: resourceNameRouterFactory } },
     { token: ANOTHER_RESOURECE_ROUTER_SYMBOL, provider: { useFactory: anotherResourceRouterFactory } },
     {
