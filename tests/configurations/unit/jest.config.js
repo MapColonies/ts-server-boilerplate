@@ -4,8 +4,8 @@ module.exports = {
   },
   globals: {
     'ts-jest': {
-      tsConfig: 'tsconfig.test.json'
-    }
+      tsConfig: 'tsconfig.test.json',
+    },
   },
   testMatch: ['<rootDir>/tests/unit/**/*.spec.ts'],
   coverageReporters: ['text', 'html'],
