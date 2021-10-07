@@ -19,7 +19,8 @@
     "build": "tsc --project tsconfig.build.json  && npm run assets:copy",
     "start": "npm run build && cd dist && node ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "install": "npx husky install"
   },
   "directories": {
     "test": "tests"
