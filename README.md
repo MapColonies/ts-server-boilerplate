@@ -66,6 +66,10 @@ Install deps with npm
 ```bash
 npm install
 ```
+### Install Git Hooks
+```bash
+npx husky install
+```
 
 ## Run Locally
 
