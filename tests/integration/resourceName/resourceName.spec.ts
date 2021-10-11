@@ -1,6 +1,7 @@
 import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
+
 import { getApp } from '../../../src/app';
 import { SERVICES } from '../../../src/common/constants';
 import { IResourceNameModel } from '../../../src/resourceName/models/resourceNameManager';
@@ -26,6 +27,7 @@ describe('resourceName', function () {
       expect(response.status).toBe(httpStatusCodes.OK);
 
       const resource = response.body as IResourceNameModel;
+      expect(response).toSatisfyApiSpec();
       expect(resource.id).toEqual(1);
       expect(resource.name).toEqual('ronin');
       expect(resource.description).toEqual('can you do a logistics run?');

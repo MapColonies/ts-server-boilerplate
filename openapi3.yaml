@@ -80,7 +80,6 @@ components:
       required:
         - kind
         - isAlive
-        - description
       properties:
         kind:
           type: string
