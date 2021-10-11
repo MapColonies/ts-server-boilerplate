@@ -34,7 +34,7 @@ env:
     url: http://localhost:55681/v1/metrics
 
 resources:
-  enabled: false
+  enabled: true
   value:
     limits:
       cpu: 100m
