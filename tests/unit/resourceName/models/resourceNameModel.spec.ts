@@ -13,9 +13,9 @@ describe('ResourceNameManager', () => {
       const resource = resourceNameManager.getResource();
 
       // expectation
-      expect(resource.id).toEqual(1);
-      expect(resource.name).toEqual('ronin');
-      expect(resource.description).toEqual('can you do a logistics run?');
+      expect(resource.id).toBe(1);
+      expect(resource.name).toBe('ronin');
+      expect(resource.description).toBe('can you do a logistics run?');
     });
   });
   describe('#createResource', () => {
