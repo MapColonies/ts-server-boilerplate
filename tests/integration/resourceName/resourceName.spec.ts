@@ -28,9 +28,9 @@ describe('resourceName', function () {
 
       const resource = response.body as IResourceNameModel;
       expect(response).toSatisfyApiSpec();
-      expect(resource.id).toEqual(1);
-      expect(resource.name).toEqual('ronin');
-      expect(resource.description).toEqual('can you do a logistics run?');
+      expect(resource.id).toBe(1);
+      expect(resource.name).toBe('ronin');
+      expect(resource.description).toBe('can you do a logistics run?');
     });
     it('should return 200 status code and create the resource', async function () {
       const response = await requestSender.createResource();

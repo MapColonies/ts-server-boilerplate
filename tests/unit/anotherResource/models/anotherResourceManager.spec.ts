@@ -13,8 +13,8 @@ describe('ResourceNameManager', () => {
       const resource = anotherResourceManager.getResource();
 
       // expectation
-      expect(resource.kind).toEqual('avi');
-      expect(resource.isAlive).toEqual(false);
+      expect(resource.kind).toBe('avi');
+      expect(resource.isAlive).toBe(false);
     });
   });
 });

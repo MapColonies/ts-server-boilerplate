@@ -27,8 +27,8 @@ describe('resourceName', function () {
       expect(response).toSatisfyApiSpec();
 
       const resource = response.body as IAnotherResourceModel;
-      expect(resource.kind).toEqual('avi');
-      expect(resource.isAlive).toEqual(false);
+      expect(resource.kind).toBe('avi');
+      expect(resource.isAlive).toBe(false);
     });
   });
   describe('Bad Path', function () {
