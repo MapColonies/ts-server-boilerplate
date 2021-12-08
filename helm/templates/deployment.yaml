@@ -30,6 +30,10 @@ spec:
         run: {{ $releaseName }}-{{ $chartName }}
         {{- include "ts-server-boilerplate.selectorLabels" . | nindent 8 }}
     spec:
+    {{- if .Values.cloudProvider.imagePullSecretName }}
+      imagePullSecrets:
+        - name: {{ .Values.cloudProvider.imagePullSecretName | quote }}
+    {{- end }}
       containers:
         - name: {{ $releaseName }}-{{ $chartName }}-deployment
           {{- with .Values.image }}
