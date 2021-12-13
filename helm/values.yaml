@@ -15,6 +15,9 @@ cloudProvider:
   imagePullSecretName: 'my-registry-secret'
   flavor: openshift
 
+caSecretName: ''
+caKey: 'ca.crt'
+
 image:
   repository: ts-server-boilerplate
   tag: 'latest'
