@@ -41,7 +41,7 @@ spec:
           {{- end }}
           volumeMounts:
             {{- if .Values.caSecretName }}
-            - mountPath: {{ quote .Values.caPath }}
+            - mountPath: {{ printf "%s/%s" .Values.caPath .Values.caKey | quote }}
               name: root-ca
               subPath: {{ quote .Values.caKey }}
             {{- end }}
