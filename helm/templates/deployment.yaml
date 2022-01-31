@@ -2,6 +2,7 @@
 {{- $chartName := include "ts-server-boilerplate.name" . -}}
 {{- $cloudProviderFlavor := include "ts-server-boilerplate.cloudProviderFlavor" . -}}
 {{- $cloudProviderDockerRegistryUrl := include "ts-server-boilerplate.cloudProviderDockerRegistryUrl" . -}}
+{{- $cloudProviderImagePullSecretName := include "ts-server-boilerplate.cloudProviderImagePullSecretName" . -}}
 {{- $imageTag := include "ts-server-boilerplate.tag" . -}}
 {{- if .Values.enabled -}}
 apiVersion: apps/v1
@@ -30,9 +31,9 @@ spec:
         run: {{ $releaseName }}-{{ $chartName }}
         {{- include "ts-server-boilerplate.selectorLabels" . | nindent 8 }}
     spec:
-    {{- if .Values.cloudProvider.imagePullSecretName }}
+    {{- if $cloudProviderImagePullSecretName }}
       imagePullSecrets:
-        - name: {{ .Values.cloudProvider.imagePullSecretName | quote }}
+        - name: {{ $cloudProviderImagePullSecretName | quote }}
     {{- end }}
       containers:
         - name: {{ $releaseName }}-{{ $chartName }}-deployment
