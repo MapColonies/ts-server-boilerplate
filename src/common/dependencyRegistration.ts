@@ -15,7 +15,7 @@ export const registerDependencies = (
 ): DependencyContainer => {
   const container = useChild ? defaultContainer.createChildContainer() : defaultContainer;
   dependencies.forEach((injectionObj) => {
-    const inject = override?.find((overrideObj) => overrideObj.token === injectionObj.token) !== undefined;
+    const inject = override?.find((overrideObj) => overrideObj.token === injectionObj.token) === undefined;
     if (inject) {
       container.register(injectionObj.token, injectionObj.provider as constructor<unknown>);
     }
