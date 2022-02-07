@@ -19,5 +19,4 @@ data:
   TELEMETRY_METRICS_ENABLED: 'true'
   TELEMETRY_METRICS_URL: {{ $metricsUrl }}
   {{ end }}
-  LOG_LEVEL: {{ .Values.env.logLevel | quote }}
 {{- end }}
