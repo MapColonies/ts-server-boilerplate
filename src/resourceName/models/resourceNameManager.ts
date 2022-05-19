@@ -21,11 +21,18 @@ export interface IResourceNameModel {
 @injectable()
 export class ResourceNameManager {
   public constructor(@inject(SERVICES.LOGGER) private readonly logger: Logger) {}
+
   public getResource(): IResourceNameModel {
-    this.logger.info('loggging');
+    this.logger.info({ msg: 'getting resource', resourceId: resourceInstance.id });
+
     return resourceInstance;
   }
+
   public createResource(resource: IResourceNameModel): IResourceNameModel {
-    return { id: generateRandomId(), ...resource };
+    const resourceId = generateRandomId();
+
+    this.logger.info({ msg: 'creating resource', resourceId });
+
+    return { id: resourceId, ...resource };
   }
 }
