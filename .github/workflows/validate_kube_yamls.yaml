@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: validate helm yaml
-      uses: MapColonies/DevOps-helm-kubeval-action@1.0.0
+      uses: MapColonies/DevOps-helm-kubeval-action@1.1.0
       with:
         path: helm
         ignore_missing_schemas: false
