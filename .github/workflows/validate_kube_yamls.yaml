@@ -1,0 +1,16 @@
+on: [pull_request,workflow_dispatch]
+name: Validate YAMLs
+jobs:
+  kubeval:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1.21.6,1.19.0]
+    steps:
+    - uses: actions/checkout@master
+    - name: validate helm yaml
+      uses: MapColonies/DevOps-helm-kubeval-action@1.0.0
+      with:
+        path: helm
+        ignore_missing_schemas: false
+        version: ${{ matrix.version }}
