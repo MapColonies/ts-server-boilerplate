@@ -5,7 +5,7 @@ metadata:
   description: A boilerplate github repo for a REST API service in NodeJS for MapColonies
   annotations:
     github.com/project-slug: MapColonies/ts-server-boilerplate
-  tags: 
+  tags:
     - nodejs
     - typescript
     - expressjs

@@ -1,13 +1,11 @@
 import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
-
 import { getApp } from '../../../src/app';
 import { SERVICES } from '../../../src/common/constants';
-import { IResourceNameModel } from '../../../src/resourceName/models/resourceNameManager';
 import { DocsRequestSender } from './helpers/docsRequestSender';
 
-describe('resourceName', function () {
+describe('docs', function () {
   let requestSender: DocsRequestSender;
   beforeEach(function () {
     const app = getApp({
@@ -24,9 +22,17 @@ describe('resourceName', function () {
     it('should return 200 status code and the resource', async function () {
       const response = await requestSender.getDocs();
 
-      expect(response.status).toBe(httpStatusCodes.MOVED_PERMANENTLY);
-      expect(response.redirect).toBe(true);
+      expect(response.status).toBe(httpStatusCodes.OK);
       expect(response.type).toBe('text/html');
+    });
+
+    it('should return 200 status code and the json spec', async function () {
+      const response = await requestSender.getDocsJson();
+
+      expect(response.status).toBe(httpStatusCodes.OK);
+
+      expect(response.type).toBe('application/json');
+      expect(response.body).toHaveProperty('openapi');
     });
   });
 });
