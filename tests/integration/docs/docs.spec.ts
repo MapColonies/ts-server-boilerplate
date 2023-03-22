@@ -17,7 +17,6 @@ describe('docs', function () {
     });
     requestSender = new DocsRequestSender(app);
   });
-  
 
   describe('Happy Path', function () {
     it('should return 200 status code and the resource', async function () {
@@ -31,9 +30,9 @@ describe('docs', function () {
       const response = await requestSender.getDocsJson();
 
       expect(response.status).toBe(httpStatusCodes.OK);
-      
+
       expect(response.type).toBe('application/json');
-      expect(response.body).toHaveProperty('openapi')
+      expect(response.body).toHaveProperty('openapi');
     });
   });
 });
