@@ -18,6 +18,7 @@
     "prebuild": "npm run clean",
     "build": "tsc --project tsconfig.build.json  && npm run assets:copy",
     "start": "npm run build && cd dist && node ./index.js",
+    "start:dev": "npm run build && cd dist && node --enable-source-maps ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist",
     "install": "npx husky install"
@@ -41,8 +42,8 @@
   "dependencies": {
     "@godaddy/terminus": "^4.11.2",
     "@map-colonies/error-express-handler": "^2.1.0",
-    "@map-colonies/express-access-log-middleware": "^1.0.0",
-    "@map-colonies/js-logger": "^0.0.5",
+    "@map-colonies/express-access-log-middleware": "^2.0.1",
+    "@map-colonies/js-logger": "^1.0.1",
     "@map-colonies/openapi-express-viewer": "^3.0.0",
     "@map-colonies/read-pkg": "0.0.1",
     "@map-colonies/telemetry": "4.1.0",
