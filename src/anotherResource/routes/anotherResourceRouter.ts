@@ -11,6 +11,6 @@ const anotherResourceRouterFactory: FactoryFunction<Router> = (dependencyContain
   return router;
 };
 
-export const ANOTHER_RESOURECE_ROUTER_SYMBOL = Symbol('anotherResourceRouterFactory');
+export const ANOTHER_RESOURCE_ROUTER_SYMBOL = Symbol('anotherResourceRouterFactory');
 
 export { anotherResourceRouterFactory };
