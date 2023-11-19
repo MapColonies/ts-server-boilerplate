@@ -7,6 +7,7 @@ global:
 enabled: true
 environment: development
 replicaCount: 1
+revisionHistoryLimit: 5
 initialDelaySeconds: 60
 nodePort: 30030 #for minikube deployment only
 resetOnConfigChange: true
