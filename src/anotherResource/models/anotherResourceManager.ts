@@ -16,7 +16,7 @@ export interface IAnotherResourceModel {
 export class AnotherResourceManager {
   public constructor(@inject(SERVICES.LOGGER) private readonly logger: Logger) {}
   public getResource(): IAnotherResourceModel {
-    this.logger.info('loggging');
+    this.logger.info('logging');
     return resourceInstance;
   }
 }
