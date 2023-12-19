@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $releaseName }}-{{ $chartName }}
+  name: {{ printf "%s-service" (include "ts-server-boilerplate.fullname" .) }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}

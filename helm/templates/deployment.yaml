@@ -8,7 +8,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $releaseName }}-{{ $chartName }}
+  name: {{ printf "%s-deployment" (include "ts-server-boilerplate.fullname" .) }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
@@ -48,6 +48,14 @@ spec:
           {{- with .Values.image }}
           image: {{ $cloudProviderDockerRegistryUrl }}{{ .repository }}:{{ $imageTag }}
           imagePullPolicy: {{ .pullPolicy | default "IfNotPresent" }}
+          {{- end }}
+          {{- if .Values.command }}
+          command: 
+          {{- toYaml .Values.command |nindent 12 }}
+          {{- if .Values.args }}
+          args: 
+          {{- toYaml .Values.args | nindent 12 }}
+          {{- end }}
           {{- end }}
           volumeMounts:
             {{- if .Values.caSecretName }}

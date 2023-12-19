@@ -21,7 +21,7 @@ livenessProbe:
   failureThreshold: 6
 
 readinessProbe:
-  enabled: true
+  enabled: false
   initialDelaySeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
@@ -34,9 +34,12 @@ extraVolumeMounts: []
 
 extraEnvVars: []
 
+command: []
+args: []
+
 cloudProvider:
-  dockerRegistryUrl: my-registry-url.io
-  imagePullSecretName: 'my-registry-secret'
+  dockerRegistryUrl: 
+  imagePullSecretName: ''
   flavor: openshift
 
 caSecretName: ''
@@ -76,9 +79,19 @@ resources:
 route:
   enabled: true
   path: /
+  host: 
   timeout:
     enabled: false # defaults to 30s by openshift
     duration: 60s # supported units (us, ms, s, m, h, d)
+  rewriteTarget: ''
+  tls:
+    enabled: true
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    useCerts: false
+    certificate: ''
+    key: ''
+    caCertificate: ''
 
 ingress:
   enabled: false

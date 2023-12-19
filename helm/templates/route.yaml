@@ -7,15 +7,28 @@ kind: Route
 metadata:
   name: {{ $releaseName }}-{{ $chartName }}-route
   annotations:
-    haproxy.router.openshift.io/rewrite-target: /
+    {{- if .Values.route.rewriteTarget }}
+    haproxy.router.openshift.io/rewrite-target: {{ .Values.route.rewriteTarget }}
+    {{- end }}
     {{- if .Values.route.timeout.enabled }}
-    haproxy.router.openshift.io/timeout: {{ .Values.route.timeout.duration }}
+    haproxy.router.openshift.io/timeout: {{ .Values.route.timeout.durationSeconds }}
     {{- end }}
 spec:
-  path:  {{ .Values.route.path | default "/" }}
+  {{- if .Values.route.host }}
+  host: {{ .Values.route.host }}
+  {{- end }}
+  path: {{ .Values.route.path | default "/" }}
   to:
     kind: Service
-    name: {{ $releaseName }}-{{ $chartName }}
+    name: {{ printf "%s-service" (include "ts-server-boilerplate.fullname" .) }}
+  {{- if .Values.route.tls.enabled }}
   tls:
-    termination: edge
+    termination: {{ .Values.route.tls.termination | quote }}
+    insecureEdgeTerminationPolicy: {{ .Values.route.tls.insecureEdgeTerminationPolicy | quote }}
+    {{- if .Values.route.tls.useCerts }}
+    certificate: {{ .Values.route.tls.certificate | quote }}
+    key: {{ .Values.route.tls.key | quote }}
+    caCertificate: {{ .Values.route.tls.caCertificate | quote }}
+    {{- end }}
+  {{- end -}}
 {{- end -}}
