@@ -39,7 +39,7 @@ extraEnvVars: []
 command: []
 args: []
 # command: [ "/bin/sh", "-c", "--" ]
-# args: [ "while true; do sleep 30; done;" ]
+# args: [ "while true; do sleep infinity; done;" ]
 
 cloudProvider:
   dockerRegistryUrl: 
