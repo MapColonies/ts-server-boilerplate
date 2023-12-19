@@ -2,15 +2,37 @@ global:
   cloudProvider: {}
   tracing: {}
   metrics: {}
-  environment: {}
+  environment: ''
 
 enabled: true
 environment: development
 replicaCount: 1
 revisionHistoryLimit: 5 # Amount of revisions we keep
-initialDelaySeconds: 60
 nodePort: 30030 #for minikube deployment only
-resetOnConfigChange: true
+resetOnConfigChange: false
+
+nameOverride: ""
+fullnameOverride: ""
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+
+podAnnotations: {}
+
+extraVolumes: []
+
+extraVolumeMounts: []
+
+extraEnvVars: []
 
 cloudProvider:
   dockerRegistryUrl: my-registry-url.io
@@ -24,6 +46,7 @@ caKey: 'ca.crt'
 image:
   repository: ts-server-boilerplate
   tag: 'latest'
+  pullPolicy: IfNotPresent
 
 env:
   port: 8080
