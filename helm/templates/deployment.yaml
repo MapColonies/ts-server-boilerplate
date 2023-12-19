@@ -91,7 +91,7 @@ spec:
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
             failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
             httpGet:
-              path: /liveness
+              path: {{ .Values.livenessProbe.path }}
               port: {{ .Values.env.targetPort }}
           {{- end }}
           {{- if .Values.readinessProbe.enabled }}
@@ -100,7 +100,7 @@ spec:
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
             httpGet:
-              path: /liveness
+              path: {{ .Values.readinessProbe.path }}
               port: {{ .Values.env.targetPort }}
           {{- end }}        
           {{- if .Values.resources.enabled }}

@@ -19,12 +19,14 @@ livenessProbe:
   initialDelaySeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
+  path: /liveness
 
 readinessProbe:
-  enabled: false
+  enabled: true
   initialDelaySeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
+  path: /liveness
 
 podAnnotations: {}
 
