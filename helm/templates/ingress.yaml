@@ -27,7 +27,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ $releaseName }}-{{ $chartName }}
+            name: {{ printf "%s-service" (include "ts-server-boilerplate.fullname" .) }}
             port:
               number: {{ .Values.env.port }}
     host: {{ .Values.ingress.host | quote }}
