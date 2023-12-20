@@ -51,7 +51,7 @@ spec:
           {{- end }}
           {{- if .Values.command }}
           command: 
-          {{- toYaml .Values.command |nindent 12 }}
+          {{- toYaml .Values.command | nindent 12 }}
           {{- if .Values.args }}
           args: 
           {{- toYaml .Values.args | nindent 12 }}
@@ -107,6 +107,9 @@ spec:
           resources:
             {{- toYaml .Values.resources.value | nindent 12 }}
           {{- end }}
+        {{- if .Values.sidecars }}
+        {{ tpl (toYaml .Values.sidecars) . | nindent 8 }}
+        {{- end }}
       volumes:
         - name: nginx-config
           configMap:
