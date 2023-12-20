@@ -41,6 +41,8 @@ args: []
 # command: [ "/bin/sh", "-c", "--" ]
 # args: [ "while true; do sleep infinity; done;" ]
 
+sidecars: []
+
 cloudProvider:
   dockerRegistryUrl: 
   imagePullSecretName: ''
