@@ -14,7 +14,7 @@ This is a basic repo template for building new MapColonies web services in Types
 
 - .nvmrc
 
-- Multi stage producton-ready Dockerfile
+- Multi stage production-ready Dockerfile
 
 - commitlint
 
