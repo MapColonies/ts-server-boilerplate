@@ -1,0 +1,98 @@
+name: Bump version
+
+on:
+  push:
+    branches:
+      - master
+env:
+  HELM_EXPERIMENTAL_OCI: 1
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files in the Helm Folder
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v40
+        with:
+          files: helm/**
+
+# If files in Helm dir changed, init var as yes
+      - name: Set output if any file(s) in the helm folder change
+        id: set
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          echo "::set-output name=files_changed::yes"
+    outputs:
+          files_changed: ${{ steps.set.outputs.files_changed }}
+
+  chart-update:
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.files_changed == 'yes'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Run Bump Version Script
+        id: bump_version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python .github/scripts/bump.py ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use New Version
+        run: |
+          echo "New Version: ${{ steps.bump_version.outputs.NEW_VERSION }}"
+    outputs:
+          new_version: ${{ steps.bump_version.outputs.NEW_VERSION }}
+
+
+  build:
+    name: publish acr
+    runs-on: ubuntu-latest
+    environment: prod
+    needs: chart-update
+    steps:    
+      - uses: actions/checkout@v2
+        name: checkout repo
+
+      - name: install helm
+        uses: Azure/setup-helm@v1
+        with:
+          version: 'v3.6.3'
+
+      - name: login to acr using helm
+        run: |
+          helm registry login ${{ secrets.ACR_URL }} --username ${{ secrets.ACR_PUSH_USER }} --password ${{ secrets.ACR_PUSH_TOKEN }} 
+
+      - name: Get Chart name
+        id: get_chart
+        run: |
+          export "CHART=$(cat Chart.yaml | grep name | awk '{print $2; exit}')"
+          echo "CHART=$CHART" >> $GITHUB_ENV
+        working-directory: ./helm
+
+      - name: save helm chart to local registry
+        run: |
+          helm chart save . '${{ secrets.ACR_URL }}/helm/${{ env.CHART }}:${{ needs.chart-update.outputs.new_version }}'
+        working-directory: ./helm
+      
+      - name: publish chart to acr
+        run: |
+          helm chart push ${{ secrets.ACR_URL }}/helm/${{ env.CHART }}:${{ needs.chart-update.outputs.new_version }}
+        working-directory: ./helm
+
