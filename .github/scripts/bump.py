@@ -14,15 +14,16 @@ def get_chart_version():
 
 def update_chart_version(new_version):
     chart_path = os.path.join("helm", "Chart.yaml")
-    github_token = os.environ.get("GITHUB_TOKEN") 
-    # Use sed to replace the version line
-    subprocess.run(["sed", "-i", f"s/^version: .*/version: {new_version}/", chart_path])
-    # TODO: check if really necessary 
-    subprocess.run(["git", "config", "--global", "user.email", "github-actions@github.com"])
-    subprocess.run(["git", "config", "--global", "user.name", "GitHub Actions"])
-    subprocess.run(["git", "add", chart_path])
-    subprocess.run(["git", "commit", "-m", f"chore(release): bump version to {new_version}"])
-    subprocess.run(["git", "push", "origin", "master"])
+    commands = f"""
+        sed -i 's/^version:.*/version: {new_version}/' {chart_path}
+        git config --global user.email 'github-actions@github.com'
+        git config --global user.name 'GitHub Actions'
+        git add {chart_path}
+        git commit -m 'chore(release): bump version to {new_version}'
+        git push origin master
+    """
+
+    subprocess.run(commands, shell=True)
 
 
 def generate_new_version(version):
@@ -43,6 +44,8 @@ def generate_new_version(version):
     return new_version
 
 if __name__ == "__main__":
-    new_version = bump_version_segments(get_chart_version())
-    change_version_in_chart(new_version)
+    new_version = generate_new_version(get_chart_version())
+    update_chart_version(new_version)
     print(f"Bumped version to {new_version}")
+    print(f"::set-output name=NEW_VERSION::{new_version}")
+
