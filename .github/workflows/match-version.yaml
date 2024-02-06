@@ -13,7 +13,7 @@ permissions:
   pull-requests: write
 
 jobs:
-    user-input:
+  user-input:
     runs-on: ubuntu-latest
     steps:
       - name: Prompt User for Input
