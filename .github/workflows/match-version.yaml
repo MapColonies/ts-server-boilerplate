@@ -2,8 +2,8 @@ name: "Match chert version"
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - match-version
 
 env:
   HELM_EXPERIMENTAL_OCI: 1
