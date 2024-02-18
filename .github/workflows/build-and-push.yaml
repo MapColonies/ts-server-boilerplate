@@ -35,7 +35,7 @@ jobs:
       - run: docker build . -t ${{ env.Docker_Repository }}
       - run: docker push ${{ env.Docker_Repository }}
 
-  build_and_push_docker_helm:
+  build_and_push_helm:
     name: publish helm to acr
     runs-on: ubuntu-latest
     steps:    
