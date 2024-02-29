@@ -3,6 +3,6 @@ name: pull_request
 on: [pull_request]
 
 jobs:
-  reusable_workflow_job:
+  pull_request:
     uses: MapColonies/shared-workflows/.github/workflows/pull_request.yaml@master
     secrets: inherit

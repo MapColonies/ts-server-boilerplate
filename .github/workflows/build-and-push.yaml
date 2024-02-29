@@ -18,6 +18,6 @@ permissions:
   pull-requests: write
 
 jobs:
-  reusable_workflow_job:
+  build_and_push:
     uses: MapColonies/shared-workflows/.github/workflows/build-and-push.yaml@master
     secrets: inherit
