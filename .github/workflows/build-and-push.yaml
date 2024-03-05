@@ -2,7 +2,7 @@ name: Build and push artifacts
 
 on:
   push:
-    tags: 
+    tags:
       - 'v*'
 
   workflow_dispatch:
@@ -18,6 +18,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  build_and_push:
-    uses: MapColonies/shared-workflows/.github/workflows/build-and-push.yaml@master
-    secrets: inherit
+  build_and_push_docker:
+      uses: MapColonies/shared-workflows/.github/workflows/build-and-push-docker.yaml@master
+      secrets: inherit
+  
+  build_and_push_helm:
+      uses: MapColonies/shared-workflows/.github/workflows/build-and-push-helm.yaml@master
+      secrets: inherit
