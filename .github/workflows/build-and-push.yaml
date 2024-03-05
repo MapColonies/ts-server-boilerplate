@@ -2,8 +2,8 @@ name: Build and push artifacts
 
 on:
   push:
-    branches:
-      - '*'
+    tags:
+      - 'v*'
 
   workflow_dispatch:
     inputs:
