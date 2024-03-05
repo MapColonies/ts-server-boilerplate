@@ -2,8 +2,8 @@ name: Build and push artifacts
 
 on:
   push:
-    tags: 
-      - 'v*'
+    branches:
+      - '*'
 
   workflow_dispatch:
     inputs:
@@ -19,5 +19,10 @@ permissions:
 
 jobs:
   build_and_push:
-    uses: MapColonies/shared-workflows/.github/workflows/build-and-push.yaml@master
-    secrets: inherit
+    - name: Build docker image and push it to remote registry
+      uses: MapColonies/shared-workflows/.github/workflows/build-and-push-docker.yaml@master
+      secrets: inherit
+
+    - name: Build helm package and push it to remote registry
+      uses: MapColonies/shared-workflows/.github/workflows/build-and-push-helm.yaml@master
+      secrets: inherit
