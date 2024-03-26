@@ -80,7 +80,7 @@ spec:
             {{- end }}            
           envFrom:
             - configMapRef:
-                name: {{ $releaseName }}-{{ $chartName }}-configmap
+                name: {{ printf "%s-configmap" (include "ts-server-boilerplate.fullname" .) }}
           ports:
             - name: http
               containerPort: {{ .Values.env.targetPort }}
