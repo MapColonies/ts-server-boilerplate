@@ -1,0 +1,6 @@
+dependencies:
+- name: common
+  repository: oci://acrarolibotnonprod.azurecr.io/helm
+  version: 1.0.0
+digest: sha256:3c2b7f7032f682b873ae1441d62378170b6b08c8c27547c9be414e36e33b78c8
+generated: "2024-04-15T11:19:36.465511+03:00"

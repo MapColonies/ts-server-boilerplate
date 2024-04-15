@@ -1,5 +1,9 @@
 global:
-  cloudProvider: {}
+  imageRegistry: ""
+  imagePullSecrets:
+    - acr-registry
+  deploymentFlavor: "openshift"
+  pullPolicy: "IfNotPresent"
   tracing: {}
   metrics: {}
   environment: ''
@@ -43,20 +47,27 @@ args: []
 
 sidecars: []
 
-cloudProvider:
-  dockerRegistryUrl: 
-  imagePullSecretName: ''
-  flavor: openshift
-
 caSecretName: ''
 caPath: '/usr/local/share/ca-certificates'
 caKey: 'ca.crt'
 
 image:
+  registry: acrarolibotnonprod.azurecr.io
   repository: ts-server-boilerplate
-  tag: 'latest'
-  pullPolicy: IfNotPresent
-
+  tag: 'v4.2.0'
+  digest: ""
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
+  ##
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## E.g.:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: []
 env:
   port: 8080
   targetPort: 8080
@@ -83,7 +94,7 @@ resources:
       memory: 128Mi
 
 route:
-  enabled: true
+  enabled: false
   path: /
   host: 
   timeout:
