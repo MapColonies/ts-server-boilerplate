@@ -1,5 +1,8 @@
 global:
-  cloudProvider: {}
+  imageRegistry: ""
+  imagePullSecrets: []
+  deploymentFlavor: "openshift"
+  pullPolicy: "IfNotPresent"
   tracing: {}
   metrics: {}
   environment: ''
@@ -43,20 +46,16 @@ args: []
 
 sidecars: []
 
-cloudProvider:
-  dockerRegistryUrl: 
-  imagePullSecretName: ''
-  flavor: openshift
-
 caSecretName: ''
 caPath: '/usr/local/share/ca-certificates'
 caKey: 'ca.crt'
 
 image:
+  registry: ""
   repository: ts-server-boilerplate
-  tag: 'latest'
-  pullPolicy: IfNotPresent
-
+  tag: 'v4.2.0'
+  digest: ""
+  pullSecrets: []
 env:
   port: 8080
   targetPort: 8080

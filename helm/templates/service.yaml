@@ -1,6 +1,6 @@
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := include "ts-server-boilerplate.name" . -}}
-{{- $cloudProviderFlavor := include "ts-server-boilerplate.cloudProviderFlavor" . -}}
+{{- $deploymentFlavor := include "ts-server-boilerplate.deploymentFlavor" . -}}
 {{- if .Values.enabled -}}
 apiVersion: v1
 kind: Service
@@ -13,7 +13,7 @@ metadata:
     release: {{ $releaseName }}
     {{- include "ts-server-boilerplate.labels" . | nindent 4 }}
 spec:
-  {{- if eq $cloudProviderFlavor "minikube" }}
+  {{- if eq $deploymentFlavor "minikube" }}
   type: NodePort
   {{- end }}
   ports:
@@ -21,7 +21,7 @@ spec:
       targetPort: {{ .Values.env.targetPort }}
       protocol: {{ .Values.env.protocol }}
       name: http
-      {{- if eq $cloudProviderFlavor "minikube" }}
+      {{- if eq $deploymentFlavor "minikube" }}
       nodePort: {{ .Values.nodePort }}
       {{- end }}
   selector:

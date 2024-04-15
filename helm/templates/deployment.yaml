@@ -1,9 +1,5 @@
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := include "ts-server-boilerplate.name" . -}}
-{{- $cloudProviderFlavor := include "ts-server-boilerplate.cloudProviderFlavor" . -}}
-{{- $cloudProviderDockerRegistryUrl := include "ts-server-boilerplate.cloudProviderDockerRegistryUrl" . -}}
-{{- $cloudProviderImagePullSecretName := include "ts-server-boilerplate.cloudProviderImagePullSecretName" . -}}
-{{- $imageTag := include "ts-server-boilerplate.tag" . -}}
 {{- if .Values.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -39,16 +35,10 @@ spec:
       {{- toYaml .Values.podAnnotations | nindent 8 }}
       {{- end }}
     spec:
-    {{- if $cloudProviderImagePullSecretName }}
-      imagePullSecrets:
-        - name: {{ $cloudProviderImagePullSecretName | quote }}
-    {{- end }}
+      {{- include "ts-server-boilerplate.imagePullSecrets" . | nindent 6 }}
       containers:
         - name: {{ $releaseName }}-{{ $chartName }}-deployment
-          {{- with .Values.image }}
-          image: {{ $cloudProviderDockerRegistryUrl }}{{ .repository }}:{{ $imageTag }}
-          imagePullPolicy: {{ .pullPolicy | default "IfNotPresent" }}
-          {{- end }}
+          image: {{ include "ts-server-boilerplate.image" . }}
           {{- if .Values.command }}
           command: 
           {{- toYaml .Values.command | nindent 12 }}
@@ -121,5 +111,5 @@ spec:
         {{- end }}
         {{- if .Values.extraVolumes -}}
           {{ tpl (toYaml .Values.extraVolumes) . | nindent 8 }}
-        {{- end }}    
+        {{- end }}   
 {{- end -}}
