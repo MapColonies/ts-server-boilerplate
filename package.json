@@ -65,6 +65,8 @@
     "@map-colonies/prettier-config": "0.0.1",
     "@map-colonies/standard-version-update-helm-version": "^2.0.1",
     "@map-colonies/standard-version-update-openapi3-version": "0.0.2",
+    "@map-colonies/config": "https://ghatmpstorage.blob.core.windows.net/npm-packages/config-049b2c49e9573f5e1610fd9c11709b3e7498b90b.tgz",
+    "@map-colonies/schemas": "0.2.0",
     "@redocly/openapi-cli": "^1.0.0-beta.94",
     "@types/compression": "^1.7.2",
     "@types/config": "^3.3.0",
