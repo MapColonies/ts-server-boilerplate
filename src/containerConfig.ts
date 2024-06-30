@@ -1,8 +1,10 @@
-import config from 'config';
+// import config from 'config';
+import { config } from '@map-colonies/config';
+import { commonBoilerplateV3 } from '@map-colonies/schemas';
 import { getOtelMixin } from '@map-colonies/telemetry';
 import { trace, metrics as OtelMetrics } from '@opentelemetry/api';
 import { DependencyContainer } from 'tsyringe/dist/typings/types';
-import jsLogger, { LoggerOptions } from '@map-colonies/js-logger';
+import jsLogger from '@map-colonies/js-logger';
 import { Metrics } from '@map-colonies/telemetry';
 import { InjectionObject, registerDependencies } from '@common/dependencyRegistration';
 import { SERVICES, SERVICE_NAME } from '@common/constants';
@@ -15,8 +17,17 @@ export interface RegisterOptions {
   useChild?: boolean;
 }
 
-export const registerExternalValues = (options?: RegisterOptions): DependencyContainer => {
-  const loggerConfig = config.get<LoggerOptions>('telemetry.logger');
+export const registerExternalValues = async (options?: RegisterOptions): Promise<DependencyContainer> => {
+  const configInstance = await config({
+    configName: 'boilerplate',
+    configServerUrl: 'http://localhost:8080',
+    schema: commonBoilerplateV3,
+    version: 'latest',
+  });
+
+  const loggerConfig = configInstance.get('telemetry.logger');
+  console.log(loggerConfig.avi);
+
   const logger = jsLogger({ ...loggerConfig, prettyPrint: loggerConfig.prettyPrint, mixin: getOtelMixin() });
 
   const metrics = new Metrics();
@@ -25,7 +36,7 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
   const tracer = trace.getTracer(SERVICE_NAME);
 
   const dependencies: InjectionObject<unknown>[] = [
-    { token: SERVICES.CONFIG, provider: { useValue: config } },
+    { token: SERVICES.CONFIG, provider: { useValue: configInstance } },
     { token: SERVICES.LOGGER, provider: { useValue: logger } },
     { token: SERVICES.TRACER, provider: { useValue: tracer } },
     { token: SERVICES.METER, provider: { useValue: OtelMetrics.getMeterProvider().getMeter(SERVICE_NAME) } },
