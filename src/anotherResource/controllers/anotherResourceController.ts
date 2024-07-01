@@ -1,6 +1,5 @@
 import { Logger } from '@map-colonies/js-logger';
-import { Meter } from '@opentelemetry/api';
-import { BoundCounter } from '@opentelemetry/api-metrics';
+import { Meter, Counter } from '@opentelemetry/api';
 import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
@@ -12,7 +11,7 @@ type GetResourceHandler = RequestHandler<undefined, IAnotherResourceModel>;
 
 @injectable()
 export class AnotherResourceController {
-  private readonly createdResourceCounter: BoundCounter;
+  private readonly createdResourceCounter: Counter;
 
   public constructor(
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
