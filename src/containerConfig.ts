@@ -22,7 +22,6 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
   const metrics = new Metrics();
   metrics.start();
 
-  tracing.start();
   const tracer = trace.getTracer(SERVICE_NAME);
 
   const dependencies: InjectionObject<unknown>[] = [
