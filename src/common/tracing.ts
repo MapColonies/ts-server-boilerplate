@@ -1,20 +1,12 @@
 import { Tracing } from '@map-colonies/telemetry';
-import { IGNORED_INCOMING_TRACE_ROUTES, IGNORED_OUTGOING_TRACE_ROUTES } from './constants';
-import { getConfig, initConfig } from './config';
+import { IGNORED_INCOMING_TRACE_ROUTES, IGNORED_OUTGOING_TRACE_ROUTES } from './constants.js';
 
-let tracing: Tracing;
+let tracing: Tracing | undefined;
 
-(async (): Promise<void> => {
-  await initConfig();
-
-  const config = getConfig();
-
-  const tracingConfig = config.get('telemetry.tracing');
-  const sharedConfig = config.get('telemetry.shared');
-
+// eslint-disable-next-line @typescript-eslint/no-magic-numbers
+export function tracingFactory(options: ConstructorParameters<typeof Tracing>[0]): Tracing {
   tracing = new Tracing({
-    ...tracingConfig,
-    ...sharedConfig,
+    ...options,
     autoInstrumentationsConfigMap: {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       '@opentelemetry/instrumentation-http': {
@@ -30,7 +22,12 @@ let tracing: Tracing;
     },
   });
 
-  tracing.start();
-})().catch(console.error);
+  return tracing;
+}
 
-export { tracing };
+export function getTracing(): Tracing {
+  if (!tracing) {
+    throw new Error('tracing not initialized');
+  }
+  return tracing;
+}

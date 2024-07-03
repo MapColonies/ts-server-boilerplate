@@ -9,11 +9,12 @@ import { ConfigInstance } from '@map-colonies/config';
 import { commonBoilerplateV3Type } from '@map-colonies/schemas';
 
 import { getApp } from './app';
+import { ConfigType } from './common/config';
 
 void getApp()
   .then(([app]) => {
     const logger = container.resolve<Logger>(SERVICES.LOGGER);
-    const config = container.resolve<ConfigInstance<commonBoilerplateV3Type>>(SERVICES.CONFIG);
+    const config = container.resolve<ConfigType>(SERVICES.CONFIG);
     const port = config.get('server.port');
     const stubHealthCheck = async (): Promise<void> => Promise.resolve();
     // eslint-disable-next-line @typescript-eslint/naming-convention
