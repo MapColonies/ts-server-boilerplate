@@ -1,13 +1,13 @@
-import { ConfigInstance, config } from "@map-colonies/config";
-import { commonBoilerplateV4, commonBoilerplateV4Type } from "@map-colonies/schemas";
+import { ConfigInstance, config } from '@map-colonies/config';
+import { commonBoilerplateV4, commonBoilerplateV4Type } from '@map-colonies/schemas';
 
-type ConfigType = ConfigInstance<commonBoilerplateV4Type>
+type ConfigType = ConfigInstance<commonBoilerplateV4Type>;
 
 let configInstance: ConfigType | undefined;
 
 async function initConfig(): Promise<void> {
   configInstance = await config({
-    configName: 'boilerplate',
+    configName: 'test-boilerplate',
     configServerUrl: 'http://localhost:8080',
     schema: commonBoilerplateV4,
     version: 'latest',
@@ -20,6 +20,5 @@ function getConfig(): ConfigType {
   }
   return configInstance;
 }
-
 
 export { getConfig, initConfig, ConfigType };
