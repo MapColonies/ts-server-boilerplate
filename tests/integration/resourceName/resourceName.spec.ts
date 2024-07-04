@@ -6,10 +6,17 @@ import { getApp } from '@src/app';
 import { SERVICES } from '@common/constants';
 import { paths, operations } from '@openapi';
 
+import { initConfig } from '@src/common/config';
+
 describe('resourceName', function () {
   let requestSender: RequestSender<paths, operations>;
+
+  beforeAll(async function () {
+    await initConfig(true);
+  });
+
   beforeEach(async function () {
-    const app = getApp({
+    const [app] = await getApp({
       override: [
         { token: SERVICES.LOGGER, provider: { useValue: jsLogger({ enabled: false }) } },
         { token: SERVICES.TRACER, provider: { useValue: trace.getTracer('testTracer') } },
