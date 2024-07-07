@@ -34,7 +34,9 @@ extraVolumes: []
 
 extraVolumeMounts: []
 
-extraEnvVars: []
+extraEnvVars: 
+  - name: CONFIG_OFFLINE_MODE
+    value: "true"
 
 command: []
 args: []
