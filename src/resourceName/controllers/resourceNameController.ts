@@ -3,7 +3,7 @@ import { BoundCounter, Meter } from '@opentelemetry/api-metrics';
 import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
-import { SERVICES } from '../../common/constants';
+import { SERVICES } from '@common/constants';
 
 import { IResourceNameModel, ResourceNameManager } from '../models/resourceNameManager';
 

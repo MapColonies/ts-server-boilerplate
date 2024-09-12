@@ -1,5 +1,5 @@
 import jsLogger from '@map-colonies/js-logger';
-import { ResourceNameManager } from '../../../../src/resourceName/models/resourceNameManager';
+import { ResourceNameManager } from '@src/resourceName/models/resourceNameManager';
 
 let resourceNameManager: ResourceNameManager;
 
