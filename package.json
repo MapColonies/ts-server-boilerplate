@@ -16,7 +16,7 @@
     "release": "standard-version",
     "test": "npm run test:unit && npm run test:integration",
     "prebuild": "npm run clean",
-    "build": "tsc --project tsconfig.build.json && npx tsc-alias -p tsconfig.build.json && npm run assets:copy",
+    "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json && npm run assets:copy",
     "start": "npm run build && cd dist && node --require ./common/tracing.js ./index.js",
     "start:dev": "npm run build && cd dist && node --enable-source-maps --require ./common/tracing.js ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
@@ -89,7 +89,6 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.2.5",
     "tsc-alias": "^1.8.10",
-    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   }
 }
