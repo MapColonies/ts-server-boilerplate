@@ -116,3 +116,22 @@ To only run integration tests:
 ```bash
 npm run test:integration
 ```
+
+## Deployment
+
+You should choose wich values.yaml file you want and copy it to the empty values.yaml:
+
+* minimal-values.yaml
+* maximal-values.yaml
+
+Run:
+
+```bash
+helm dependency update 
+```
+
+```bash
+helm install <RELEASE_NAME> helm
+```
+
+See [helm values](https://github.com/MapColonies/helm-common/blob/c352a2453117895ec0f9df0267a66d6f5b9c2da2/README.md)
