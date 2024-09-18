@@ -1,0 +1,153 @@
+global:
+  configManagment:
+    enabled: false
+  imageRegistry:
+  imagePullSecrets:
+    - my-registry
+  deploymentFlavor: openshift
+  tlsCertificates:
+    - hostname:
+      certificate:
+      key:
+      caCertificate:
+  tracing:
+    enabled: false
+    url: http://localhost:55681/v1/traces
+  metrics:
+    enabled: false
+    url: http://localhost:55681/v1/metrics
+  environment: development
+  releaseVersion: DUMMY_releaseVersion
+  currentSubChart: DUMMY_currentSubChart
+  secrets:
+    - name: root-ca
+      type: Opaque
+      path: /usr/local/share/ca-certificates
+      data:
+        - key: ca.crt
+          value:
+
+nameOverride:
+fullnameOverride:
+
+commonLabels:
+commonAnnotations:
+# ----------- initContainers ----------
+volumePermissions:
+  enabled: false
+# ------ volumes and volumeMounts -----
+persistence:
+  enabled: false
+# ----------- command/debug -----------
+diagnosticMode:
+  enabled: false
+# --------- MAIN_OBJECT_BLOCK ---------
+configValues:
+  deploymentAnnotations:
+    # collectord.io/index: '' # PROVIDE SPLUNK INDEX
+  autoscaling:
+    enabled: false
+  replicaCount: 1
+  podAnnotations:
+    enabled: true
+    resetOnConfigChange: true
+    annotations: {}
+  prometheus:
+    scrape: false
+  metrics:
+    enabled: false
+  tracing:
+    enabled: false
+  # ----------- containers ------------
+  image:
+    repository: ts-server-boilerplate
+    tag: v4.2.0
+    pullPolicy: Always
+    debug: false
+  containerSecurityContext:
+    enabled: true
+    allowPrivilegeEscalation: false
+    # runAsUser: 0
+  extraEnvVars:
+    - name: SERVER_PORT
+      value: '{{ .Values.configValues.containerPorts.http }}'
+  extraEnvVarsCM: '{{ template "common.names.fullname" . }}'
+  extraEnvVarsSecret:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 200Mi
+    requests:
+      cpu: 50m
+      memory: 200Mi
+  containerPorts:
+    http: 8080
+    https: 443
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    enabled: false
+  extraVolumeMounts:
+    - name: root-ca
+      mountPath: '{{ (include "common.secrets.getSecretByName" (dict "name" "root-ca" "key" "path" "context" .)) }}'
+  extraVolumes:
+    - name: root-ca
+      secret:
+        secretName: root-ca
+env:
+  logLevel: info
+  logPrettyPrintEnabled: false
+  responseCompressionEnabled: true
+  requestPayloadLimit: 1mb
+route:
+  enabled: true
+  annotations:
+    haproxy.router.openshift.io/rewrite-target: /
+  timeout:
+    enabled: false
+    duration: 60s
+  hostname:
+  path: /
+  targetPort: http
+  tls: 
+    enabled: true
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    useCerts: false
+  extraRules:
+ingress:
+  enabled: false
+  # apiVersion: ""
+  # type: nginx-kubernetes
+  # annotations: {}
+  # pathType: Prefix
+  # hostname: COMPONENT_NAME.local
+  # extraHosts: []
+  # extraPaths: []
+  # path: /
+  # extraRules: []
+  # extraTls: []
+  # selfSigned: false
+  # tls: true
+  # cors:
+  #   enabled: true
+  #   origin: '*'
+service:
+  annotations: {}
+  ports:
+    http: 80
+  protocol: TCP
+serviceAccount:
+  create: false
