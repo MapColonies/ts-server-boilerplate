@@ -119,16 +119,20 @@ npm run test:integration
 
 ## Deployment
 
-You should choose which values.yaml file you want and copy it to the empty values.yaml:
-
-* minimal-values.yaml
-* maximal-values.yaml
-
 Run:
 
 ```bash
 helm dependency update 
 ```
+
+```bash
+tar -xOzf common-1.0.1.tgz common/values.yaml > ../maximal-values.yaml
+```
+
+You should choose which values.yaml file you want and copy its content to the empty `values.yaml` file:
+
+* minimal-values.yaml
+* maximal-values.yaml
 
 ```bash
 helm install <RELEASE_NAME> helm
