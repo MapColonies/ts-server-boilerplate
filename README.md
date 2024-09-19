@@ -122,11 +122,7 @@ npm run test:integration
 Run:
 
 ```bash
-helm dependency update 
-```
-
-```bash
-tar -xOzf common-1.0.1.tgz common/values.yaml > ../maximal-values.yaml
+npm run pre-deploy
 ```
 
 You should choose which values.yaml file you want and copy its content to the empty `values.yaml` file:

@@ -21,7 +21,8 @@
     "start:dev": "npm run build && cd dist && node --enable-source-maps --require ./common/tracing.js ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist",
-    "install": "npx husky install"
+    "install": "npx husky install",
+    "pre-deploy": "cd helm && helm dependency update && tar -xOzf charts/common-1.0.1.tgz common/values.yaml > maximal-values.yaml"
   },
   "directories": {
     "test": "tests"
