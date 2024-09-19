@@ -119,7 +119,7 @@ npm run test:integration
 
 ## Deployment
 
-You should choose wich values.yaml file you want and copy it to the empty values.yaml:
+You should choose which values.yaml file you want and copy it to the empty values.yaml:
 
 * minimal-values.yaml
 * maximal-values.yaml
