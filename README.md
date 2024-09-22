@@ -122,7 +122,7 @@ npm run test:integration
 Run:
 
 ```bash
-npm run pre-deploy
+npm run helm-assets
 ```
 
 You should choose which values.yaml file you want and copy its content to the empty `values.yaml` file:
