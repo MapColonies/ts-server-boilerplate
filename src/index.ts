@@ -5,7 +5,7 @@ import { createTerminus } from '@godaddy/terminus';
 import { Logger } from '@map-colonies/js-logger';
 import { container } from 'tsyringe';
 import config from 'config';
-import { DEFAULT_SERVER_PORT, SERVICES } from './common/constants';
+import { DEFAULT_SERVER_PORT, SERVICES } from '@common/constants';
 
 import { getApp } from './app';
 

@@ -16,7 +16,7 @@
     "release": "standard-version",
     "test": "npm run test:unit && npm run test:integration",
     "prebuild": "npm run clean",
-    "build": "tsc --project tsconfig.build.json  && npm run assets:copy",
+    "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json && npm run assets:copy",
     "start": "npm run build && cd dist && node --require ./common/tracing.js ./index.js",
     "start:dev": "npm run build && cd dist && node --enable-source-maps --require ./common/tracing.js ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
@@ -78,7 +78,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.43.0",
     "husky": "^8.0.3",
-    "jest": "^29.5.0",
+    "jest": "^29.7.0",
     "jest-create-mock-instance": "^2.0.0",
     "jest-html-reporters": "^3.1.4",
     "jest-openapi": "^0.14.2",
@@ -87,7 +87,8 @@
     "rimraf": "^5.0.1",
     "standard-version": "^9.5.0",
     "supertest": "^6.3.3",
-    "ts-jest": "^29.0.5",
+    "ts-jest": "^29.2.5",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.1.3"
   }
 }
