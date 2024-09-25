@@ -22,7 +22,8 @@
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist",
     "install": "npx husky install",
-    "helm-assets": "cd helm && helm dependency update && tar -xOzf charts/helm-common-*.tgz helm-common/values.yaml > maximal-values.yaml"
+    "helm-assets": "npx zx helm-assets.mjs",
+    "helm-install": "npm run helm-assets && cd helm && helm install -f './global.yaml' -f './values.yaml' <RELEASE_NAME> ."
   },
   "directories": {
     "test": "tests"

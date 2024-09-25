@@ -119,8 +119,14 @@ npm run test:integration
 
 ## Deployment
 
+Before you start this process there is something importent you sholuld know:
+
+    We depend on `Red-Hat Yaml Extention` for validate the values files against the relevant schemas from helm-common.
+    That means, you should install the extention from vscode in order to be able to edit values files according to our schemas.
+    
 Run:
 
+In order to extract schemas and maximal values.yaml file from helm-common:
 ```bash
 npm run helm-assets
 ```
@@ -131,7 +137,7 @@ You should choose which values.yaml file you want and copy its content to the em
 * maximal-values.yaml
 
 ```bash
-helm install <RELEASE_NAME> helm
+npm run helm-install
 ```
 
 See [helm values](https://github.com/MapColonies/helm-common/blob/c352a2453117895ec0f9df0267a66d6f5b9c2da2/README.md)

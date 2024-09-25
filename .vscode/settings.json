@@ -1,4 +1,12 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "yaml.schemas": {
+        "./helm/schemas/values-schema.json": [
+            "helm/values.yaml"
+        ],
+        "./helm/schemas/global-schema.json": [
+            "helm/global.yaml"
+        ]
+    },
 }
