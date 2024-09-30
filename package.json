@@ -23,7 +23,8 @@
     "clean": "rimraf dist",
     "install": "npx husky install",
     "helm-assets": "npx zx helm-assets.mjs",
-    "helm-install": "npm run helm-assets && cd helm && helm install -f './global.yaml' -f './values.yaml' <RELEASE_NAME> ."
+    "helm-install": "npm run helm-assets && cd helm && helm install -f './global.yaml' -f './values.yaml' <RELEASE_NAME> .",
+    "helm-uninstall": "helm uninstall <RELEASE_NAME>"
   },
   "directories": {
     "test": "tests"
