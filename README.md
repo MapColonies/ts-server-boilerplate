@@ -116,3 +116,27 @@ To only run integration tests:
 ```bash
 npm run test:integration
 ```
+
+## Deployment
+
+> [!IMPORTANT] 
+> We depend on `Red-Hat Yaml Extension` for validating the values files against the relevant schemas from helm-common.
+> That means, you should install the extension from vscode in order to be able to edit values files according to our schemas.
+    
+Run:
+
+In order to extract schemas and maximal values.yaml file from helm-common:
+```bash
+npm run helm-assets
+```
+
+You should choose which values.yaml file you want and copy its content to the empty `values.yaml` file:
+
+* minimal-values.yaml
+* maximal-values.yaml
+
+```bash
+npm run helm-install
+```
+
+See [helm values](https://github.com/MapColonies/helm-common/blob/c352a2453117895ec0f9df0267a66d6f5b9c2da2/README.md)

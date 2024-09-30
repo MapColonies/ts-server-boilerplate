@@ -21,7 +21,10 @@
     "start:dev": "npm run build && cd dist && node --enable-source-maps --require ./common/tracing.js ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist",
-    "install": "npx husky install"
+    "install": "npx husky install",
+    "helm-assets": "npx zx helm-assets.mjs",
+    "helm-install": "npm run helm-assets && cd helm && helm install -f './global.yaml' -f './values.yaml' <RELEASE_NAME> .",
+    "helm-uninstall": "helm uninstall <RELEASE_NAME>"
   },
   "directories": {
     "test": "tests"
