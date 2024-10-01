@@ -3,7 +3,6 @@ import { inject, injectable } from 'tsyringe';
 import { SERVICES } from '@common/constants';
 import type { components } from '@openapi';
 
-
 const resourceInstance: IResourceNameModel = {
   id: 1,
   name: 'ronin',

@@ -38,9 +38,9 @@ paths:
       tags:
         - resourceName
       summary: creates a new record of type resource
-      requestBody: 
+      requestBody:
         required: true
-        content: 
+        content:
           application/json:
             schema:
               $ref: '#/components/schemas/resource'

@@ -5,8 +5,7 @@ import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
 import { SERVICES } from '@common/constants';
 import type { TypedRequestHandlers } from '@openapi';
-import {  AnotherResourceManager } from '../models/anotherResourceManager';
-
+import { AnotherResourceManager } from '../models/anotherResourceManager';
 
 @injectable()
 export class AnotherResourceController {
