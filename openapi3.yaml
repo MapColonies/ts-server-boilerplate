@@ -38,6 +38,12 @@ paths:
       tags:
         - resourceName
       summary: creates a new record of type resource
+      requestBody: 
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resource'
       responses:
         201:
           description: created

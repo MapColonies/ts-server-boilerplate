@@ -1,15 +1,14 @@
 import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
-
+import { createRequestSender, RequestSender } from '@map-colonies/openapi-helpers/requestSender';
 import { getApp } from '@src/app';
 import { SERVICES } from '@common/constants';
-import { IResourceNameModel } from '@src/resourceName/models/resourceNameManager';
-import { ResourceNameRequestSender } from './helpers/requestSender';
+import { paths, operations } from '@openapi';
 
 describe('resourceName', function () {
-  let requestSender: ResourceNameRequestSender;
-  beforeEach(function () {
+  let requestSender: RequestSender<paths, operations>;
+  beforeEach(async function () {
     const app = getApp({
       override: [
         { token: SERVICES.LOGGER, provider: { useValue: jsLogger({ enabled: false }) } },
@@ -17,24 +16,31 @@ describe('resourceName', function () {
       ],
       useChild: true,
     });
-    requestSender = new ResourceNameRequestSender(app);
+    requestSender = await createRequestSender<paths, operations>('openapi3.yaml', app);
   });
 
   describe('Happy Path', function () {
     it('should return 200 status code and the resource', async function () {
-      const response = await requestSender.getResource();
+      const response = await requestSender.getResourceName();
 
       expect(response.status).toBe(httpStatusCodes.OK);
 
-      const resource = response.body as IResourceNameModel;
+      const resource = response.body;
       expect(response).toSatisfyApiSpec();
       expect(resource.id).toBe(1);
       expect(resource.name).toBe('ronin');
       expect(resource.description).toBe('can you do a logistics run?');
     });
     it('should return 200 status code and create the resource', async function () {
-      const response = await requestSender.createResource();
+      const response = await requestSender.createResource({
+        requestBody: {
+          description: 'aaa',
+          id: 1,
+          name: 'aaa',
+        },
+      });
 
+      expect(response).toSatisfyApiSpec();
       expect(response.status).toBe(httpStatusCodes.CREATED);
     });
   });
