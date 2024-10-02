@@ -92,6 +92,7 @@
     "standard-version": "^9.5.0",
     "supertest": "^7.0.0",
     "tsc-alias": "^1.8.10",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.1.3"
   }
 }
