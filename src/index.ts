@@ -4,7 +4,7 @@ import { createServer } from 'http';
 import { createTerminus } from '@godaddy/terminus';
 import { Logger } from '@map-colonies/js-logger';
 import { container } from 'tsyringe';
-import { SERVICES } from './common/constants';
+import { SERVICES } from '@common/constants';
 import { getApp } from './app';
 import { ConfigType } from './common/config';
 

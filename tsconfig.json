@@ -9,7 +9,13 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "NodeNext",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@tests/*": ["tests/*"],
+      "@common/*": ["src/common/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "tests"]

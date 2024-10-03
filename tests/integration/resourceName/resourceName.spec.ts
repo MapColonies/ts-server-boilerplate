@@ -1,10 +1,10 @@
 import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
-import { getApp } from '../../../src/app';
-import { SERVICES } from '../../../src/common/constants';
-import { IResourceNameModel } from '../../../src/resourceName/models/resourceNameManager';
-import { initConfig } from '../../../src/common/config';
+import { initConfig } from '@src/common/config';
+import { getApp } from '@src/app';
+import { SERVICES } from '@common/constants';
+import { IResourceNameModel } from '@src/resourceName/models/resourceNameManager';
 import { ResourceNameRequestSender } from './helpers/requestSender';
 
 describe('resourceName', function () {

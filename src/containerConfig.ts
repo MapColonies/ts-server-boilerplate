@@ -3,12 +3,12 @@ import { trace, metrics as OtelMetrics } from '@opentelemetry/api';
 import { DependencyContainer } from 'tsyringe/dist/typings/types';
 import jsLogger from '@map-colonies/js-logger';
 import { Metrics } from '@map-colonies/telemetry';
-import { SERVICES, SERVICE_NAME } from './common/constants';
-import { getTracing } from './common/tracing';
+import { InjectionObject, registerDependencies } from '@common/dependencyRegistration';
+import { SERVICES, SERVICE_NAME } from '@common/constants';
+import { getTracing } from '@common/tracing';
+import { getConfig } from '@common/config';
 import { resourceNameRouterFactory, RESOURCE_NAME_ROUTER_SYMBOL } from './resourceName/routes/resourceNameRouter';
-import { InjectionObject, registerDependencies } from './common/dependencyRegistration';
 import { anotherResourceRouterFactory, ANOTHER_RESOURCE_ROUTER_SYMBOL } from './anotherResource/routes/anotherResourceRouter';
-import { getConfig } from './common/config';
 
 export interface RegisterOptions {
   override?: InjectionObject<unknown>[];
