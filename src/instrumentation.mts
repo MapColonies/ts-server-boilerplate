@@ -7,7 +7,6 @@ import { getConfig, initConfig } from './common/config.js';
 await initConfig(true);
 
 const config = getConfig();
-console.log(config.getConfigParts());
 
 const tracingConfig = config.get('telemetry.tracing');
 const sharedConfig = config.get('telemetry.shared');

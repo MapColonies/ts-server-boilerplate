@@ -5,8 +5,6 @@ let tracing: Tracing | undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-magic-numbers
 export function tracingFactory(options: ConstructorParameters<typeof Tracing>[0]): Tracing {
-  console.log("options: ", options);
-  
   tracing = new Tracing({
     ...options,
     autoInstrumentationsConfigMap: {
