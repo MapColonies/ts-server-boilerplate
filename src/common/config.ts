@@ -1,8 +1,8 @@
 import { type ConfigInstance, config } from '@map-colonies/config';
-import { commonBoilerplateV4, type commonBoilerplateV4Type } from '@map-colonies/schemas';
+import { commonBoilerplateV1, type commonBoilerplateV1Type } from '@map-colonies/schemas';
 
 // Choose here the type of the config instance and import this type from the entire application
-type ConfigType = ConfigInstance<commonBoilerplateV4Type>;
+type ConfigType = ConfigInstance<commonBoilerplateV1Type>;
 
 let configInstance: ConfigType | undefined;
 
@@ -15,7 +15,7 @@ async function initConfig(offlineMode?:boolean): Promise<void> {
   configInstance = await config({
     configName: 'boiler-config',
     configServerUrl: 'http://localhost:8080',
-    schema: commonBoilerplateV4,
+    schema: commonBoilerplateV1,
     version: 'latest',
     offlineMode: offlineMode
   });

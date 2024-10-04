@@ -7,7 +7,7 @@
   },
   "telemetry": {
     "tracing": {
-      "enabled": false
+      "isEnabled": false
     },
     "shared": {
 
