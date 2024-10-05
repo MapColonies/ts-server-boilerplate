@@ -9,9 +9,7 @@
     "tracing": {
       "isEnabled": false
     },
-    "shared": {
-
-    },
+    "shared": {},
     "logger": {
       "level": "info",
       "prettyPrint": false
