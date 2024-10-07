@@ -1,6 +1,5 @@
 import { Logger } from '@map-colonies/js-logger';
-import { Meter } from '@opentelemetry/api';
-import { BoundCounter } from '@opentelemetry/api-metrics';
+import { Registry,Counter } from 'prom-client';
 import { RequestHandler } from 'express';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
@@ -12,17 +11,28 @@ type GetResourceHandler = RequestHandler<undefined, IAnotherResourceModel>;
 
 @injectable()
 export class AnotherResourceController {
-  private readonly createdResourceCounter: BoundCounter;
+  private readonly createdResourceCounter: Counter<'status'>;
 
   public constructor(
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
     @inject(AnotherResourceManager) private readonly manager: AnotherResourceManager,
-    @inject(SERVICES.METER) private readonly meter: Meter
+    @inject(SERVICES.METRICS_REGISTRY) private readonly metricsRegistry: Registry
   ) {
-    this.createdResourceCounter = meter.createCounter('created_resource');
+    this.createdResourceCounter = new Counter({
+      name: 'another_resource_fetch_total',
+      help: 'Total number of fetches of another resource',
+      labelNames: ['status'] as const,
+      registers: [this.metricsRegistry] ,
+    })
   }
 
-  public getResource: GetResourceHandler = (req, res) => {
-    return res.status(httpStatus.OK).json(this.manager.getResource());
+  public getResource: GetResourceHandler = (req, res, next) => {
+    this.createdResourceCounter.inc({ status: 'success' });
+    try {
+      return res.status(httpStatus.OK).json(this.manager.getResource());
+    } catch (error) {
+      this.createdResourceCounter.inc({ status: 'failure' });
+      next(error);
+    }
   };
 }

@@ -13,6 +13,7 @@ import { ConfigType } from '@common/config';
 import { SERVICES } from '@common/constants';
 import { RESOURCE_NAME_ROUTER_SYMBOL } from './resourceName/routes/resourceNameRouter';
 import { ANOTHER_RESOURCE_ROUTER_SYMBOL } from './anotherResource/routes/anotherResourceRouter';
+import { Registry } from 'prom-client';
 
 @injectable()
 export class ServerBuilder {
@@ -21,6 +22,7 @@ export class ServerBuilder {
   public constructor(
     @inject(SERVICES.CONFIG) private readonly config: ConfigType,
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
+    @inject(SERVICES.METRICS_REGISTRY) private readonly metricsRegistry: Registry,
     @inject(RESOURCE_NAME_ROUTER_SYMBOL) private readonly resourceNameRouter: Router,
     @inject(ANOTHER_RESOURCE_ROUTER_SYMBOL) private readonly anotherResourceRouter: Router
   ) {
@@ -51,7 +53,7 @@ export class ServerBuilder {
   }
 
   private registerPreRoutesMiddleware(): void {
-    this.serverInstance.use(collectMetricsExpressMiddleware({}));
+    this.serverInstance.use(collectMetricsExpressMiddleware({registry: this.metricsRegistry}));
     this.serverInstance.use(httpLogger({ logger: this.logger, ignorePaths: ['/metrics'] }));
 
     if (this.config.get('server.response.compression.enabled')) {
