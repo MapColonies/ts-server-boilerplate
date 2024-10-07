@@ -69,12 +69,48 @@ Returns the environment from global if exists or from the chart's values, defaul
 {{- end -}}
 
 {{/*
+Returns the cloud provider name from global if exists or from the chart's values, defaults to minikube
+*/}}
+{{- define "ts-server-boilerplate.cloudProviderFlavor" -}}
+{{- if .Values.global.cloudProvider.flavor }}
+    {{- .Values.global.cloudProvider.flavor -}}
+{{- else if .Values.cloudProvider -}}
+    {{- .Values.cloudProvider.flavor | default "minikube" -}}
+{{- else -}}
+    {{ "minikube" }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Returns the cloud provider docker registry url from global if exists or from the chart's values
+*/}}
+{{- define "ts-server-boilerplate.cloudProviderDockerRegistryUrl" -}}
+{{- if .Values.global.cloudProvider.dockerRegistryUrl }}
+    {{- printf "%s/" .Values.global.cloudProvider.dockerRegistryUrl -}}
+{{- else if .Values.cloudProvider.dockerRegistryUrl -}}
+    {{- printf "%s/" .Values.cloudProvider.dockerRegistryUrl -}}
+{{- else -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Returns the cloud provider image pull secret name from global if exists or from the chart's values
+*/}}
+{{- define "ts-server-boilerplate.cloudProviderImagePullSecretName" -}}
+{{- if .Values.global.cloudProvider.imagePullSecretName }}
+    {{- .Values.global.cloudProvider.imagePullSecretName -}}
+{{- else if .Values.cloudProvider.imagePullSecretName -}}
+    {{- .Values.cloudProvider.imagePullSecretName -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Returns the tracing url from global if exists or from the chart's values
 */}}
 {{- define "ts-server-boilerplate.tracingUrl" -}}
 {{- if .Values.global.tracing.url }}
     {{- .Values.global.tracing.url -}}
-{{- else if .Values.env.tracing.url -}}
+{{- else if .Values.cloudProvider -}}
     {{- .Values.env.tracing.url -}}
 {{- end -}}
 {{- end -}}
@@ -88,33 +124,4 @@ Returns the tracing url from global if exists or from the chart's values
 {{- else -}}
     {{- .Values.env.metrics.url -}}
 {{- end -}}
-{{- end -}}
-
-{{/*
-Return the proper image name
-*/}}
-{{- define "ts-server-boilerplate.image" -}}
-{{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
-{{- end -}}
-
-
-{{/*
-Return the proper Docker Image Registry Secret Names
-*/}}
-{{- define "ts-server-boilerplate.imagePullSecrets" -}}
-{{ include "common.images.renderPullSecrets" (dict "images" (list .Values.image) "context" $) }}
-{{- end -}}
-
-{{/*
-Return the proper image pullPolicy
-*/}}
-{{- define "ts-server-boilerplate.pullPolicy" -}}
-{{ include "common.images.pullPolicy" (dict "imageRoot" .Values.image "global" .Values.global) }}
-{{- end -}}
-
-{{/*
-Return the proper image deploymentFlavor
-*/}}
-{{- define "ts-server-boilerplate.deploymentFlavor" -}}
-{{ include "common.images.deploymentFlavor" (dict "imageRoot" .Values.image "global" .Values.global) }}
 {{- end -}}
