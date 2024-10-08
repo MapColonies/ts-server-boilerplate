@@ -11,7 +11,7 @@ metadata:
     haproxy.router.openshift.io/rewrite-target: {{ .Values.route.rewriteTarget }}
     {{- end }}
     {{- if .Values.route.timeout.enabled }}
-    haproxy.router.openshift.io/timeout: {{ .Values.route.timeout.durationSeconds }}
+    haproxy.router.openshift.io/timeout: {{ .Values.route.timeout.duration }}
     {{- end }}
 spec:
   {{- if .Values.route.host }}
