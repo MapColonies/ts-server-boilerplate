@@ -1,14 +1,15 @@
 import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
+import { createRequestSender, RequestSender } from '@map-colonies/openapi-helpers/requestSender';
+import { paths, operations } from '@openapi';
 import { getApp } from '@src/app';
 import { SERVICES } from '@src/common/constants';
-import { IAnotherResourceModel } from '@src/anotherResource/models/anotherResourceManager';
-import { AnotherResourceRequestSender } from './helpers/requestSender';
 
 describe('resourceName', function () {
-  let requestSender: AnotherResourceRequestSender;
-  beforeEach(function () {
+  let requestSender: RequestSender<paths, operations>;
+
+  beforeEach(async function () {
     const app = getApp({
       override: [
         { token: SERVICES.LOGGER, provider: { useValue: jsLogger({ enabled: false }) } },
@@ -16,17 +17,17 @@ describe('resourceName', function () {
       ],
       useChild: true,
     });
-    requestSender = new AnotherResourceRequestSender(app);
+    requestSender = await createRequestSender<paths, operations>('openapi3.yaml', app);
   });
 
   describe('Happy Path', function () {
     it('should return 200 status code and the resource', async function () {
-      const response = await requestSender.getResource();
+      const response = await requestSender.getAnotherResource();
 
       expect(response.status).toBe(httpStatusCodes.OK);
       expect(response).toSatisfyApiSpec();
 
-      const resource = response.body as IAnotherResourceModel;
+      const resource = response.body;
       expect(resource.kind).toBe('avi');
       expect(resource.isAlive).toBe(false);
     });

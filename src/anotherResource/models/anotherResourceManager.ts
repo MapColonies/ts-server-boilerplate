@@ -1,16 +1,14 @@
 import { Logger } from '@map-colonies/js-logger';
 import { inject, injectable } from 'tsyringe';
-import { SERVICES } from '../../common/constants';
+import { components } from '@src/openapi';
+import { SERVICES } from '@common/constants';
 
 const resourceInstance: IAnotherResourceModel = {
   kind: 'avi',
   isAlive: false,
 };
 
-export interface IAnotherResourceModel {
-  kind: string;
-  isAlive: boolean;
-}
+export type IAnotherResourceModel = components['schemas']['anotherResource'];
 
 @injectable()
 export class AnotherResourceManager {

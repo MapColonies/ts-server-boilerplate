@@ -4,6 +4,9 @@
 
 This is a basic repo template for building new MapColonies web services in Typescript.
 
+> [!IMPORTANT]
+> To regenerate the types on openapi change run the command `npm run generate:openapi-types`.
+
 ### Template Features:
 
 - eslint configuration by [@map-colonies/eslint-config](https://github.com/MapColonies/eslint-config)

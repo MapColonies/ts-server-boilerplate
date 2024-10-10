@@ -1,6 +1,7 @@
 import { Logger } from '@map-colonies/js-logger';
 import { inject, injectable } from 'tsyringe';
 import { SERVICES } from '@common/constants';
+import type { components } from '@openapi';
 
 const resourceInstance: IResourceNameModel = {
   id: 1,
@@ -12,11 +13,8 @@ function generateRandomId(): number {
   const rangeOfIds = 100;
   return Math.floor(Math.random() * rangeOfIds);
 }
-export interface IResourceNameModel {
-  id?: number;
-  name: string;
-  description: string;
-}
+
+export type IResourceNameModel = components['schemas']['resource'];
 
 @injectable()
 export class ResourceNameManager {
@@ -33,6 +31,6 @@ export class ResourceNameManager {
 
     this.logger.info({ msg: 'creating resource', resourceId });
 
-    return { id: resourceId, ...resource };
+    return { ...resource, id: resourceId };
   }
 }

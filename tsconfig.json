@@ -10,11 +10,13 @@
     "moduleResolution": "NodeNext",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
       "@tests/*": ["tests/*"],
-      "@common/*": ["src/common/*"]
+      "@common/*": ["src/common/*"],
+      "@openapi": ["src/openapi"]
     }
   },
   "include": ["src"],

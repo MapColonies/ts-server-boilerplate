@@ -21,7 +21,7 @@ describe('ResourceNameManager', () => {
   describe('#createResource', () => {
     it('return the resource of id 1', function () {
       // action
-      const resource = resourceNameManager.createResource({ description: 'meow', name: 'cat' });
+      const resource = resourceNameManager.createResource({ description: 'meow', id: 1, name: 'cat' });
 
       // expectation
       expect(resource.id).toBeLessThanOrEqual(100);
