@@ -5,11 +5,8 @@ import { createTerminus } from '@godaddy/terminus';
 import { Logger } from '@map-colonies/js-logger';
 import { container } from 'tsyringe';
 import { SERVICES } from '@common/constants';
-import { ConfigInstance } from '@map-colonies/config';
-import { commonBoilerplateV3Type } from '@map-colonies/schemas';
-
+import { ConfigType } from '@common/config';
 import { getApp } from './app';
-import { ConfigType } from './common/config';
 
 void getApp()
   .then(([app]) => {
