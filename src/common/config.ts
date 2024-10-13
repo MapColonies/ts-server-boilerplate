@@ -13,10 +13,7 @@ let configInstance: ConfigType | undefined;
  */
 async function initConfig(offlineMode?: boolean): Promise<void> {
   configInstance = await config({
-    configName: 'boiler-config',
-    configServerUrl: 'http://localhost:8080',
     schema: commonBoilerplateV1,
-    version: 'latest',
     offlineMode: offlineMode,
   });
 }

@@ -19,4 +19,10 @@ data:
   TELEMETRY_METRICS_URL: {{ $metricsUrl }}
   {{ end }}
   npm_config_cache: /tmp/
+  {{- with .Values.configManagement }}
+  CONFIG_NAME: {{ .name| quote }}
+  CONFIG_VERSION: {{ .version | quote }}
+  CONFIG_OFFLINE_MODE: {{ .offlineMode | quote }}
+  CONFIG_SERVER_URL: {{ .serverUrl | quote }}
+  {{- end -}}}}
 {{- end }}
