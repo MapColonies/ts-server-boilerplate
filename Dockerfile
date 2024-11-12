@@ -4,6 +4,7 @@ FROM node:20 as build
 WORKDIR /tmp/buildApp
 
 COPY ./package*.json ./
+COPY .husky/ .husky/
 
 RUN npm install
 COPY . .
@@ -20,6 +21,7 @@ ENV SERVER_PORT=8080
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
+COPY .husky/ .husky/
 
 RUN npm ci --only=production
 
