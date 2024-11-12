@@ -22,7 +22,7 @@
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist",
     "generate:openapi-types": "openapi-helpers ./openapi3.yaml ./src/openapi.d.ts --format --add-typed-request-handler",
-    "prepare": "husky"
+    "prepare": "node .husky/install.mjs"
   },
   "directories": {
     "test": "tests"

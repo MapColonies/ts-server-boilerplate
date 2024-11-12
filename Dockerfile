@@ -21,8 +21,7 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
-# --ignore-scripts is used for to skip "prepare" script
-RUN npm ci --only=production --ignore-scripts
+RUN npm ci --only=production
 
 COPY --chown=node:node --from=build /tmp/buildApp/dist .
 COPY --chown=node:node ./config ./config
