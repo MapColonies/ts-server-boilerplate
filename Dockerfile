@@ -3,9 +3,11 @@ FROM node:20 as build
 
 WORKDIR /tmp/buildApp
 
-COPY . .
+COPY ./package*.json ./
+COPY .husky/ .husky/
 
 RUN npm install
+COPY . .
 RUN npm run build
 
 FROM node:20.3.1-alpine3.17 as production
@@ -19,7 +21,7 @@ ENV SERVER_PORT=8080
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
-COPY --chown=node:node .husky/ .husky/
+COPY .husky/ .husky/
 
 RUN npm ci --only=production
 
