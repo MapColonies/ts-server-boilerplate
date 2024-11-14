@@ -54,7 +54,7 @@ caKey: 'ca.crt'
 
 image:
   repository: ts-server-boilerplate
-  tag: 'latest'
+  # tag: 'latest'
   pullPolicy: IfNotPresent
 
 env:
