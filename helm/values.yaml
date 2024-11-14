@@ -54,7 +54,8 @@ caKey: 'ca.crt'
 
 image:
   repository: ts-server-boilerplate
-  # tag: 'latest' // If commented, appVersion will be taken. See: _helpers.tpl
+  # If commented, appVersion will be taken. See: _helpers.tpl
+  # tag: 'latest'
   pullPolicy: IfNotPresent
 
 env:
