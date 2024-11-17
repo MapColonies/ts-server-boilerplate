@@ -5,7 +5,6 @@ import { createRequestSender, RequestSender } from '@map-colonies/openapi-helper
 import { getApp } from '@src/app';
 import { SERVICES } from '@common/constants';
 import { paths, operations } from '@openapi';
-
 import { initConfig } from '@src/common/config';
 
 describe('resourceName', function () {
