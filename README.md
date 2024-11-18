@@ -7,6 +7,9 @@ This is a basic repo template for building new MapColonies web services in Types
 > [!IMPORTANT]
 > To regenerate the types on openapi change run the command `npm run generate:openapi-types`.
 
+## Development
+When in development you should use the command `npm run start:dev`. The main benefits are that it enables offline mode for the config package, and source map support for NodeJS errors.
+
 ### Template Features:
 
 - eslint configuration by [@map-colonies/eslint-config](https://github.com/MapColonies/eslint-config)
