@@ -1,8 +1,8 @@
 import { getOtelMixin } from '@map-colonies/telemetry';
-import { trace, metrics as OtelMetrics } from '@opentelemetry/api';
+import { trace } from '@opentelemetry/api';
+import { Registry } from 'prom-client';
 import { DependencyContainer } from 'tsyringe/dist/typings/types';
 import jsLogger from '@map-colonies/js-logger';
-import { Metrics } from '@map-colonies/telemetry';
 import { InjectionObject, registerDependencies } from '@common/dependencyRegistration';
 import { SERVICES, SERVICE_NAME } from '@common/constants';
 import { getTracing } from '@common/tracing';
@@ -22,16 +22,15 @@ export const registerExternalValues = async (options?: RegisterOptions): Promise
 
   const logger = jsLogger({ ...loggerConfig, prettyPrint: loggerConfig.prettyPrint, mixin: getOtelMixin() });
 
-  const metrics = new Metrics();
-  metrics.start();
-
   const tracer = trace.getTracer(SERVICE_NAME);
+  const metricsRegistry = new Registry();
+  configInstance.initializeMetrics(metricsRegistry);
 
   const dependencies: InjectionObject<unknown>[] = [
     { token: SERVICES.CONFIG, provider: { useValue: configInstance } },
     { token: SERVICES.LOGGER, provider: { useValue: logger } },
     { token: SERVICES.TRACER, provider: { useValue: tracer } },
-    { token: SERVICES.METER, provider: { useValue: OtelMetrics.getMeterProvider().getMeter(SERVICE_NAME) } },
+    { token: SERVICES.METRICS, provider: { useValue: metricsRegistry } },
     { token: RESOURCE_NAME_ROUTER_SYMBOL, provider: { useFactory: resourceNameRouterFactory } },
     { token: ANOTHER_RESOURCE_ROUTER_SYMBOL, provider: { useFactory: anotherResourceRouterFactory } },
     {
@@ -39,7 +38,7 @@ export const registerExternalValues = async (options?: RegisterOptions): Promise
       provider: {
         useValue: {
           useValue: async (): Promise<void> => {
-            await Promise.all([metrics.stop(), getTracing().stop()]);
+            await Promise.all([getTracing().stop()]);
           },
         },
       },

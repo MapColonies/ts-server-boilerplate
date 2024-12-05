@@ -1,5 +1,5 @@
 import { Logger } from '@map-colonies/js-logger';
-import { Meter } from '@opentelemetry/api';
+import client, { Registry } from 'prom-client';
 import { BoundCounter } from '@opentelemetry/api-metrics';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
@@ -9,17 +9,22 @@ import { AnotherResourceManager } from '../models/anotherResourceManager';
 
 @injectable()
 export class AnotherResourceController {
-  private readonly createdResourceCounter: BoundCounter;
+  private readonly getResourceCounter: client.Counter;
 
   public constructor(
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
     @inject(AnotherResourceManager) private readonly manager: AnotherResourceManager,
-    @inject(SERVICES.METER) private readonly meter: Meter
+    @inject(SERVICES.METRICS) private readonly metricsRegistry: Registry
   ) {
-    this.createdResourceCounter = meter.createCounter('created_resource');
+    this.getResourceCounter = new client.Counter({
+      name: 'get_resource',
+      help: 'number of get resource requests',
+      registers: [this.metricsRegistry],
+    });
   }
 
   public getResource: TypedRequestHandlers['getAnotherResource'] = (req, res) => {
+    this.getResourceCounter.inc(1);
     return res.status(httpStatus.OK).json(this.manager.getResource());
   };
 }
