@@ -1,6 +1,5 @@
 import { Logger } from '@map-colonies/js-logger';
 import client, { Registry } from 'prom-client';
-import { BoundCounter } from '@opentelemetry/api-metrics';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
 import { SERVICES } from '@common/constants';
