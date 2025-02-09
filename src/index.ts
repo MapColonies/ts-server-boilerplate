@@ -3,13 +3,12 @@ import 'reflect-metadata';
 import { createServer } from 'http';
 import { createTerminus } from '@godaddy/terminus';
 import { Logger } from '@map-colonies/js-logger';
-import { container } from 'tsyringe';
 import { SERVICES } from '@common/constants';
 import { ConfigType } from '@common/config';
 import { getApp } from './app';
 
 void getApp()
-  .then(([app]) => {
+  .then(([app, container]) => {
     const logger = container.resolve<Logger>(SERVICES.LOGGER);
     const config = container.resolve<ConfigType>(SERVICES.CONFIG);
     const port = config.get('server.port');
