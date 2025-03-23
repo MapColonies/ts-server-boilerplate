@@ -25,4 +25,5 @@ function getConfig(): ConfigType {
   return configInstance;
 }
 
-export { getConfig, initConfig, ConfigType };
+export { getConfig, initConfig };
+export type { ConfigType };

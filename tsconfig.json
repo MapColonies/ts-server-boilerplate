@@ -1,16 +1,6 @@
 {
+  "extends": "@map-colonies/tsconfig/tsconfig-app",
   "compilerOptions": {
-    "target": "es2021",
-    "module": "NodeNext",
-    "declaration": true,
-    "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "NodeNext",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
@@ -19,6 +9,6 @@
       "@openapi": ["src/openapi"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "tests"]
+  "include": ["src", "tests"],
+  "exclude": ["node_modules", "dist"]
 }

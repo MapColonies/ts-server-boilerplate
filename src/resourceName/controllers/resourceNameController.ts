@@ -1,4 +1,4 @@
-import { Logger } from '@map-colonies/js-logger';
+import type { Logger } from '@map-colonies/js-logger';
 import client from 'prom-client';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
