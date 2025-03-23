@@ -1,21 +1,21 @@
 import type { Logger } from '@map-colonies/js-logger';
-import client, { Registry } from 'prom-client';
+import { type Registry, Counter } from 'prom-client';
 import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
-import { SERVICES } from '@common/constants';
 import type { TypedRequestHandlers } from '@openapi';
+import { SERVICES } from '@common/constants';
 import { AnotherResourceManager } from '../models/anotherResourceManager';
 
 @injectable()
 export class AnotherResourceController {
-  private readonly getResourceCounter: client.Counter;
+  private readonly getResourceCounter: Counter;
 
   public constructor(
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
     @inject(AnotherResourceManager) private readonly manager: AnotherResourceManager,
     @inject(SERVICES.METRICS) private readonly metricsRegistry: Registry
   ) {
-    this.getResourceCounter = new client.Counter({
+    this.getResourceCounter = new Counter({
       name: 'get_resource',
       help: 'number of get resource requests',
       registers: [this.metricsRegistry],
