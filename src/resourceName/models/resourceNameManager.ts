@@ -1,7 +1,7 @@
 import type { Logger } from '@map-colonies/js-logger';
 import { inject, injectable } from 'tsyringe';
-import { SERVICES } from '@common/constants';
 import type { components } from '@openapi';
+import { SERVICES } from '@common/constants';
 
 const resourceInstance: IResourceNameModel = {
   id: 1,
