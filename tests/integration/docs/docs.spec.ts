@@ -1,4 +1,5 @@
 import { jsLogger } from '@map-colonies/js-logger';
+import { describe, beforeEach, it, expect, beforeAll } from 'vitest';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
 import { getApp } from '@src/app';

@@ -1,4 +1,5 @@
 import { jsLogger } from '@map-colonies/js-logger';
+import { describe, beforeEach, it, expect } from 'vitest';
 import { ResourceNameManager } from '@src/resourceName/models/resourceNameManager';
 
 let resourceNameManager: ResourceNameManager;
