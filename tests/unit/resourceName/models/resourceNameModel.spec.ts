@@ -1,3 +1,4 @@
+import { describe, beforeEach, it, expect } from 'vitest';
 import jsLogger from '@map-colonies/js-logger';
 import { ResourceNameManager } from '@src/resourceName/models/resourceNameManager';
 

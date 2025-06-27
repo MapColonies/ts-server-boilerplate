@@ -1,3 +1,4 @@
+import { describe, beforeEach, it, expect, beforeAll } from 'vitest';
 import jsLogger from '@map-colonies/js-logger';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
@@ -37,10 +38,10 @@ describe('anotherResourceName', function () {
       expect(resource.isAlive).toBe(false);
     });
   });
-  describe('Bad Path', function () {
-    // All requests with status code of 400
-  });
-  describe('Sad Path', function () {
-    // All requests with status code 4XX-5XX
-  });
+  // describe('Bad Path', function () {
+  //   // All requests with status code of 400
+  // });
+  // describe('Sad Path', function () {
+  //   // All requests with status code 4XX-5XX
+  // });
 });
