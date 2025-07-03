@@ -30,7 +30,7 @@ spec:
         app: {{ $chartName }}
         release: {{ $releaseName }}
         run: {{ $releaseName }}-{{ $chartName }}
-        {{- include "ts-server-boilerplate.selectorLabels" . | nindent 8 }}
+        {{- include "ts-server-boilerplate.labels" . | nindent 8 }}
       annotations:
       {{- if .Values.resetOnConfigChange }}
         checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}

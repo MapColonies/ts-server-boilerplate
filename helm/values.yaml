@@ -7,8 +7,8 @@ global:
 enabled: true
 environment: development
 replicaCount: 1
-revisionHistoryLimit: 5 # Amount of revisions we keep
-nodePort: 30030 #for minikube deployment only
+revisionHistoryLimit: 5  # Amount of revisions we keep
+nodePort: 30030  # for minikube deployment only
 resetOnConfigChange: false
 
 nameOverride: ""
@@ -50,7 +50,7 @@ args: []
 sidecars: []
 
 cloudProvider:
-  dockerRegistryUrl: 
+  dockerRegistryUrl: ''
   imagePullSecretName: ''
   flavor: openshift
 
@@ -92,10 +92,10 @@ resources:
 route:
   enabled: true
   path: /
-  host: 
+  host: ''
   timeout:
-    enabled: false # defaults to 30s by openshift
-    duration: 60s # supported units (us, ms, s, m, h, d)
+    enabled: false  # defaults to 30s by openshift
+    duration: 60s  # supported units (us, ms, s, m, h, d)
   rewriteTarget: ''
   tls:
     enabled: true
