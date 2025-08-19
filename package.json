@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "tsc --noEmit && npm run test:unit && npm run test:integration",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && npm run generate:openapi-types",
     "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json && npm run assets:copy",
     "start": "npm run build && cd dist && node --import ./instrumentation.mjs ./index.js",
     "start:dev": "npm run build && cd dist && cross-env CONFIG_OFFLINE_MODE=true  node --enable-source-maps --import ./instrumentation.mjs ./index.js",
