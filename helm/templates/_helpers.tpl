@@ -40,6 +40,7 @@ helm.sh/chart: {{ include "ts-server-boilerplate.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "mc-labels-and-annotations.labels" . }}
 {{- end }}
 
 {{/*
@@ -55,18 +56,8 @@ Selector labels
 {{- define "ts-server-boilerplate.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "ts-server-boilerplate.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "mc-labels-and-annotations.selectorLabels" . }}
 {{- end }}
-
-{{/*
-Returns the environment from global if exists or from the chart's values, defaults to development
-*/}}
-{{- define "ts-server-boilerplate.environment" -}}
-{{- if .Values.global.environment }}
-    {{- .Values.global.environment -}}
-{{- else -}}
-    {{- .Values.environment | default "development" -}}
-{{- end -}}
-{{- end -}}
 
 {{/*
 Returns the cloud provider name from global if exists or from the chart's values, defaults to minikube
