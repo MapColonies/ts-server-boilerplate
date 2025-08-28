@@ -5,7 +5,7 @@ global:
 
 mcLabelsAndAnnotations:
   component: backend
-  partOf: ts-server-boilerplate
+  partOf: boilerplates
   owner: common
 
 enabled: true
