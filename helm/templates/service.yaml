@@ -9,7 +9,6 @@ metadata:
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
-    environment: {{ include "ts-server-boilerplate.environment" . }}
     release: {{ $releaseName }}
     {{- include "ts-server-boilerplate.labels" . | nindent 4 }}
 spec:
