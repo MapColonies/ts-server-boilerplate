@@ -2,5 +2,5 @@ dependencies:
 - name: mc-labels-and-annotations
   repository: oci://acrarolibotnonprod.azurecr.io/helm/infra
   version: 0.8.0
-digest: sha256:2be5f55b663b3888821a0bc9d1b8f382a5836f40b066b114c9c90f6804295d8e
-generated: "2025-08-26T15:22:01.155919009+03:00"
+digest: sha256:eea5cc8dea7b4eca7806d3ed72c9c9e09c85cb0f299278e16ec21073ea75d5ae
+generated: "2025-08-31T10:18:36.794274991+03:00"
