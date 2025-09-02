@@ -7,6 +7,8 @@ mcLabelsAndAnnotations:
   component: backend
   partOf: boilerplates
   owner: common
+  prometheus:
+    enabled: true
 
 enabled: true
 replicaCount: 1
