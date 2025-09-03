@@ -18,18 +18,39 @@ permissions:
   pull-requests: write
 
 jobs:
-  build_and_push_docker:
-    uses: MapColonies/shared-workflows/.github/workflows/build-and-push-docker.yaml@v4
-    secrets: inherit
+  Artifactory_Login:
+    uses: MapColonies/shared-workflows/actions/artifactory-login@9a05fd7a01e18746d69cc210b7e6defbd1cc79fc # v1.0.1
     with:
-      # for example
-      # scope: 3d
-      scope: YOUR-DOMAIN
+      registry: ACR_URL
+      username: ACR_PUSH_USER
+      password: ACR_PUSH_TOKEN
 
-  build_and_push_helm:
-    uses: MapColonies/shared-workflows/.github/workflows/build-and-push-helm.yaml@v4
-    secrets: inherit
+  Build_Docker_Image:
+    uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
     with:
       # for example
-      # scope: 3d
-      scope: YOUR-DOMAIN
+      # domain: infra
+      domain: YOUR-DOMAIN
+      registry: ACR_URL
+
+  Push_Docker_Image:
+    uses: MapColonies/shared-workflows/actions/push-docker@push-docker-v1.0.1
+    with:
+      # for example
+      # image_name: scaler
+      # image_tag: v1.0.0
+      image_name: DOCKER_IMAGE_NAME
+      image_tag: DOCKER_IMAGE_TAG
+
+
+  Build_and_Push_Helm_Chart:
+    uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
+    with:
+      # for example
+      # context: ./infra/monitoring
+      # domain: infra
+      context: YOUR-PATH
+      domain: YOUR-DOMAIN
+      registry: ACR_URL
+      version: YOUR-VERSION
+
