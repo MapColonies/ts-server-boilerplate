@@ -52,5 +52,4 @@ jobs:
       context: YOUR-PATH
       domain: YOUR-DOMAIN
       registry: ACR_URL
-      version: YOUR-VERSION
 
