@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   Artifactory_Login:
-    uses: MapColonies/shared-workflows/actions/artifactory-login@9a05fd7a01e18746d69cc210b7e6defbd1cc79fc # v1.0.1
+    uses: MapColonies/shared-workflows/actions/artifactory-login@artifactory-login-v1.0.0
     with:
       registry: ACR_URL
       username: ACR_PUSH_USER
