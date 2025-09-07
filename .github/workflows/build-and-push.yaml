@@ -44,3 +44,19 @@ jobs:
       context: YOUR-PATH
       domain: YOUR-DOMAIN
       registry: ACR_URL
+
+  update_artifacts_file:
+    uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1.1.1
+    with:
+      # for example
+      # domain: infra
+      # artifact_name: "sftpgo"
+      # artifact_tag: "v1.2.3"
+      # type: "docker"
+      domain: YOUR-DOMAIN
+      artifact_name: ARTIFACT_NAME
+      artifact_tag: ARTIFACT_TAG
+      type: ARTIFACT_TYPE
+      registry: ACR_URL
+      github_token: YOUR_GITHUB_TOKEN
+
