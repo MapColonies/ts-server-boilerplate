@@ -48,11 +48,11 @@ jobs:
   update_artifacts_file:
     uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1.1.1
     with:
-      # for example
+      # Example:
       # domain: infra
-      # artifact_name: "sftpgo"
-      # artifact_tag: "v1.2.3"
-      # type: "docker"
+      # artifact_name: sftpgo
+      # artifact_tag: v1.2.3
+      # type: docker
       domain: YOUR-DOMAIN
       artifact_name: ARTIFACT_NAME
       artifact_tag: ARTIFACT_TAG
