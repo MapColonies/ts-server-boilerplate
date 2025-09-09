@@ -41,8 +41,8 @@ jobs:
       # Example
       # context: ./infra/monitoring
       # domain: infra
-      context: YOUR-PATH
-      domain: YOUR-DOMAIN
+      context: YOUR_PATH
+      domain: YOUR_DOMAIN
       registry: ACR_URL
 
   update_artifacts_file:
