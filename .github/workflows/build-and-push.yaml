@@ -53,7 +53,7 @@ jobs:
       # artifact_name: sftpgo
       # artifact_tag: v1.2.3
       # type: docker
-      domain: YOUR-DOMAIN
+      domain: YOUR_DOMAIN
       artifact_name: ARTIFACT_NAME
       artifact_tag: ARTIFACT_TAG
       type: ARTIFACT_TYPE
