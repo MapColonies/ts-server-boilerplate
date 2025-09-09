@@ -35,7 +35,7 @@ jobs:
       image_tag: DOCKER_IMAGE_TAG
 
 
-  Build_and_Push_Helm_Chart:
+  build_and_push_helm_chart:
     uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
     with:
       # Example
