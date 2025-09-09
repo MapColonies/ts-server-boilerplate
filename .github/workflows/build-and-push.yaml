@@ -17,7 +17,7 @@ jobs:
       username: REGISTRY_PUSH_USER
       password: REGISTRY_PUSH_TOKEN
 
-  Build_Docker_Image:
+  build_docker_image:
     uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
     with:
       # for example
