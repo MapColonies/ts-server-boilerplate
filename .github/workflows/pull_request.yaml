@@ -1,37 +1,39 @@
 name: pull_request
 
-on:
-  pull_request
+on: pull_request
 
 permissions:
   contents: read
   pull-requests: read
 
 jobs:
-  helm-lint:
-    uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1.0.0
-    with:
-      # for example
-      # chartDirs: helm
-      chartDirs: YOUR_CHARTS_PATH
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: helm-lint
+        uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1.0.0
+        with:
+          # Example:
+          # chartDirs: ./helm
+          chartDirs: YOUR_CHARTS_PATH
 
-  eslint:
-    uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
-    with:
-      # for example
-      # path: ./src
-      path: YOUR_NODEJS_CODE_PATH
+      - name: eslint
+        uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
+        with:
+          # Example:
+          # path: ./src
+          path: YOUR_NODEJS_CODE_PATH
 
-  openapi-lint:
-    uses: MapColonies/shared-workflows/actions/openapi-lint@openapi-lint-v1.0.0
-    with:
-      # for example
-      # node_version: "20"
-      # openapi-file: ./openapi3.yaml
-      # path: ./src
-      node_version: YOUR_NODE_VERSION
-      openapi-file: YOUR_OPENAPI_FILE_PATH
-      path: YOUR_NODEJS_CODE_PATH
+      - name: openapi-lint
+        uses: MapColonies/shared-workflows/actions/openapi-lint@openapi-lint-v1.0.0
+        with:
+          # Example:
+          # node_version: "20"
+          # openapi-file: ./openapi3.yaml
+          # path: .
+          node_version: YOUR_NODE_VERSION
+          openapi-file: YOUR_OPENAPI_FILE_PATH
+          path: YOUR_REPO_PATH
 
   security:
     runs-on: ubuntu-latest
@@ -87,10 +89,14 @@ jobs:
           name: Test Reporters Node-${{ matrix.node }}
           path: reports/**
 
-  Build_Docker_Image:
-    uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
-    with:
-      # for example
-      # domain: infra
-      domain: YOUR-DOMAIN
-      registry: ACR_URL
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker Image
+        uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
+        with:
+          # Example:
+          # domain: infra
+          domain: infra
+          registry: ${{ secrets.ACR_URL }}
+          tag: pr-${{ github.event.number }}

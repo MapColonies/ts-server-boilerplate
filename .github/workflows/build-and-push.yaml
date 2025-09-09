@@ -26,7 +26,7 @@ jobs:
         with:
           # Example:
           # domain: infra
-          domain: infra
+          domain: YOUR_DOMAIN
           registry: ${{ secrets.ACR_URL }}
 
       - name: Push Docker Image
@@ -38,7 +38,7 @@ jobs:
       - name: Build and Push Helm Chart
         uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
         with:
-          # Example
+          # Example:
           # context: helm
           # domain: infra
           context: YOUR_CHART_PATH
