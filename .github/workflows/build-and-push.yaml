@@ -38,7 +38,7 @@ jobs:
   Build_and_Push_Helm_Chart:
     uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
     with:
-      # for example
+      # Example
       # context: ./infra/monitoring
       # domain: infra
       context: YOUR-PATH
