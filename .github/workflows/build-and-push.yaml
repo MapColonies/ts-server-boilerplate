@@ -22,7 +22,7 @@ jobs:
     with:
       # for example
       # domain: infra
-      domain: YOUR-DOMAIN
+      domain: YOUR_DOMAIN
       registry: ACR_URL
 
   push_docker_image:
