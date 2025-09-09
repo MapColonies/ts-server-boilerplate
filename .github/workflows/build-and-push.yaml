@@ -25,7 +25,7 @@ jobs:
       domain: YOUR-DOMAIN
       registry: ACR_URL
 
-  Push_Docker_Image:
+  push_docker_image:
     uses: MapColonies/shared-workflows/actions/push-docker@push-docker-v1.0.1
     with:
       # for example
