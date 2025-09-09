@@ -20,7 +20,7 @@ jobs:
   build_docker_image:
     uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
     with:
-      # for example
+      # Example:
       # domain: infra
       domain: YOUR_DOMAIN
       registry: ACR_URL
