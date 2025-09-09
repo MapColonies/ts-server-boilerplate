@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  Artifactory_Login:
+  artifactory_login:
     uses: MapColonies/shared-workflows/actions/artifactory-login@artifactory-login-v1.0.0
     with:
       registry: REGISTRY_URL
