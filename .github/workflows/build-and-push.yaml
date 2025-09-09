@@ -39,26 +39,23 @@ jobs:
         uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
         with:
           # Example
-          # context: ./infra/monitoring
+          # context: helm
           # domain: infra
-          context: helm
-          domain: infra
+          context: YOUR_CHART_PATH
+          domain: YOUR_DOMAIN
           registry: ${{ secrets.ACR_URL }}
 
-  # update_artifacts_file:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Update Artifacts File
-  #       uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1.1.1
-  #       with:
-  #         # Example:
-  #         # domain: infra
-  #         # artifact_name: sftpgo
-  #         # artifact_tag: v1.2.3
-  #         # type: docker
-  #         domain: infra
-  #         artifact_name: ${{ github.event.repository.name }}
-  #         artifact_tag: ${{ github.ref_name }}
-  #         type: docker
-  #         registry: ${{ secrets.ACR_URL }}
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Artifacts File
+        uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1.1.1
+        with:
+          # Example:
+          # domain: infra
+          # artifact_name: sftpgo
+          # artifact_tag: v1.2.3
+          # type: docker
+          domain: YOUR_DOMAIN
+          artifact_name: ${{ github.event.repository.name }}
+          artifact_tag: ${{ github.ref_name }}
+          type: YOUR_ARTIFACT_TYPE
+          registry: ${{ secrets.ACR_URL }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
