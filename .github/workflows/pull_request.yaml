@@ -15,8 +15,7 @@ jobs:
         with:
           # Example:
           # chartDirs: your helm charts path
-          chartDirs: helm
-
+          chartDirs: ./helm
 
       - name: eslint
         uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
@@ -32,10 +31,9 @@ jobs:
           # node_version: your node version
           # openapi-file: your openapi file path
           # path: your repo path
-          node_version: "20"
+          node_version: '20'
           openapi-file: ./openapi3.yaml
           path: .
-
 
   security:
     runs-on: ubuntu-latest
