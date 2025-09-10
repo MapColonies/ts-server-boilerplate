@@ -97,6 +97,6 @@ jobs:
         with:
           # Example:
           # domain: infra
-          domain: YOUR_DOMAIN
+          domain: domain
           registry: ${{ secrets.ACR_URL }}
           tag: pr-${{ github.event.number }}

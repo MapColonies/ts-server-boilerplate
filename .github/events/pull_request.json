@@ -1,0 +1,10 @@
+{
+  "pull_request": {
+    "base": {
+      "ref": "master"
+    }
+  },
+  "repository": {
+    "default_branch": "master"
+  }
+}
