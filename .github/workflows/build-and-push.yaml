@@ -35,7 +35,7 @@ jobs:
         uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
         with:
           # Example:
-          # context: helm
+          # context: ./helm (default value)
           # domain: infra
           context: YOUR_CHART_PATH
           domain: YOUR_DOMAIN
