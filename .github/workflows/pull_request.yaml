@@ -12,28 +12,12 @@ jobs:
     steps:
       - name: helm-lint
         uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1.0.0
-        with:
-          # Example:
-          # chartDirs: your helm charts path
-          chartDirs: ./helm
 
       - name: eslint
         uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
-        with:
-          # Example:
-          # path: your nodejs code path
-          path: ./src
 
       - name: openapi-lint
         uses: MapColonies/shared-workflows/actions/openapi-lint@openapi-lint-v1.0.0
-        with:
-          # Example:
-          # node_version: your node version
-          # openapi-file: your openapi file path
-          # path: your repo path
-          node_version: '20'
-          openapi-file: ./openapi3.yaml
-          path: .
 
   security:
     runs-on: ubuntu-latest
@@ -51,24 +35,6 @@ jobs:
     strategy:
       matrix:
         node: [20.x, 22.x]
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: ${{ (inputs.usePostgres == true) && 'postgis/postgis:13-3.4' || ''}}
-        # Provide the password for postgres
-        env:
-          POSTGRES_PASSWORD: 1234
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
