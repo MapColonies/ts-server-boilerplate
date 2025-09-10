@@ -89,7 +89,7 @@ jobs:
           name: Test Reporters Node-${{ matrix.node }}
           path: reports/**
 
-  build_and_push:
+  build_docker_image:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker Image
