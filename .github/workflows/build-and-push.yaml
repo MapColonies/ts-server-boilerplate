@@ -52,4 +52,4 @@ jobs:
           artifact_tag: ${{ github.ref_name }}
           type: YOUR_ARTIFACT_TYPE
           registry: ${{ secrets.ACR_URL }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
