@@ -14,26 +14,28 @@ jobs:
         uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1.0.0
         with:
           # Example:
-          # chartDirs: ./helm
-          chartDirs: YOUR_CHARTS_PATH
+          # chartDirs: your helm charts path
+          chartDirs: helm
+
 
       - name: eslint
         uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
         with:
           # Example:
-          # path: ./src
-          path: YOUR_NODEJS_CODE_PATH
+          # path: your nodejs code path
+          path: ./src
 
       - name: openapi-lint
         uses: MapColonies/shared-workflows/actions/openapi-lint@openapi-lint-v1.0.0
         with:
           # Example:
-          # node_version: "20"
-          # openapi-file: ./openapi3.yaml
-          # path: .
-          node_version: YOUR_NODE_VERSION
-          openapi-file: YOUR_OPENAPI_FILE_PATH
-          path: YOUR_REPO_PATH
+          # node_version: your node version
+          # openapi-file: your openapi file path
+          # path: your repo path
+          node_version: "20"
+          openapi-file: ./openapi3.yaml
+          path: .
+
 
   security:
     runs-on: ubuntu-latest
