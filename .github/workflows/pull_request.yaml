@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: helm-lint
-        uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1.0.0
+        uses: MapColonies/shared-workflows/actions/helm-lint@artifactory-login-v1.0
 
       - name: eslint
-        uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
+        uses: MapColonies/shared-workflows/actions/eslint@artifactory-login-v1.0
 
       - name: openapi-lint
-        uses: MapColonies/shared-workflows/actions/openapi-lint@openapi-lint-v1.0.0
+        uses: MapColonies/shared-workflows/actions/openapi-lint@artifactory-login-v1.0
 
   security:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker Image
-        uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
+        uses: MapColonies/shared-workflows/actions/build-docker@artifactory-login-v1.0
         with:
           # Example:
           # domain: infra
