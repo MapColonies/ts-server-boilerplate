@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Artifactory Login
-        uses: MapColonies/shared-workflows/actions/artifactory-login@artifactory-login-v1.0.0
+        uses: MapColonies/shared-workflows/actions/artifactory-login@artifactory-login-v1.0
         with:
           registry: ${{ secrets.ACR_URL }}
           username: ${{ secrets.ACR_PUSH_USER }}
@@ -18,7 +18,7 @@ jobs:
 
       - name: Build Docker Image
         id: build
-        uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
+        uses: MapColonies/shared-workflows/actions/build-docker@artifactory-login-v1.0
         with:
           # Example:
           # domain: infra
@@ -26,13 +26,13 @@ jobs:
           registry: ${{ secrets.ACR_URL }}
 
       - name: Push Docker Image
-        uses: MapColonies/shared-workflows/actions/push-docker@push-docker-v1.0.1
+        uses: MapColonies/shared-workflows/actions/push-docker@artifactory-login-v1.0
         with:
           image_name: ${{ steps.build.outputs.docker_image_full_name }}
           image_tag: ${{ steps.build.outputs.docker_image_tag }}
 
       - name: Build and Push Helm Chart
-        uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
+        uses: MapColonies/shared-workflows/actions/build-and-push-helm@artifactory-login-v1.0
         with:
           # Example:
           # context: ./helm (default value)
@@ -42,7 +42,7 @@ jobs:
           registry: ${{ secrets.ACR_URL }}
 
       - name: Update Artifacts File
-        uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1.1.1
+        uses: MapColonies/shared-workflows/actions/update-artifacts-file@artifactory-login-v1.0
         with:
           # Example:
           # domain: infra
