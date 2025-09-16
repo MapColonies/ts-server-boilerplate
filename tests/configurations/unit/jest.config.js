@@ -19,7 +19,7 @@ module.exports = {
     '!**/routes/**',
     '!<rootDir>/src/*',
   ],
-  coverageDirectory: '<rootDir>/coverage',
+  coverageDirectory: '<rootDir>/coverage/unit',
   reporters: [
     'default',
     ['jest-html-reporters', { multipleReportsUnitePath: './reports', pageTitle: 'unit', publicPath: './reports', filename: 'unit.html' }],
