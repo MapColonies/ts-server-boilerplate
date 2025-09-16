@@ -20,7 +20,7 @@
     "start:dev": "npm run build && cd dist && cross-env CONFIG_OFFLINE_MODE=true  node --enable-source-maps --import ./instrumentation.mjs ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./openapi3.yaml ./dist/ && copyfiles ./package.json dist",
     "clean": "rimraf dist",
-    "generate:openapi-types": "openapi-helpers ./openapi3.yaml ./src/openapi.d.ts --format --add-typed-request-handler",
+    "generate:openapi-types": "openapi-helpers generate types ./openapi3.yaml ./src/openapi.d.ts --format --add-typed-request-handler",
     "prepare": "node .husky/install.mjs"
   },
   "directories": {
@@ -51,7 +51,7 @@
     "@commitlint/cli": "^19.8.0",
     "@map-colonies/commitlint-config": "^1.1.1",
     "@map-colonies/eslint-config": "^6.0.0",
-    "@map-colonies/openapi-helpers": "^2.0.0",
+    "@map-colonies/openapi-helpers": "^4.0.0",
     "@map-colonies/prettier-config": "0.0.1",
     "@map-colonies/tsconfig": "^1.0.1",
     "@redocly/cli": "^1.34.0",

@@ -1,4 +1,7 @@
 /* eslint-disable */
+// This file was auto-generated. Do not edit manually.
+// To update, run the error generation script again.
+
 import type { TypedRequestHandlers as ImportedTypedRequestHandlers } from '@map-colonies/openapi-helpers/typedRequestHandler';
 export type paths = {
   '/anotherResource': {
@@ -80,6 +83,15 @@ export interface operations {
           'application/json': components['schemas']['anotherResource'];
         };
       };
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['error'];
+        };
+      };
     };
   };
   getResourceName: {
@@ -98,6 +110,15 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['resource'];
+        };
+      };
+      /** @description Bad Request */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['error'];
         };
       };
     };
