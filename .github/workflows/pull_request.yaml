@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Init Nodejs
-        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
+        uses: MapColonies/shared-workflows/actions/init-npm@remove-unnecessary-actions
         with:
           node-version: ${{ matrix.node }}
 
@@ -30,6 +30,31 @@ jobs:
           eslint: true
           prettier: true
           eslint_extensions: ts
+
+  openapi-lint:
+    name: Run OpenAPI lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out TS Project Git repository
+        uses: actions/checkout@v5
+
+      - name: Init Nodejs
+        uses: MapColonies/shared-workflows/actions/init-npm@remove-unnecessary-actions
+
+      - name: OpenAPI Lint Checks
+        run: npx @redocly/cli lint --format=github-actions openapi3.yaml
+
+  helm-lint:
+    name: Run Helm lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out TS Project Git repository
+        uses: actions/checkout@v5
+
+      - name: OpenAPI Lint Checks
+        run: npx @redocly/cli lint --format=github-actions openapi3.yaml
 
   security:
     runs-on: ubuntu-latest
@@ -52,7 +77,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Init Nodejs
-        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
+        uses: MapColonies/shared-workflows/actions/init-npm@remove-unnecessary-actions
         with:
           node-version: ${{ matrix.node }}
 
