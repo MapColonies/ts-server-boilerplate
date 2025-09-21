@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: OpenAPI Lint Checks
-        run: npx @redocly/cli lint --format=github-actions openapi3.yaml
+        run: MapColonies/shared-workflows/actions/helm-lint@remove-unnecessary-actions
 
   security:
     runs-on: ubuntu-latest
