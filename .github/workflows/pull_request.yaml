@@ -53,8 +53,8 @@ jobs:
       - name: Check out TS Project Git repository
         uses: actions/checkout@v5
 
-      - name: OpenAPI Lint Checks
-        run: MapColonies/shared-workflows/actions/helm-lint@remove-unnecessary-actions
+      - name: Helm Lint Checks
+        uses: MapColonies/shared-workflows/actions/helm-lint@remove-unnecessary-actions
 
   security:
     runs-on: ubuntu-latest
