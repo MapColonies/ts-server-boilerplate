@@ -1,55 +1,59 @@
-name: Build and push artifacts
+name: Push Artifacts to Azure Registry
 
 on:
   push:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+  packages: write
+
+env:
+  DOMAIN: YOUR_DOMAIN
+
 jobs:
-  build_and_push:
+  push-docker-image:
+    name: Build and Push Docker Image
     runs-on: ubuntu-latest
     steps:
-      - name: Artifactory Login
-        uses: MapColonies/shared-workflows/actions/artifactory-login@artifactory-login-v1.0.0
+      - name: Login to Azure Container Registry
+        uses: docker/login-action@v3
         with:
           registry: ${{ secrets.ACR_URL }}
           username: ${{ secrets.ACR_PUSH_USER }}
           password: ${{ secrets.ACR_PUSH_TOKEN }}
 
-      - name: Build Docker Image
-        id: build
-        uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
+      - name: Build and Push Docker image
+        id: build_and_push
+        uses: docker/build-push-action@v6
         with:
-          # Example:
-          # domain: infra
-          domain: YOUR_DOMAIN
-          registry: ${{ secrets.ACR_URL }}
+          push: true
+          tags: ${{ secrets.ACR_URL }}/${{ env.DOMAIN }}/${{ github.event.repository.name }}:${{ github.ref_name }}
 
-      - name: Push Docker Image
-        uses: MapColonies/shared-workflows/actions/push-docker@push-docker-v1.0.1
+      - name: Update Docker Image in artifacts.json
+        uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1
         with:
-          image_name: ${{ steps.build.outputs.docker_image_full_name }}
-          image_tag: ${{ steps.build.outputs.docker_image_tag }}
+          domain: ${{ env.DOMAIN }}
+          type: docker
+          artifact_name: ${{ github.event.repository.name }}
+          artifact_tag: ${{ github.ref_name }} # Using the git tag directly
+          registry: ${{ secrets.ACR_URL }}
+          github_token: ${{ secrets.GH_PAT }}
 
       - name: Build and Push Helm Chart
-        uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1.0.1
+        id: build_helm_chart
+        uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1
         with:
-          # Example:
-          # context: ./helm (default value)
-          # domain: infra
-          context: YOUR_CHART_PATH
-          domain: YOUR_DOMAIN
+          domain: ${{ env.DOMAIN }}
           registry: ${{ secrets.ACR_URL }}
 
-      - name: Update Artifacts File
-        uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1.1.1
+      - name: Update Helm Package in artifacts.json
+        uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1
         with:
-          # Example:
-          # domain: infra
-          # type: docker
-          domain: YOUR_DOMAIN
-          artifact_name: ${{ github.event.repository.name }}
-          artifact_tag: ${{ github.ref_name }}
-          type: YOUR_ARTIFACT_TYPE
+          domain: ${{ env.DOMAIN }}
+          type: helm
+          artifact_name: ${{ steps.build_helm_chart.outputs.chart }}
+          artifact_tag: ${{ steps.build_helm_chart.outputs.ver }}
           registry: ${{ secrets.ACR_URL }}
           github_token: ${{ secrets.GH_PAT }}
