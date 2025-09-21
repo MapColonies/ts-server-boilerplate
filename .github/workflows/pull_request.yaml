@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [20.x, 22.x]
+        node: [22.x, 24.x]
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v5
