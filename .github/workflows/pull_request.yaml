@@ -52,6 +52,8 @@ jobs:
     steps:
       - name: Check out TS Project Git repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Helm Lint Checks
         uses: MapColonies/shared-workflows/actions/helm-lint@remove-unnecessary-actions
