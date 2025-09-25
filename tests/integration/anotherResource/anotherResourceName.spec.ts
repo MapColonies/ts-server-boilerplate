@@ -32,7 +32,7 @@ describe('anotherResourceName', function () {
       expect(response.status).toBe(httpStatusCodes.OK);
       expect(response).toSatisfyApiSpec();
 
-      const resource = response.body;
+      const resource = response.body as paths['/anotherResource']['get']['responses'][200]['content']['application/json'];
       expect(resource.kind).toBe('avi');
       expect(resource.isAlive).toBe(false);
     });
