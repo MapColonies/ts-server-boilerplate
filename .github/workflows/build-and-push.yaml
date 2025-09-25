@@ -13,10 +13,12 @@ env:
   DOMAIN: YOUR_DOMAIN
 
 jobs:
-  push-docker-image:
-    name: Build and Push Docker Image
+  push-artifacts:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
       - name: Login to Azure Container Registry
         uses: docker/login-action@v3
         with:
@@ -41,19 +43,28 @@ jobs:
           registry: ${{ secrets.ACR_URL }}
           github_token: ${{ secrets.GH_PAT }}
 
-      - name: Build and Push Helm Chart
-        id: build_helm_chart
-        uses: MapColonies/shared-workflows/actions/build-and-push-helm@build-and-push-helm-v1
+      - name: Remove v from the tag
+        id: remove_v
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Push Chart to ACR
+        uses: appany/helm-oci-chart-releaser@v0.5.0
         with:
-          domain: ${{ env.DOMAIN }}
+          name: ${{ github.event.repository.name }}
+          repository: helm/${{ env.DOMAIN }}
+          tag: ${{ steps.remove_v.outputs.version }}
+          path: ./helm
           registry: ${{ secrets.ACR_URL }}
+          registry_username: ${{ secrets.ACR_PUSH_USER }}
+          registry_password: ${{ secrets.ACR_PUSH_TOKEN }}
+          update_dependencies: 'true' # Defaults to false
 
       - name: Update Helm Package in artifacts.json
         uses: MapColonies/shared-workflows/actions/update-artifacts-file@update-artifacts-file-v1
         with:
           domain: ${{ env.DOMAIN }}
           type: helm
-          artifact_name: ${{ steps.build_helm_chart.outputs.chart }}
-          artifact_tag: ${{ steps.build_helm_chart.outputs.ver }}
+          artifact_name: ${{ github.event.repository.name }}
+          artifact_tag: ${{ steps.remove_v.outputs.version }}
           registry: ${{ secrets.ACR_URL }}
           github_token: ${{ secrets.GH_PAT }}
