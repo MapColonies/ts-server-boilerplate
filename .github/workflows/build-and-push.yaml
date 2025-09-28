@@ -45,7 +45,9 @@ jobs:
 
       - name: Remove v from the tag
         id: remove_v
-        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        run: |
+            TAG=${{ github.ref_name }}
+            echo "VERSION=${TAG#v}" >> $GITHUB_OUTPUT
 
       - name: Push Chart to ACR
         uses: appany/helm-oci-chart-releaser@v0.5.0
