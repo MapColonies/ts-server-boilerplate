@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Init Nodejs
-        uses: MapColonies/shared-workflows/actions/init-npm@remove-unnecessary-actions
+        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
         with:
           node-version: ${{ matrix.node }}
 
@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Init Nodejs
-        uses: MapColonies/shared-workflows/actions/init-npm@remove-unnecessary-actions
+        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
 
       - name: OpenAPI Lint Checks
         run: npx @redocly/cli lint --format=github-actions openapi3.yaml
@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
 
       - name: Helm Lint Checks
-        uses: MapColonies/shared-workflows/actions/helm-lint@remove-unnecessary-actions
+        uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1
 
   security:
     runs-on: ubuntu-latest
@@ -80,7 +80,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Init Nodejs
-        uses: MapColonies/shared-workflows/actions/init-npm@remove-unnecessary-actions
+        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
         with:
           node-version: ${{ matrix.node }}
 
