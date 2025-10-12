@@ -7,17 +7,57 @@ permissions:
   pull-requests: read
 
 jobs:
-  lint:
+  eslint:
+    name: Run TS Project eslint
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [22.x, 24.x]
+
     steps:
-      - name: helm-lint
-        uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1.0.0
+      - name: Check out TS Project Git repository
+        uses: actions/checkout@v5
 
-      - name: eslint
-        uses: MapColonies/shared-workflows/actions/eslint@eslint-v1.0.1
+      - name: Init Nodejs
+        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
+        with:
+          node-version: ${{ matrix.node }}
 
-      - name: openapi-lint
-        uses: MapColonies/shared-workflows/actions/openapi-lint@openapi-lint-v1.0.0
+      - name: Run TS Project linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
+          prettier: true
+          eslint_extensions: ts
+          tsc: true
+
+  openapi-lint:
+    name: Run OpenAPI lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out TS Project Git repository
+        uses: actions/checkout@v5
+
+      - name: Init Nodejs
+        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
+
+      - name: OpenAPI Lint Checks
+        run: npx @redocly/cli lint --format=github-actions openapi3.yaml
+
+  helm-lint:
+    name: Run Helm lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out TS Project Git repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Helm Lint Checks
+        uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1
 
   security:
     runs-on: ubuntu-latest
@@ -34,18 +74,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [20.x, 22.x]
+        node: [22.x, 24.x]
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+      - name: Init Nodejs
+        uses: MapColonies/shared-workflows/actions/init-npm@init-npm-v1
         with:
           node-version: ${{ matrix.node }}
-
-      - name: Install Node.js dependencies
-        run: npm ci
 
       - name: Run tests
         run: npm run test
@@ -58,11 +95,5 @@ jobs:
   build_docker_image:
     runs-on: ubuntu-latest
     steps:
-      - name: Build Docker Image
-        uses: MapColonies/shared-workflows/actions/build-docker@build-docker-v1.1.0
-        with:
-          # Example:
-          # domain: infra
-          domain: domain
-          registry: ${{ secrets.ACR_URL }}
-          tag: pr-${{ github.event.number }}
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v6
