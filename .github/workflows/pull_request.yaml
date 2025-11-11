@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [22.x, 24.x]
+        node: [24.x]
 
     steps:
       - name: Check out TS Project Git repository
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [22.x, 24.x]
+        node: [24.x]
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v5
