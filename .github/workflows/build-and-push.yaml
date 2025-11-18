@@ -47,13 +47,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
 
-      - name: Login to Azure Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ secrets.ACR_URL }}
-          username: ${{ secrets.ACR_PUSH_USER }}
-          password: ${{ secrets.ACR_PUSH_TOKEN }}
-
       - name: Remove v from the tag
         id: remove_v
         run: |
