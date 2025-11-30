@@ -24,6 +24,6 @@ export class AnotherResourceController {
 
   public getResource: TypedRequestHandlers['getAnotherResource'] = (req, res) => {
     this.getResourceCounter.inc(1);
-    return res.status(httpStatus.OK).json(this.manager.getResource());
+    return res.status(httpStatus.IM_A_TEAPOT).json(this.manager.getResource());
   };
 }

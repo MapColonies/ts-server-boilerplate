@@ -23,7 +23,8 @@ export class ResourceNameController {
     });
   }
 
-  public getResource: TypedRequestHandlers['getResourceName'] = (req, res) => {
+  public getResource: TypedRequestHandlers['getResourceName'] = (req, res, next) => {
+    return next(new Error('Not implemented'));
     return res.status(httpStatus.OK).json(this.manager.getResource());
   };
 

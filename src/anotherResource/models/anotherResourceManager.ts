@@ -14,7 +14,7 @@ export type IAnotherResourceModel = components['schemas']['anotherResource'];
 export class AnotherResourceManager {
   public constructor(@inject(SERVICES.LOGGER) private readonly logger: Logger) {}
   public getResource(): IAnotherResourceModel {
-    this.logger.info('logging');
+    // this.logger.info('logging');
     return resourceInstance;
   }
 }
