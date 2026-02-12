@@ -1,8 +1,8 @@
-import { getOtelMixin } from '@map-colonies/telemetry';
+import { getOtelMixin } from '@map-colonies/tracing-utils';
 import { trace } from '@opentelemetry/api';
 import { Registry } from 'prom-client';
 import { DependencyContainer } from 'tsyringe/dist/typings/types';
-import jsLogger from '@map-colonies/js-logger';
+import { jsLogger } from '@map-colonies/js-logger';
 import { InjectionObject, registerDependencies } from '@common/dependencyRegistration';
 import { SERVICES, SERVICE_NAME } from '@common/constants';
 import { getTracing } from '@common/tracing';

@@ -1,4 +1,4 @@
-import jsLogger from '@map-colonies/js-logger';
+import { jsLogger } from '@map-colonies/js-logger';
 import { AnotherResourceManager } from '@src/anotherResource/models/anotherResourceManager';
 
 let anotherResourceManager: AnotherResourceManager;

@@ -6,9 +6,8 @@ import { getErrorHandlerMiddleware } from '@map-colonies/error-express-handler';
 import { middleware as OpenApiMiddleware } from 'express-openapi-validator';
 import { inject, injectable } from 'tsyringe';
 import type { Logger } from '@map-colonies/js-logger';
-import httpLogger from '@map-colonies/express-access-log-middleware';
-import { getTraceContexHeaderMiddleware } from '@map-colonies/telemetry';
-import { collectMetricsExpressMiddleware } from '@map-colonies/telemetry/prom-metrics';
+import { httpLogger } from '@map-colonies/express-access-log-middleware';
+import { collectMetricsExpressMiddleware } from '@map-colonies/prometheus';
 import { Registry } from 'prom-client';
 import type { ConfigType } from '@common/config';
 import { SERVICES } from '@common/constants';
@@ -61,7 +60,6 @@ export class ServerBuilder {
     }
 
     this.serverInstance.use(bodyParser.json(this.config.get('server.request.payload')));
-    this.serverInstance.use(getTraceContexHeaderMiddleware());
 
     const ignorePathRegex = new RegExp(`^${this.config.get('openapiConfig.basePath')}/.*`, 'i');
     const apiSpecPath = this.config.get('openapiConfig.filePath');
