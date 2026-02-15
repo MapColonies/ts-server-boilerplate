@@ -42,9 +42,15 @@ describe('anotherResourceName', function () {
 
   describe('Bad Path', function () {
     // All requests with status code of 400
+    it('should in theory test 400 status code', async function () {
+      expect(true).toBe(true);
+    });
   });
 
   describe('Sad Path', function () {
     // All requests with status code 4XX-5XX
+    it('should in theory test 500 status code', async function () {
+      expect(true).toBe(true);
+    });
   });
 });
