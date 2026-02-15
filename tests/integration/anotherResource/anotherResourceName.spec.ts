@@ -34,14 +34,17 @@ describe('anotherResourceName', function () {
       expect(response).toSatisfyApiSpec();
 
       const resource = response.body as paths['/anotherResource']['get']['responses'][200]['content']['application/json'];
+
       expect(resource.kind).toBe('avi');
       expect(resource.isAlive).toBe(false);
     });
   });
-  // describe('Bad Path', function () {
-  //   // All requests with status code of 400
-  // });
-  // describe('Sad Path', function () {
-  //   // All requests with status code 4XX-5XX
-  // });
+
+  describe('Bad Path', function () {
+    // All requests with status code of 400
+  });
+
+  describe('Sad Path', function () {
+    // All requests with status code 4XX-5XX
+  });
 });

@@ -8,8 +8,9 @@ describe('ResourceNameManager', () => {
   beforeEach(function () {
     resourceNameManager = new ResourceNameManager(jsLogger({ enabled: false }));
   });
+
   describe('#getResource', () => {
-    it('return the resource of id 1', function () {
+    it('should return the resource of id 1', function () {
       // action
       const resource = resourceNameManager.getResource();
 
@@ -19,8 +20,9 @@ describe('ResourceNameManager', () => {
       expect(resource.description).toBe('can you do a logistics run?');
     });
   });
+
   describe('#createResource', () => {
-    it('return the resource of id 1', function () {
+    it('should return the resource of id 1', function () {
       // action
       const resource = resourceNameManager.createResource({ description: 'meow', id: 1, name: 'cat' });
 

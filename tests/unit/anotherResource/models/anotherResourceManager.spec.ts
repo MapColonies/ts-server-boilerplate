@@ -8,6 +8,7 @@ describe('ResourceNameManager', () => {
   beforeEach(function () {
     anotherResourceManager = new AnotherResourceManager(jsLogger({ enabled: false }));
   });
+
   describe('#getResource', () => {
     it('should return resource of kind avi', function () {
       // action
