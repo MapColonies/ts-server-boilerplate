@@ -1,6 +1,6 @@
-import { Application } from 'express';
-import { DependencyContainer } from 'tsyringe';
-import { registerExternalValues, RegisterOptions } from './containerConfig';
+import type { Application } from 'express';
+import type { DependencyContainer } from 'tsyringe';
+import { registerExternalValues, type RegisterOptions } from './containerConfig';
 import { ServerBuilder } from './serverBuilder';
 
 async function getApp(registerOptions?: RegisterOptions): Promise<[Application, DependencyContainer]> {
