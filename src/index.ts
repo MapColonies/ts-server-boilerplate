@@ -17,7 +17,6 @@ void getApp()
 
     server.listen(port, () => {
       logger.info(`app started on port ${port}`);
-      console.log(process.env['OTEL_EXPORTER_OTLP_LOGS_ENDPOINT']);
     });
   })
   .catch((error: Error) => {

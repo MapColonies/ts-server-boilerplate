@@ -16,15 +16,12 @@ async function initConfig(offlineMode?: boolean): Promise<void> {
     schema: commonBoilerplateV3,
     offlineMode,
   });
-
-  console.log('Configuration initialized', process.env['OTEL_EXPORTER_OTLP_LOGS_ENDPOINT']);
 }
 
 function getConfig(): ConfigType {
   if (!configInstance) {
     throw new Error('config not initialized');
   }
-  console.log(configInstance.getAll().telemetry.logger);
   return configInstance;
 }
 
