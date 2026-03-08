@@ -23,7 +23,7 @@ export class ResourceNameController {
     });
   }
 
-  public getResource: TypedRequestHandlers['getResourceName'] = (req, res, next) => {
+  public getResource: TypedRequestHandlers['getResourceName'] = (req, res) => {
     return res.status(httpStatus.OK).json(this.manager.getResource());
   };
 
