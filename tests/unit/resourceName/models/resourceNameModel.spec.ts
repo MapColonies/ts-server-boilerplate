@@ -5,8 +5,8 @@ import { ResourceNameManager } from '@src/resourceName/models/resourceNameManage
 let resourceNameManager: ResourceNameManager;
 
 describe('ResourceNameManager', () => {
-  beforeEach(function () {
-    resourceNameManager = new ResourceNameManager(jsLogger({ enabled: false }));
+  beforeEach(async function () {
+    resourceNameManager = new ResourceNameManager(await jsLogger({ enabled: false }));
   });
 
   describe('#getResource', () => {
