@@ -54,7 +54,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.4.1",
     "@map-colonies/commitlint-config": "^2.0.0",
-    "@map-colonies/eslint-config": "^7.2.0",
+    "@map-colonies/eslint-config": "^8.0.0",
     "@map-colonies/openapi-helpers": "^5.1.0",
     "@map-colonies/prettier-config": "^1.0.0",
     "@map-colonies/tsconfig": "^2.0.0",
