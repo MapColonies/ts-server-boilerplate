@@ -13,7 +13,10 @@
     "shared": {},
     "logger": {
       "level": "info",
-      "prettyPrint": false
+      "prettyPrint": false,
+      "opentelemetryOptions": {
+        "enabled": false
+      }
     }
   },
   "server": {

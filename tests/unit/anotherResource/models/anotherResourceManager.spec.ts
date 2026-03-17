@@ -5,8 +5,8 @@ import { AnotherResourceManager } from '@src/anotherResource/models/anotherResou
 let anotherResourceManager: AnotherResourceManager;
 
 describe('ResourceNameManager', () => {
-  beforeEach(function () {
-    anotherResourceManager = new AnotherResourceManager(jsLogger({ enabled: false }));
+  beforeEach(async function () {
+    anotherResourceManager = new AnotherResourceManager(await jsLogger({ enabled: false }));
   });
 
   describe('#getResource', () => {
