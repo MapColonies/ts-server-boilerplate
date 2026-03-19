@@ -26,6 +26,6 @@ spec:
   selector:
     app: {{ $chartName }}
     release: {{ $releaseName }}
-    run: {{ $releaseName }}-{{ $chartName }}
+    run: {{ include "ts-server-boilerplate.fullname" . }}
     {{- include "ts-server-boilerplate.selectorLabels" . | nindent 4 }}
 {{- end }}
