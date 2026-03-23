@@ -8,7 +8,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-deployment" (include "ts-server-boilerplate.fullname" .) }}
+  name: {{ include "ts-server-boilerplate.fullname" . }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
@@ -21,14 +21,14 @@ spec:
     matchLabels:
       app: {{ $chartName }}
       release: {{ $releaseName }}
-      run: {{ $releaseName }}-{{ $chartName }}
+      run: {{ include "ts-server-boilerplate.fullname" . }}
       {{- include "ts-server-boilerplate.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
         app: {{ $chartName }}
         release: {{ $releaseName }}
-        run: {{ $releaseName }}-{{ $chartName }}
+        run: {{ include "ts-server-boilerplate.fullname" . }}
         {{- include "ts-server-boilerplate.labels" . | nindent 8 }}
       annotations:
         {{ include "mclabels.annotations" . | nindent 8 }}
@@ -44,7 +44,7 @@ spec:
         - name: {{ $cloudProviderImagePullSecretName | quote }}
     {{- end }}
       containers:
-        - name: {{ $releaseName }}-{{ $chartName }}-deployment
+        - name: {{ include "ts-server-boilerplate.fullname" . }}
           {{- with .Values.image }}
           image: {{ $cloudProviderDockerRegistryUrl }}{{ .repository }}:{{ $imageTag }}
           imagePullPolicy: {{ .pullPolicy | default "IfNotPresent" }}
@@ -84,7 +84,7 @@ spec:
             {{- end }}            
           envFrom:
             - configMapRef:
-                name: {{ printf "%s-configmap" (include "ts-server-boilerplate.fullname" .) }}
+                name: {{ include "ts-server-boilerplate.fullname" . }}
           ports:
             - name: http
               containerPort: {{ .Values.env.targetPort }}

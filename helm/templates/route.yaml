@@ -5,7 +5,7 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ $releaseName }}-{{ $chartName }}-route
+  name: {{ include "ts-server-boilerplate.fullname" . }}
   annotations:
     {{- if .Values.route.rewriteTarget }}
     haproxy.router.openshift.io/rewrite-target: {{ .Values.route.rewriteTarget }}
@@ -20,7 +20,7 @@ spec:
   path: {{ .Values.route.path | default "/" }}
   to:
     kind: Service
-    name: {{ printf "%s-service" (include "ts-server-boilerplate.fullname" .) }}
+    name: {{ include "ts-server-boilerplate.fullname" . }}
   {{- if .Values.route.tls.enabled }}
   tls:
     termination: {{ .Values.route.tls.termination | quote }}

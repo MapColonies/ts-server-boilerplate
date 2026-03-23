@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ printf "%s-service" (include "ts-server-boilerplate.fullname" .) }}
+  name: {{ include "ts-server-boilerplate.fullname" . }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
@@ -26,6 +26,6 @@ spec:
   selector:
     app: {{ $chartName }}
     release: {{ $releaseName }}
-    run: {{ $releaseName }}-{{ $chartName }}
+    run: {{ include "ts-server-boilerplate.fullname" . }}
     {{- include "ts-server-boilerplate.selectorLabels" . | nindent 4 }}
 {{- end }}
