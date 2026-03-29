@@ -45,7 +45,7 @@ jobs:
     needs: push-docker-image
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Remove v from the tag
         id: remove_v
