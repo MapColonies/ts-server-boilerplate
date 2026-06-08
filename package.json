@@ -80,6 +80,6 @@
     "ts-jest": "^29.4.11",
     "tsc-alias": "^1.8.17",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.8"
   }
 }
