@@ -38,7 +38,7 @@
     "@map-colonies/js-logger": "^5.0.0",
     "@map-colonies/openapi-express-viewer": "^5.0.0",
     "@map-colonies/prometheus": "^1.0.0",
-    "@map-colonies/read-pkg": "^1.0.0",
+    "@map-colonies/read-pkg": "^2.0.0",
     "@map-colonies/schemas": "^1.21.0",
     "@map-colonies/tracing": "^1.0.0",
     "@map-colonies/tracing-utils": "^1.0.0",
