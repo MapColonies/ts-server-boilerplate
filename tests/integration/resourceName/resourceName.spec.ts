@@ -2,7 +2,7 @@ import { jsLogger } from '@map-colonies/js-logger';
 import { describe, beforeEach, it, expect, beforeAll } from 'vitest';
 import { trace } from '@opentelemetry/api';
 import httpStatusCodes from 'http-status-codes';
-import { createRequestSender, type RequestSender } from '@map-colonies/openapi-helpers/requestSender';
+import { createRequestSender, type RequestSender } from '@map-colonies/openapi-supertest';
 import type { paths, operations } from '@openapi';
 import { getApp } from '@src/app';
 import { SERVICES } from '@common/constants';
