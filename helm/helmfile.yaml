@@ -1,0 +1,17 @@
+# helmfile.yaml
+environments:
+  dev:
+  stage:
+  prod:
+
+---
+
+releases:
+  - name: ts-server-boilerplate
+    namespace: my-app-{{ .Environment.Name }}
+    chart: ./chart
+    labels:
+      component: backend
+    values:
+      - ./environments/base.yaml.gotmpl
+      - ./environments/{{ .Environment.Name }}.yaml

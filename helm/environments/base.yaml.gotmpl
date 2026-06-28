@@ -1,0 +1,28 @@
+cloudProvider:
+  flavor: openshift
+
+# Dynamically pull the component name from the release labels defined in helmfile.yaml
+mclabels:
+  component: {{ index .Release.Labels "component" | default "backend" }}
+
+env:
+  # Simple, readable conditions for environment-specific logging
+  {{- if eq .Environment.Name "dev" }}
+  logLevel: debug
+  logPrettyPrintEnabled: true
+  {{- else if eq .Environment.Name "prod" }}
+  logLevel: warn
+  logPrettyPrintEnabled: false
+  {{- else }}
+  logLevel: info
+  logPrettyPrintEnabled: false
+  {{- end }}
+
+route:
+  enabled: true
+  # Generates my-app-dev.apps... for dev/stage, and my-app.apps... for prod
+  {{- if eq .Environment.Name "prod" }}
+  host: {{ .Release.Name }}.apps.ocp-cluster.internal
+  {{- else }}
+  host: {{ .Release.Name }}-{{ .Environment.Name }}.apps.ocp-cluster.internal
+  {{- end }}
