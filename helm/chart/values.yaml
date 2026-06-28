@@ -3,13 +3,6 @@ global:
   tracing: {}
   metrics: {}
 
-mclabels:
-  component: backend
-  partOf: boilerplates
-  owner: common
-  prometheus:
-    enabled: true
-
 enabled: true
 replicaCount: 1
 revisionHistoryLimit: 5  # Amount of revisions we keep
@@ -54,12 +47,6 @@ args: []
 
 sidecars: []
 
-cloudProvider:
-  dockerRegistryUrl: ''
-  imagePullSecretName: ''
-  flavor: openshift
-
-caSecretName: ''
 caPath: '/usr/local/share/ca-certificates'
 caKey: 'ca.crt'
 
@@ -73,8 +60,7 @@ env:
   port: 8080
   targetPort: 8080
   protocol: TCP
-  logLevel: info
-  logPrettyPrintEnabled: false
+
   responseCompressionEnabled: true
   requestPayloadLimit: 1mb
   tracing:
@@ -84,15 +70,6 @@ env:
     enabled: false
     url: http://localhost:55681/v1/metrics
 
-resources:
-  enabled: true
-  value:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
 
 route:
   enabled: true

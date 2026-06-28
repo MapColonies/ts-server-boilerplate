@@ -1,28 +1,31 @@
 cloudProvider:
+  dockerRegistryUrl: ''
+  imagePullSecretName: ''
   flavor: openshift
 
 # Dynamically pull the component name from the release labels defined in helmfile.yaml
 mclabels:
-  component: {{ index .Release.Labels "component" | default "backend" }}
+  component: backend
+  partOf: boilerplates
+  owner: common
+  prometheus:
+    enabled: true
+
+caSecretName: ''
 
 env:
-  # Simple, readable conditions for environment-specific logging
-  {{- if eq .Environment.Name "dev" }}
-  logLevel: debug
-  logPrettyPrintEnabled: true
-  {{- else if eq .Environment.Name "prod" }}
-  logLevel: warn
-  logPrettyPrintEnabled: false
-  {{- else }}
+  {{- if eq .Environment.Name "prod" }}
   logLevel: info
   logPrettyPrintEnabled: false
+  {{- else  }}
+  logLevel: debug
+  logPrettyPrintEnabled: true
   {{- end }}
 
 route:
   enabled: true
-  # Generates my-app-dev.apps... for dev/stage, and my-app.apps... for prod
   {{- if eq .Environment.Name "prod" }}
-  host: {{ .Release.Name }}.apps.ocp-cluster.internal
+  host: {{ .Release.Name }}.mapcolonies.net
   {{- else }}
-  host: {{ .Release.Name }}-{{ .Environment.Name }}.apps.ocp-cluster.internal
+  host: {{ .Release.Name }}-{{ .Environment.Name }}.mapcolonies.net
   {{- end }}
