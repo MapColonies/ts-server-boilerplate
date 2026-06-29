@@ -24,10 +24,12 @@ export class ResourceNameController {
   }
 
   public getResource: TypedRequestHandlers['getResourceName'] = (req, res) => {
+    this.logger.info(`Getting resource`);
     return res.status(httpStatus.OK).json(this.manager.getResource());
   };
 
   public createResource: TypedRequestHandlers['POST /resourceName'] = (req, res) => {
+    this.logger.info('Creating new resource');
     const createdResource = this.manager.createResource(req.body);
     this.createdResourceCounter.inc(1);
     return res.status(httpStatus.CREATED).json(createdResource);
