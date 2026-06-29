@@ -23,6 +23,7 @@ export class AnotherResourceController {
   }
 
   public getResource: TypedRequestHandlers['getAnotherResource'] = (req, res) => {
+    this.logger.info('Getting another resource');
     this.getResourceCounter.inc(1);
     return res.status(httpStatus.OK).json(this.manager.getResource());
   };
