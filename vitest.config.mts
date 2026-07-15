@@ -13,12 +13,6 @@ const pathAlias = Object.fromEntries(
   ])
 );
 
-const reporters: Exclude<ViteUserConfig['test'], undefined>['reporters'] = ['default', 'html'];
-
-if (process.env.GITHUB_ACTIONS) {
-  reporters.push('github-actions');
-}
-
 export default defineConfig({
   test: {
     projects: [
@@ -45,7 +39,6 @@ export default defineConfig({
         },
       },
     ],
-    reporters,
     coverage: {
       enabled: true,
       reporter: ['text', 'html', 'json', 'json-summary'],
