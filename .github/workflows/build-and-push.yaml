@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and Push Docker image
         id: build_and_push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           push: true
           tags: ${{ secrets.ACR_URL }}/${{ env.DOMAIN }}/${{ github.event.repository.name }}:${{ github.ref_name }}
