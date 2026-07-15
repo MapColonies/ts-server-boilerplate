@@ -52,7 +52,7 @@
     "tsyringe": "^4.8.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.1",
+    "@commitlint/cli": "^21.2.1",
     "@map-colonies/commitlint-config": "^2.0.1",
     "@map-colonies/eslint-config": "^9.0.0",
     "@map-colonies/eslint-plugin": "^1.0.0",
