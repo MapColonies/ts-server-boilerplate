@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Run TS Project linters
-        uses: wearerequired/lint-action@v2
+        uses: wearerequired/lint-action@v3
         with:
           eslint: true
           prettier: true
