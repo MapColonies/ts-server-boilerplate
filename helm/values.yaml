@@ -1,7 +1,6 @@
 global:
   cloudProvider: {}
-  tracing: {}
-  metrics: {}
+  telemetry: {}
 
 mclabels:
   component: backend
@@ -69,20 +68,24 @@ image:
   # tag: 'latest'
   pullPolicy: IfNotPresent
 
-env:
+server:
   port: 8080
   targetPort: 8080
   protocol: TCP
-  logLevel: info
-  logPrettyPrintEnabled: false
   responseCompressionEnabled: true
   requestPayloadLimit: 1mb
+
+telemetry:
+  logger:
+    level: info
+    prettyPrint: false
+    opentelemetryOptions:
+      enabled: true
+      url: http://localhost:4317
+      resourceAttributes: {}
   tracing:
-    enabled: false
+    enabled: true
     url: http://localhost:55681/v1/trace
-  metrics:
-    enabled: false
-    url: http://localhost:55681/v1/metrics
 
 resources:
   enabled: true

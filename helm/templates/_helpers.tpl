@@ -96,23 +96,10 @@ Returns the cloud provider image pull secret name from global if exists or from 
 {{- end -}}
 
 {{/*
-Returns the tracing url from global if exists or from the chart's values
+Returns the telemetry values merged with the global telemetry values.
+Chart values take precedence; global fills in keys the chart leaves empty (false or empty string count as empty).
+Usage: {{ $telemetry := include "ts-server-boilerplate.telemetry.merged" . | fromYaml }}
 */}}
-{{- define "ts-server-boilerplate.tracingUrl" -}}
-{{- if .Values.global.tracing.url }}
-    {{- .Values.global.tracing.url -}}
-{{- else if .Values.cloudProvider -}}
-    {{- .Values.env.tracing.url -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Returns the tracing url from global if exists or from the chart's values
-*/}}
-{{- define "ts-server-boilerplate.metricsUrl" -}}
-{{- if .Values.global.metrics.url }}
-    {{- .Values.global.metrics.url -}}
-{{- else -}}
-    {{- .Values.env.metrics.url -}}
-{{- end -}}
+{{- define "ts-server-boilerplate.telemetry.merged" -}}
+{{- merge (deepCopy .Values.telemetry) (.Values.global.telemetry | default dict) | toYaml -}}
 {{- end -}}

@@ -4,6 +4,7 @@
 {{- $cloudProviderDockerRegistryUrl := include "ts-server-boilerplate.cloudProviderDockerRegistryUrl" . -}}
 {{- $cloudProviderImagePullSecretName := include "ts-server-boilerplate.cloudProviderImagePullSecretName" . -}}
 {{- $imageTag := include "ts-server-boilerplate.tag" . -}}
+{{- $server := .Values.server -}}
 {{- if .Values.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -72,7 +73,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.uid
             - name: SERVER_PORT
-              value: {{ .Values.env.targetPort | quote }}
+              value: {{ $server.targetPort | quote }}
             {{- if .Values.caSecretName }}
             - name: REQUESTS_CA_BUNDLE
               value: {{ printf "%s/%s" .Values.caPath .Values.caKey | quote }}
@@ -87,8 +88,8 @@ spec:
                 name: {{ include "ts-server-boilerplate.fullname" . }}
           ports:
             - name: http
-              containerPort: {{ .Values.env.targetPort }}
-              protocol: {{ .Values.env.protocol }}
+              containerPort: {{ $server.targetPort }}
+              protocol: {{ $server.protocol }}
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
@@ -96,7 +97,7 @@ spec:
             failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
             httpGet:
               path: {{ .Values.livenessProbe.path }}
-              port: {{ .Values.env.targetPort }}
+              port: {{ $server.targetPort }}
           {{- end }}
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
@@ -105,7 +106,7 @@ spec:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
             httpGet:
               path: {{ .Values.readinessProbe.path }}
-              port: {{ .Values.env.targetPort }}
+              port: {{ $server.targetPort }}
           {{- end }}        
           {{- if .Values.resources.enabled }}
           resources:

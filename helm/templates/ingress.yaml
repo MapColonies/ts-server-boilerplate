@@ -1,7 +1,8 @@
 {{- if and (.Values.enabled) (.Values.ingress.enabled) -}}
 {{- $fullName := include "ts-server-boilerplate.fullname" . -}}
 {{- $serviceName := $fullName -}}
-{{- $servicePort := .Values.env.port -}}
+{{- $server := .Values.server -}}
+{{- $servicePort := $server.port -}}
 {{- $ingressPath := .Values.ingress.path -}}
 {{- $ingressPathType := default "Prefix" .Values.ingress.pathType -}}
 {{- $extraPaths := .Values.ingress.extraPaths -}}
