@@ -16,7 +16,7 @@ data:
   {{- with .logger.opentelemetryOptions }}
   {{- if .enabled }}
   OPENTELEMETRY_LOGGING_ENABLED: 'true'
-  OTLP_LOGGER_ENDPOINT_URL: {{ .url | quote }}
+  OTLP_LOGGER_ENDPOINT_URL: {{ .url | default "http://localhost:4317" | quote }}
   {{- if .resourceAttributes }}
   OPENTELEMETRY_RESOURCE_ATTRIBUTES: {{ .resourceAttributes | toJson | quote }}
   {{- end }}
@@ -24,7 +24,7 @@ data:
   {{- end }}
   {{- if .tracing.enabled }}
   TELEMETRY_TRACING_ENABLED: 'true'
-  TELEMETRY_TRACING_URL: {{ .tracing.url | quote }}
+  TELEMETRY_TRACING_URL: {{ .tracing.url | default "http://localhost:55681/v1/trace" | quote }}
   {{- end }}
   {{- end }}
   npm_config_cache: /tmp/
