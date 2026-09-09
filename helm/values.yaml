@@ -81,11 +81,11 @@ telemetry:
     prettyPrint: false
     opentelemetryOptions:
       enabled: true
-      url: http://localhost:4317
+      # url: http://localhost:4317
       resourceAttributes: {}
   tracing:
     enabled: true
-    url: http://localhost:55681/v1/trace
+    # url: http://localhost:55681/v1/trace
 
 resources:
   enabled: true
