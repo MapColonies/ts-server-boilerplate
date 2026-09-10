@@ -85,7 +85,11 @@ telemetry:
     opentelemetryOptions:
       enabled: true
       url: http://localhost:4317
+      # Rendered as OTEL_RESOURCE_ATTRIBUTES in key=value,key=value format
       resourceAttributes: {}
+      # resourceAttributes:
+      #   service.namespace: raster
+      #   deployment.environment: dev
   tracing:
     enabled: true
     url: http://localhost:55681/v1/trace
