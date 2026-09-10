@@ -119,9 +119,9 @@ Returns the opentelemetry logging url from global if set, otherwise from the cha
 
 {{/*
 Renders a map of resource attributes as key=value,key=value for OTEL_RESOURCE_ATTRIBUTES.
-Usage: {{ include "ts-server-boilerplate.resourceAttributes" .resourceAttributes }}
+Usage: {{ include "ts-server-boilerplate.otelResourceAttributes" .resourceAttributes }}
 */}}
-{{- define "ts-server-boilerplate.resourceAttributes" -}}
+{{- define "ts-server-boilerplate.otelResourceAttributes" -}}
 {{- $attributes := list }}
 {{- range $key, $value := . }}
 {{- $attributes = append $attributes (printf "%s=%s" $key (toString $value)) }}

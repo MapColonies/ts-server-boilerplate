@@ -20,7 +20,7 @@ data:
   OPENTELEMETRY_LOGGING_ENABLED: 'true'
   OTLP_LOGGER_ENDPOINT_URL: {{ $opentelemetryLoggingUrl | quote }}
   {{- if .resourceAttributes }}
-  OTEL_RESOURCE_ATTRIBUTES: {{ include "ts-server-boilerplate.resourceAttributes" .resourceAttributes | quote }}
+  OTEL_RESOURCE_ATTRIBUTES: {{ include "ts-server-boilerplate.otelResourceAttributes" .resourceAttributes | quote }}
   {{- end }}
   {{- end }}
   {{- end }}
