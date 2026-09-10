@@ -1,6 +1,9 @@
 global:
   cloudProvider: {}
-  telemetry: {}
+  telemetry:
+    tracing: {}
+    logger:
+      opentelemetryOptions: {}
 
 mclabels:
   component: backend
