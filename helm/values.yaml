@@ -85,7 +85,7 @@ telemetry:
     opentelemetryOptions:
       enabled: true
       url: http://localhost:4317
-      # Rendered as OTEL_RESOURCE_ATTRIBUTES in key=value,key=value format
+      # Rendered as OTEL_RESOURCE_ATTRIBUTES in "key=value,key=value" format
       # resourceAttributes:
       #   service.namespace: namespace
       #   deployment.environment: dev
