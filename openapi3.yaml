@@ -14,13 +14,13 @@ paths:
         - anotherResource
       summary: gets the resource
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/anotherResource'
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
@@ -33,13 +33,13 @@ paths:
         - resourceName
       summary: gets the resource
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/resource'
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
@@ -57,13 +57,13 @@ paths:
             schema:
               $ref: '#/components/schemas/resource'
       responses:
-        201:
+        '201':
           description: created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/resource'
-        400:
+        '400':
           description: Bad Request
           content:
             application/json:
