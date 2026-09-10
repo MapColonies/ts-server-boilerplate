@@ -116,3 +116,16 @@ Returns the opentelemetry logging url from global if set, otherwise from the cha
     {{- .Values.telemetry.logger.opentelemetryOptions.url -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Renders a map of resource attributes as key=value,key=value for OTEL_RESOURCE_ATTRIBUTES.
+Usage: {{ include "ts-server-boilerplate.resourceAttributes" .resourceAttributes }}
+*/}}
+{{- define "ts-server-boilerplate.resourceAttributes" -}}
+{{- $attributes := list }}
+{{- range $key, $value := . }}
+{{- $attributes = append $attributes (printf "%s=%s" $key (toString $value)) }}
+{{- end }}
+{{- join "," $attributes }}
+{{- end -}}
+

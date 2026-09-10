@@ -20,11 +20,7 @@ data:
   OPENTELEMETRY_LOGGING_ENABLED: 'true'
   OTLP_LOGGER_ENDPOINT_URL: {{ $opentelemetryLoggingUrl | quote }}
   {{- if .resourceAttributes }}
-  {{- $attributes := list }}
-  {{- range $key, $value := .resourceAttributes }}
-  {{- $attributes = append $attributes (printf "%s=%s" $key (toString $value)) }}
-  {{- end }}
-  OTEL_RESOURCE_ATTRIBUTES: {{ join "," $attributes | quote }}
+  OTEL_RESOURCE_ATTRIBUTES: {{ include "ts-server-boilerplate.resourceAttributes" .resourceAttributes | quote }}
   {{- end }}
   {{- end }}
   {{- end }}
