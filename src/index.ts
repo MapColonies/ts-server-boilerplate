@@ -24,4 +24,4 @@ void getApp()
     console.error(error);
     process.exit(1);
   });
-export const lintProbe: number = "not a number";
+export const lintProbe   =  "x";
