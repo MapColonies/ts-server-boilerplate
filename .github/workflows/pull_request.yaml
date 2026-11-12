@@ -9,6 +9,12 @@ permissions:
 jobs:
   eslint:
     name: Run TS Project eslint
+    # release-please opens its PR with GH_PAT, which triggers CI; it only bumps versions and the changelog.
+    # Anyone can name a branch release-please--, so the GH_PAT owner and this repo must match too.
+    if: &not-release-pr >-
+      ${{ !(startsWith(github.head_ref, 'release-please--')
+      && github.event.pull_request.user.login == 'mapcolonies-devops'
+      && github.event.pull_request.head.repo.full_name == github.repository) }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -34,6 +40,7 @@ jobs:
 
   openapi-lint:
     name: Run OpenAPI lint Check
+    if: *not-release-pr
     runs-on: ubuntu-latest
 
     steps:
@@ -48,6 +55,7 @@ jobs:
 
   helm-lint:
     name: Run Helm lint Check
+    if: *not-release-pr
     runs-on: ubuntu-latest
 
     steps:
@@ -60,6 +68,7 @@ jobs:
         uses: MapColonies/shared-workflows/actions/helm-lint@helm-lint-v1
 
   security:
+    if: *not-release-pr
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -71,6 +80,7 @@ jobs:
 
   tests:
     name: Run Tests
+    if: *not-release-pr
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -93,6 +103,7 @@ jobs:
           path: reports/**
 
   build_docker_image:
+    if: *not-release-pr
     runs-on: ubuntu-latest
     steps:
       - name: Build and Push Docker image
