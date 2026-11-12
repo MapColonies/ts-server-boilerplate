@@ -24,4 +24,3 @@ void getApp()
     console.error(error);
     process.exit(1);
   });
-export const lintProbe   =  "x";
