@@ -31,6 +31,7 @@ jobs:
           prettier: true
           eslint_extensions: ts
           tsc: true
+          continue_on_error: false
 
   openapi-lint:
     name: Run OpenAPI lint Check
